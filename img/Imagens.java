@@ -1,4 +1,4 @@
-
+package img;
 /* ***************************************************************
 Autor: Lucas Santos Figueiredo*
 Matricula: 201810803*
@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
+import java.io.InputStream;
 
 public class Imagens {
 
@@ -28,7 +29,8 @@ public class Imagens {
       this.imagens = new ArrayList<Image>();
          
       for (int i = 0; i <= 3; i++) { //armazena as imagens na lista
-        Image imagem = ImageIO.read(new File("linha" + i + ".png"));
+        InputStream input = Imagens.class.getResourceAsStream("linha"+i+".png");
+        Image imagem = ImageIO.read(input);
         imagens.add(imagem);
       }
 

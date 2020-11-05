@@ -1,3 +1,5 @@
+package camadas;
+
 /* ***************************************************************
 Autor: Lucas Santos Figueiredo*
 Matricula: 201810803*
@@ -6,6 +8,10 @@ Ultima alteracao: 03/11/2020*
 Nome: Simulador de Redes*
 Funcao: Exemplificar o funcionamento de um envio de mensagem.
 *************************************************************** */
+import util.MeioDeComunicacao;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 public class CamadaEnlaceDadosTransmissora{
   
@@ -24,8 +30,8 @@ public class CamadaEnlaceDadosTransmissora{
         CamadaEnlaceDadosTransmissoraControleDeFluxo.camadaEnlaceDadosTransmissoraControleDeFluxo(quadro);
         
         
-
         
-        CamadaFisicaTransmissora.camadaFisicaTransmissora(novoQuadro);
+        
+        MeioDeComunicacao.meioDeComunicacao(novoQuadro);
     }
 }

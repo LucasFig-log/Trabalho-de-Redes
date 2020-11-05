@@ -1,3 +1,4 @@
+package camadas;
 /* ***************************************************************
 Autor: Lucas Santos Figueiredo*
 Matricula: 201810803*
@@ -6,6 +7,9 @@ Ultima alteracao: 03/11/2020*
 Nome: Simulador de Redes*
 Funcao: Exemplificar o funcionamento de um envio de mensagem.
 *************************************************************** */
+import view.FramePrincipal;
+import camadas.CamadaEnlaceDadosTransmissora;
+import util.Conversao;
 
 public class CamadaEnlaceDadosTransmissoraEnquadramento{
     
@@ -37,6 +41,7 @@ public class CamadaEnlaceDadosTransmissoraEnquadramento{
         //insercao de Bytes
         fluxoBrutoDeBits = camadaEnlaceDadosTransmissoraEnquadramentoInsercaoDeBytes(quadro);
         
+
         //imprime na caixa de texto os quadros enquadrados
         FramePrincipal.imprimirNaTela(Conversao.bitsBrutosParaString(fluxoBrutoDeBits), FramePrincipal.TEXT_QUADROS_ENQUADRADOS);
               

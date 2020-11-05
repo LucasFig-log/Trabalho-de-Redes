@@ -1,3 +1,4 @@
+package util;
 /* ***************************************************************
 Autor: Lucas Santos Figueiredo*
 Matricula: 201810803*
@@ -6,6 +7,8 @@ Ultima alteracao: 03/11/2020*
 Nome: Simulador de Redes*
 Funcao: Exemplificar o funcionamento de um envio de mensagem.
 *************************************************************** */
+import view.FramePrincipal;
+
 public class Conversao {
 
    /* ***************************************************************
@@ -181,6 +184,17 @@ public class Conversao {
       string.append((char) value[i]);
     }
     return string.toString();
+  }
+
+  public static void showAscII(int[] value, int tipoDeImpressao) {
+    StringBuilder stringAscii = new StringBuilder();
+
+    for (int i = 0; i < value.length; i++) {
+      stringAscii.append(" " + (char) value[i] + "  ->  " + value[i] + "\n ");
+    }
+    // imprime a mensagem no campo especifico
+    FramePrincipal.imprimirNaTela(stringAscii.toString(), tipoDeImpressao);
+
   }
 
 }

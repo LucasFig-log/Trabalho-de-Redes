@@ -1,3 +1,4 @@
+package camadas;
 /* ***************************************************************
 Autor: Lucas Santos Figueiredo*
 Matricula: 201810803*
@@ -6,6 +7,9 @@ Ultima alteracao: 03/11/2020*
 Nome: Simulador de Redes*
 Funcao: Exemplificar o funcionamento de um envio de mensagem.
 *************************************************************** */
+import view.FramePrincipal;
+import util.Conversao;
+import camadas.CamadaDeAplicacaoReceptora;
 
 public class CamadaEnlaceDadosReceptoraEnquadramento{
     private static int[] fluxoBrutoDeBits;
@@ -27,7 +31,7 @@ public class CamadaEnlaceDadosReceptoraEnquadramento{
         FramePrincipal.imprimirNaTela(Conversao.bitsBrutosParaString(fluxoBrutoDeBits), FramePrincipal.TEXT_QUADROS_DESENQUADRADOS_RECEBIDOS);
         
         //imprime na caixa de texto a conversão caracter em ascII
-        CamadaFisicaTransmissora.showAscII(fluxoBrutoDeBits,
+        Conversao.showAscII(fluxoBrutoDeBits,
           FramePrincipal.TEXT_ASCII_DECODIFICADO);
 
         //envia os quadros desenquadrados para a camada de aplicacao receptora
@@ -42,6 +46,9 @@ public class CamadaEnlaceDadosReceptoraEnquadramento{
   Retorno: int[]*
   *************************************************************** */
     public static int[] camadaEnlaceDadosReceptoraEnquadramentoInsercaoDeBytes(int quadro[]){
+        
+        //converter bits em ascii
+        quadro = Conversao.bitsBrutosParaASCII(quadro);
         
         int[] quadrosPuros;
         char s = 'S';

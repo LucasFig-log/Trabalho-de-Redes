@@ -1,3 +1,4 @@
+package util;
 /* ***************************************************************
 Autor: Lucas Santos Figueiredo*
 Matricula: 201810803*
@@ -6,9 +7,13 @@ Ultima alteracao: 03/11/2020*
 Nome: Simulador de Redes*
 Funcao: Exemplificar o funcionamento de um envio de mensagem.
 *************************************************************** */
+import camadas.CamadaEnlaceDadosReceptora;
+import view.FramePrincipal;
+import view.PanelSouth;
+
 public class MeioDeComunicacao {
   public static int tamanho;
-
+  
   /* ***************************************************************
   Metodo: meioDeComunicacao*
   Funcao: transmitir a mensagem enviada*
@@ -63,8 +68,8 @@ public class MeioDeComunicacao {
     PanelSouth.bandeira = true;
     FramePrincipal.rePintar();
     
-    //envia os quadros para a camada fisica receptora
-    CamadaFisicaReceptora.camadaFisicaReceptora(fluxoBrutoDeBitsPontB);
+    //envia os quadros para a camada enlace de dados receptora
+    CamadaEnlaceDadosReceptora.camadaEnlaceDadosReceptora(fluxoBrutoDeBitsPontB);
 
   }
 

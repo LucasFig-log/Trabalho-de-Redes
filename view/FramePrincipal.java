@@ -1,4 +1,4 @@
-
+package view;
 /* ***************************************************************
 Autor: Lucas Santos Figueiredo*
 Matricula: 201810803*
@@ -7,10 +7,16 @@ Ultima alteracao: 03/11/2020*
 Nome: Simulador de Redes*
 Funcao: Exemplificar o funcionamento de um envio de mensagem.
 *************************************************************** */
+import view.PanelCenter;
+import view.PanelEast;
+import view.PanelSouth;
+import view.PanelWest;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.*;
+import javax.swing.Timer;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
@@ -78,44 +84,47 @@ public class FramePrincipal extends JFrame {
   *************************************************************** */
   public static void imprimirNaTela(String mensagem, int tipoDeImpressao) {
 
-    switch (tipoDeImpressao) {
-    case 0:
-      PanelWest.textASCII.setFont(font);
-      PanelWest.textASCII.setText(mensagem);
-      break;
-    case 1:
-      PanelWest.textBitsBrutos.setFont(font);
-      PanelWest.textBitsBrutos.setText(mensagem);
-      break;
-    case 2:
-      PanelWest.textBitsCodificados.setFont(font);
-      PanelWest.textBitsCodificados.setText(mensagem);
-      break;
-    case 3:
-      PanelEast.textArea.setFont(font);
-      PanelEast.textArea.setText(mensagem);
-      break;
-    case 4:
-      PanelEast.textASCII.setFont(font);
-      PanelEast.textASCII.setText(mensagem);
-      break;
-    case 5:
-      PanelEast.textBitsBrutos.setFont(font);
-      PanelEast.textBitsBrutos.setText(mensagem);
-      break;
-    case 6:
-      PanelEast.textBitsDecodificados.setFont(font);
-      PanelEast.textBitsDecodificados.setText(mensagem);
-      break;
-    case 7:
-      PanelWest.textQuadrosEnquadrados.setFont(font);
-      PanelWest.textQuadrosEnquadrados.setText(mensagem);
-      break;
-    case 8:
-      PanelEast.textQuadrosEnquadrados.setFont(font);
-      PanelEast.textQuadrosEnquadrados.setText(mensagem);
-      break;    
-    }
+    
+      switch (tipoDeImpressao) {
+        case 0:
+          PanelWest.textASCII.setFont(font);
+          PanelWest.textASCII.setText(mensagem);
+          
+          break;
+        case 1:
+          PanelWest.textBitsBrutos.setFont(font);
+          PanelWest.textBitsBrutos.setText(mensagem);
+          break;
+        case 2:
+          PanelWest.textBitsCodificados.setFont(font);
+          PanelWest.textBitsCodificados.setText(mensagem);
+          break;
+        case 3:
+          PanelEast.textArea.setFont(font);
+          PanelEast.textArea.setText(mensagem);
+          break;
+        case 4:
+          PanelEast.textASCII.setFont(font);
+          PanelEast.textASCII.setText(mensagem);
+          break;
+        case 5:
+          PanelEast.textBitsBrutos.setFont(font);
+          PanelEast.textBitsBrutos.setText(mensagem);
+          break;
+        case 6:
+          PanelEast.textBitsDecodificados.setFont(font);
+          PanelEast.textBitsDecodificados.setText(mensagem);
+          break;
+        case 7:
+          PanelWest.textQuadrosEnquadrados.setFont(font);
+          PanelWest.textQuadrosEnquadrados.setText(mensagem);
+          break;
+        case 8:
+          PanelEast.textQuadrosEnquadrados.setFont(font);
+          PanelEast.textQuadrosEnquadrados.setText(mensagem);
+          break;    
+        }
+  
   }
 
   /* ***************************************************************

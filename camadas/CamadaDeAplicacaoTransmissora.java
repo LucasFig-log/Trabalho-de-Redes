@@ -1,3 +1,4 @@
+package camadas;
 /* ***************************************************************
 Autor: Lucas Santos Figueiredo*
 Matricula: 201810803*
@@ -6,6 +7,10 @@ Ultima alteracao: 03/11/2020*
 Nome: Simulador de Redes*
 Funcao: Exemplificar o funcionamento de um envio de mensagem.
 *************************************************************** */
+import camadas.CamadaEnlaceDadosTransmissora;
+import util.Conversao;
+import view.FramePrincipal;
+
 public class CamadaDeAplicacaoTransmissora {
 
   /* ***************************************************************
@@ -24,8 +29,8 @@ public class CamadaDeAplicacaoTransmissora {
     // passando o vetor com os numeros de cada caractere para a CamadaFisicaTransmissora
     
     //imprime na caixa de texto os caracteres e seus valores ascII
-    CamadaFisicaTransmissora.showAscII(quadro, FramePrincipal.TEXT_ASCII);  
-
+    Conversao.showAscII(quadro, FramePrincipal.TEXT_ASCII);  
+    
     //converte a mensagem para bits
     quadro = Conversao.asciiParaBits(quadro);
     

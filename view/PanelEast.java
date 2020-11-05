@@ -1,4 +1,4 @@
-
+package view;
 /* ***************************************************************
 Autor: Lucas Santos Figueiredo*
 Matricula: 201810803*
@@ -45,7 +45,7 @@ public class PanelEast extends JPanel {
   public PanelEast() {
 
     this.setBackground(Color.GRAY);
-    this.setPreferredSize(new Dimension(350, 400));
+    this.setPreferredSize(new Dimension(350, 200));
     Color cor = new Color(255, 250, 205);
     this.setBackground(cor);
     font = new Font("OldStyle", Font.BOLD, 18);
@@ -89,31 +89,6 @@ public class PanelEast extends JPanel {
     scrollQuadrosEnquadrados.setPreferredSize(new Dimension(300, 50));
     scrollQuadrosEnquadrados.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-    // configuracoes do JLabel com o texto especifico
-    labelBitsBrutos = new JLabel("Bits Brutos Decodificados");
-    labelBitsBrutos.setFont(font);
-    labelBitsBrutos.setPreferredSize(new Dimension(300, 30));
-
-    // configuracoes do campo de texto que exibe os bits brutos
-    textBitsBrutos = new JTextArea();
-    textBitsBrutos.setEditable(false);
-    textBitsBrutos.setLineWrap(true);
-    scrollTextBitsBrutos = new JScrollPane(textBitsBrutos);
-    scrollTextBitsBrutos.setPreferredSize(new Dimension(300, 50));
-    scrollTextBitsBrutos.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-
-    // configuracoes do JLabel com o texto especifico
-    labelBitsDecodificado = new JLabel("Bits Recebidos");
-    labelBitsDecodificado.setFont(font);
-    labelBitsDecodificado.setPreferredSize(new Dimension(300, 30));
-
-    // configuracoes do campo de texto que exibe os bits decodificados
-    textBitsDecodificados = new JTextArea();
-    textBitsDecodificados.setEditable(false);
-    textBitsDecodificados.setLineWrap(true);
-    scrollBitsDecodificados = new JScrollPane(textBitsDecodificados);
-    scrollBitsDecodificados.setPreferredSize(new Dimension(300, 50));
-    scrollBitsDecodificados.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
     // adcionando todos os componentes ao JPanel
     add(labelText);
@@ -122,10 +97,7 @@ public class PanelEast extends JPanel {
     add(scrollTextASCII);
     add(labelQuadrosEnquadrados);
     add(scrollQuadrosEnquadrados);
-    add(labelBitsBrutos);
-    add(scrollTextBitsBrutos);
-    add(labelBitsDecodificado);
-    add(scrollBitsDecodificados);
+  
 
   }
 }

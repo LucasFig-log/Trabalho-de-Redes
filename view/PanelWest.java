@@ -1,4 +1,4 @@
-
+package view;
 /* ***************************************************************
 Autor: Lucas Santos Figueiredo*
 Matricula: 201810803*
@@ -7,7 +7,7 @@ Ultima alteracao: 03/11/2020*
 Nome: Simulador de Redes*
 Funcao: Exemplificar o funcionamento de um envio de mensagem.
 *************************************************************** */
-
+import camadas.CamadaDeAplicacaoTransmissora;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
@@ -52,7 +52,7 @@ public class PanelWest extends JPanel {
   public PanelWest() {
     cor = new Color(255, 250, 205);
     this.setBackground(cor);
-    setPreferredSize(new Dimension(350, 400));
+    setPreferredSize(new Dimension(350, 200));
     font = new Font("OldStyle", Font.BOLD, 18);
     font2 = new Font("Coolvetica", Font.HANGING_BASELINE, 13);
 
@@ -103,32 +103,6 @@ public class PanelWest extends JPanel {
     scrollQuadrosEnquadrados.setPreferredSize(new Dimension(300, 50));
     scrollQuadrosEnquadrados.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-    // configuracoes do JLabel com o texto especifico
-    labelBitsBrutos = new JLabel("Bits Brutos");
-    labelBitsBrutos.setFont(font);
-    labelBitsBrutos.setPreferredSize(new Dimension(300, 30));
-
-    // configuracoes do campo de texto que exibe os bits brutos
-    textBitsBrutos = new JTextArea();
-    textBitsBrutos.setEditable(false);
-    textBitsBrutos.setLineWrap(true);
-    scrollTextBitsBrutos = new JScrollPane(textBitsBrutos);
-    scrollTextBitsBrutos.setPreferredSize(new Dimension(300, 50));
-    scrollTextBitsBrutos.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-
-    // configuracoes do JLabel com o texto especifico
-    labelBitsCodificado = new JLabel("Bits codificados");
-    labelBitsCodificado.setFont(font);
-    labelBitsCodificado.setPreferredSize(new Dimension(300, 30));
-
-    // configuracoes do campo de texto que exibe os bits codificados
-    textBitsCodificados = new JTextArea();
-    textBitsCodificados.setEditable(false);
-    textBitsCodificados.setLineWrap(true);
-    scrollTextBitsCodificados = new JScrollPane(textBitsCodificados);
-    scrollTextBitsCodificados.setPreferredSize(new Dimension(300, 50));
-    scrollTextBitsCodificados.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-
     // adcionando todos os componentes ao JPanel
     add(labelText);
     add(scrollTextArea);
@@ -137,10 +111,7 @@ public class PanelWest extends JPanel {
     add(scrollTextASCII);
     add(labelQuadrosEnquadrados);
     add(scrollQuadrosEnquadrados);
-    add(labelBitsBrutos);
-    add(scrollTextBitsBrutos);
-    add(labelBitsCodificado);
-    add(scrollTextBitsCodificados);
+   
 
   }
 
