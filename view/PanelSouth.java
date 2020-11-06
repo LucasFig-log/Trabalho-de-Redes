@@ -18,6 +18,7 @@ import java.awt.Image;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import java.util.concurrent.Semaphore;
 
 public class PanelSouth extends JPanel {
 
@@ -35,6 +36,9 @@ public class PanelSouth extends JPanel {
 
   public static List<Integer> fluxoDeBits;
   public static ArrayList<Image> imagensLinhas = new ArrayList<Image>();
+
+  public static Semaphore mutex = new Semaphore(0);
+  public Thread thread = new Thread();
 
   /*
    * *************************************************************** Metodo:
@@ -54,6 +58,29 @@ public class PanelSouth extends JPanel {
 
   }
 
+  
+  
+
+
+  public void repintar(){
+    
+    thread =  new Thread(new Runnable(){
+      @Override
+      public void run(){
+        try{
+          
+          repaint();
+          Thread.sleep(1000);
+        }catch (InterruptedException e){
+          
+          PanelSouth.mutex.release();
+
+        }
+      }      
+    });
+    thread.start();
+  }
+
   /*
    * *************************************************************** Metodo:
    * paintComponent* Funcao: printar as imagens no JPanel referente aos bits*
@@ -61,7 +88,9 @@ public class PanelSouth extends JPanel {
    */
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
+    
     if (bandeira) { // checa se o array está vazio
+      
       for (int i = 0; i < fluxoDeBits.size() - 1; i++) {
 
         if (fluxoDeBits.get(i) == 0) {
@@ -88,10 +117,15 @@ public class PanelSouth extends JPanel {
       } else {
         g.drawImage(imagensLinhas.get(3), x, Y, LARGURA, ALTURA, paintPanel);
       }
+      
+        
+        thread.interrupt();
+  
+    
+  
       x = 0;
 
-    }
-
+    } 
   }
 
 }

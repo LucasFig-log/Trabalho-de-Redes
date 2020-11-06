@@ -34,7 +34,7 @@ public class PanelWest extends JPanel {
   private JScrollPane scrollTextBitsBrutos;
   public static JTextArea textQuadrosEnquadrados;
   private JScrollPane scrollQuadrosEnquadrados;
-  private JButton send;
+  public static JButton send;
   private JLabel labelText;
   private JLabel labelBitsCodificado;
   private JLabel labelASCII;
@@ -128,7 +128,9 @@ public class PanelWest extends JPanel {
       if (textArea.getText().equals("")) {
         JOptionPane.showMessageDialog(null, "Caixa de texto vazia! ", "Alerta! ", JOptionPane.ERROR_MESSAGE);
       } else {
+        send.setEnabled(false);
         CamadaDeAplicacaoTransmissora.camadaDeAplicacaoTransmissora(textArea.getText());
+        
       }
 
     }

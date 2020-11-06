@@ -70,9 +70,16 @@ public class FramePrincipal extends JFrame {
   Retorno: void*
   *************************************************************** */
   public static void rePintar() {
-    panelSouth.setPreferredSize(new Dimension(panelSouth.LARGURA * PanelSouth.fluxoDeBits.size(), 200));
-    panelSouth.revalidate();
-    panelSouth.repaint();
+    
+    
+    try {
+      panelSouth.setPreferredSize(new Dimension(panelSouth.LARGURA * PanelSouth.fluxoDeBits.size(), 200));
+      panelSouth.revalidate();
+      panelSouth.repintar();
+      Thread.sleep(1000);
+    } catch (Exception e) {
+      System.out.println("Erro ao repintar");
+    }
 
   }
 
@@ -89,40 +96,54 @@ public class FramePrincipal extends JFrame {
         case 0:
           PanelWest.textASCII.setFont(font);
           PanelWest.textASCII.setText(mensagem);
+          PanelWest.textASCII.update(PanelWest.textASCII.getGraphics());
           
           break;
         case 1:
           PanelWest.textBitsBrutos.setFont(font);
           PanelWest.textBitsBrutos.setText(mensagem);
+          PanelWest.textBitsBrutos.update(PanelWest.textBitsBrutos.getGraphics());
           break;
         case 2:
           PanelWest.textBitsCodificados.setFont(font);
           PanelWest.textBitsCodificados.setText(mensagem);
+          PanelWest.textBitsCodificados.update(PanelWest.textBitsCodificados.getGraphics());
           break;
         case 3:
           PanelEast.textArea.setFont(font);
           PanelEast.textArea.setText(mensagem);
+          PanelEast.textArea.update(PanelEast.textArea.getGraphics());
           break;
         case 4:
           PanelEast.textASCII.setFont(font);
           PanelEast.textASCII.setText(mensagem);
+          PanelEast.textASCII.update(PanelEast.textASCII.getGraphics());
           break;
         case 5:
           PanelEast.textBitsBrutos.setFont(font);
           PanelEast.textBitsBrutos.setText(mensagem);
+          PanelEast.textBitsBrutos.update(PanelEast.textBitsBrutos.getGraphics());
           break;
         case 6:
           PanelEast.textBitsDecodificados.setFont(font);
           PanelEast.textBitsDecodificados.setText(mensagem);
+          PanelEast.textBitsDecodificados.update(PanelEast.textBitsDecodificados.getGraphics());
           break;
         case 7:
           PanelWest.textQuadrosEnquadrados.setFont(font);
           PanelWest.textQuadrosEnquadrados.setText(mensagem);
+          PanelWest.textQuadrosEnquadrados.update(PanelWest.textQuadrosEnquadrados.getGraphics());
           break;
         case 8:
           PanelEast.textQuadrosEnquadrados.setFont(font);
           PanelEast.textQuadrosEnquadrados.setText(mensagem);
+          PanelEast.textQuadrosEnquadrados.update(PanelEast.textQuadrosEnquadrados.getGraphics());
           break;    
+        }
+        try{
+          Thread.sleep(600);
+        } catch (Exception e){
+          e.printStackTrace();
         }
   
   }

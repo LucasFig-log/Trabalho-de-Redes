@@ -9,6 +9,7 @@ Funcao: Exemplificar o funcionamento de um envio de mensagem.
 *************************************************************** */
 import util.Conversao;
 import view.FramePrincipal;
+import view.PanelWest;
 public class CamadaDeAplicacaoReceptora {
 
  /* ***************************************************************
@@ -29,5 +30,6 @@ public class CamadaDeAplicacaoReceptora {
   *************************************************************** */
   public static void aplicacaoReceptora(String mensagem) {
     FramePrincipal.imprimirNaTela(mensagem, FramePrincipal.TEXT_AREA_DECODIFICADO);
+    PanelWest.send.setEnabled(true);
   }
 }

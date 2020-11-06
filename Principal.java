@@ -15,6 +15,7 @@ public class Principal {
     FramePrincipal framePrincipal = new FramePrincipal();
     framePrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     framePrincipal.setSize(1000, 600);
+    framePrincipal.setResizable(false);
     framePrincipal.centerContainer(framePrincipal);
     framePrincipal.setVisible(true);
   }
