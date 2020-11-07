@@ -12,6 +12,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.Component;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -50,12 +53,13 @@ public class PanelWest extends JPanel {
    * void*
    */
   public PanelWest() {
+
     cor = new Color(255, 250, 205);
     this.setBackground(cor);
     setPreferredSize(new Dimension(350, 200));
     font = new Font("OldStyle", Font.BOLD, 18);
     font2 = new Font("Coolvetica", Font.HANGING_BASELINE, 13);
-
+    
     // configuracoes do JLabel com o texto especifico
     labelText = new JLabel("Mensagem Decodificada");
     labelText.setFont(font);
@@ -76,7 +80,30 @@ public class PanelWest extends JPanel {
     send.setPreferredSize(new Dimension(80, 30));
     ButtonHandler handler = new ButtonHandler();
     send.addActionListener(handler);
+    send.addKeyListener(new KeyListener(){
+      @Override
+      public void keyTyped(KeyEvent e){
 
+      }
+      @Override
+      public void keyReleased(KeyEvent e){
+
+      }
+      @Override
+      public void keyPressed(KeyEvent e){
+        
+        if (e.getKeyCode() == KeyEvent.VK_ENTER ){
+          
+          if (textArea.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Caixa de texto vazia! ", "Alerta! ", JOptionPane.ERROR_MESSAGE);
+          } else{
+            send.setEnabled(false);
+            CamadaDeAplicacaoTransmissora.camadaDeAplicacaoTransmissora(textArea.getText());
+          }
+        } 
+      }
+    });
+    
     // configuracoes do JLabel com o texto especifico
     labelASCII = new JLabel("Transcrição pra tabela ASCII");
     labelASCII.setFont(font);
@@ -116,7 +143,7 @@ public class PanelWest extends JPanel {
   }
 
   // classe privada para tratar o evento do botao que envia a mensagem
-  private class ButtonHandler implements ActionListener {
+  public class ButtonHandler implements ActionListener{
 
     /*
      * *************************************************************** Metodo:
@@ -134,5 +161,11 @@ public class PanelWest extends JPanel {
       }
 
     }
+    
   }
+
+  
+
+  
+  
 }

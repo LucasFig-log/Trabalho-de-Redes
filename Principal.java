@@ -9,14 +9,15 @@ Funcao: Exemplificar o funcionamento de um envio de mensagem.
 *************************************************************** */
 import javax.swing.JFrame;
 import view.FramePrincipal;
+import javax.swing.SwingUtilities;
 
 public class Principal {
   public static void main(String[] args) {
-    FramePrincipal framePrincipal = new FramePrincipal();
-    framePrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    framePrincipal.setSize(1000, 600);
-    framePrincipal.setResizable(false);
-    framePrincipal.centerContainer(framePrincipal);
-    framePrincipal.setVisible(true);
+    SwingUtilities.invokeLater(new Runnable(){
+      @Override
+      public void run(){
+        new FramePrincipal();
+      }
+    });    
   }
 }

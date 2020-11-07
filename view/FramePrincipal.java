@@ -35,11 +35,12 @@ public class FramePrincipal extends JFrame {
 
   public BorderLayout layout;
   public static PanelSouth panelSouth;
+  public static PanelWest panelWest;
   private JScrollPane scrollBits;
 
   /* ***************************************************************
-  Metodo: FramePrincipal*
-  Funcao: Construtor da classe FramePrincipal*
+  Metodo: this*
+  Funcao: Construtor da classe this*
   Parametros: nulo*
   Retorno: void*
   *************************************************************** */
@@ -49,18 +50,27 @@ public class FramePrincipal extends JFrame {
 
     layout = new BorderLayout();
     font = new Font("Coolvetica", Font.HANGING_BASELINE, 13);
-
+    panelWest = new PanelWest();
     panelSouth = new PanelSouth();
     scrollBits = new JScrollPane(panelSouth);
     scrollBits.setPreferredSize(new Dimension(1000, 200));
     scrollBits.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-
+    
+    this.getRootPane().setDefaultButton(panelWest.send);
+    
     // adicionando os JPanel's individuais ao frame principal
-    add(new PanelWest(), BorderLayout.WEST);
+    add(panelWest, BorderLayout.WEST);
+    
     add(new PanelCenter(), BorderLayout.CENTER);
     add(new PanelEast(), BorderLayout.EAST);
     add(scrollBits, BorderLayout.SOUTH);
 
+    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    this.setSize(1000, 600);
+    this.setResizable(false);
+    this.centerContainer(this);
+    this.setVisible(true);
+    
   }
 
    /* ***************************************************************
