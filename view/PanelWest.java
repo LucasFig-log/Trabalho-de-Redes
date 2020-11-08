@@ -31,17 +31,15 @@ public class PanelWest extends JPanel {
   private JScrollPane scrollTextArea;
   public static JTextArea textASCII;
   private JScrollPane scrollTextASCII;
-  public static JTextArea textBitsCodificados;
-  private JScrollPane scrollTextBitsCodificados;
-  public static JTextArea textBitsBrutos;
-  private JScrollPane scrollTextBitsBrutos;
+  public static JTextArea textBitsParidade;
+  private JScrollPane scrollTextBitsParidade;
+ 
   public static JTextArea textQuadrosEnquadrados;
   private JScrollPane scrollQuadrosEnquadrados;
   public static JButton send;
   private JLabel labelText;
-  private JLabel labelBitsCodificado;
+  private JLabel labelBitsParidade;
   private JLabel labelASCII;
-  private JLabel labelBitsBrutos;
   private JLabel labelQuadrosEnquadrados;
   private Font font;
   private Font font2;
@@ -130,6 +128,19 @@ public class PanelWest extends JPanel {
     scrollQuadrosEnquadrados.setPreferredSize(new Dimension(300, 50));
     scrollQuadrosEnquadrados.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
+    // configuracoes do JLabel com o texto especifico
+    labelBitsParidade = new JLabel("Quadros em Paridades Par");
+    labelBitsParidade.setFont(font);
+    labelBitsParidade.setPreferredSize(new Dimension(300, 30));
+
+    // configuracoes do campo de texto que exibe os quadros enquadrados
+    textBitsParidade = new JTextArea();
+    textBitsParidade.setEditable(false);
+    textBitsParidade.setLineWrap(true);
+    scrollTextBitsParidade = new JScrollPane(textBitsParidade);
+    scrollTextBitsParidade. setPreferredSize(new Dimension(300, 50));
+    scrollTextBitsParidade.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+    
     // adcionando todos os componentes ao JPanel
     add(labelText);
     add(scrollTextArea);
@@ -138,6 +149,8 @@ public class PanelWest extends JPanel {
     add(scrollTextASCII);
     add(labelQuadrosEnquadrados);
     add(scrollQuadrosEnquadrados);
+    add(labelBitsParidade);
+    add(scrollTextBitsParidade);
    
 
   }

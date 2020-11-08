@@ -23,13 +23,12 @@ import javax.swing.ScrollPaneConstants;
 
 public class FramePrincipal extends JFrame {
   public static final int TEXT_ASCII = 0;
-  public static final int TEXT_BITS_BRUTOS = 1;
-  public static final int TEXT_BISTS_CODIFICADOS = 2;
+  public static final int TEXT_QUADROS_ENQUADRADOS = 1;
+  public static final int TEXT_QUADROS_EM_PARIDADE_PAR = 2;
   public static final int TEXT_AREA_DECODIFICADO = 3;
   public static final int TEXT_ASCII_DECODIFICADO = 4;
   public static final int TEXT_BITS_BRUTOS_DECODIFICADO = 5;
   public static final int TEXT_BITS_RECEBIDOS = 6;
-  public static final int TEXT_QUADROS_ENQUADRADOS = 7;
   public static final int TEXT_QUADROS_DESENQUADRADOS_RECEBIDOS = 8;
   private static Font font;
 
@@ -46,7 +45,7 @@ public class FramePrincipal extends JFrame {
   *************************************************************** */
   public FramePrincipal() {
 
-    super("Trabalho 03");
+    super("Trabalho 04");
 
     layout = new BorderLayout();
     font = new Font("Coolvetica", Font.HANGING_BASELINE, 13);
@@ -66,7 +65,7 @@ public class FramePrincipal extends JFrame {
     add(scrollBits, BorderLayout.SOUTH);
 
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    this.setSize(1000, 600);
+    this.setSize(1000, 630);
     this.setResizable(false);
     this.centerContainer(this);
     this.setVisible(true);
@@ -110,14 +109,14 @@ public class FramePrincipal extends JFrame {
           
           break;
         case 1:
-          PanelWest.textBitsBrutos.setFont(font);
-          PanelWest.textBitsBrutos.setText(mensagem);
-          PanelWest.textBitsBrutos.update(PanelWest.textBitsBrutos.getGraphics());
+          PanelWest.textQuadrosEnquadrados.setFont(font);
+          PanelWest.textQuadrosEnquadrados.setText(mensagem);
+          PanelWest.textQuadrosEnquadrados.update(PanelWest.textQuadrosEnquadrados.getGraphics());
           break;
         case 2:
-          PanelWest.textBitsCodificados.setFont(font);
-          PanelWest.textBitsCodificados.setText(mensagem);
-          PanelWest.textBitsCodificados.update(PanelWest.textBitsCodificados.getGraphics());
+           PanelWest.textBitsParidade.setFont(font);
+           PanelWest.textBitsParidade.setText(mensagem);
+           PanelWest.textBitsParidade.update(PanelWest.textBitsParidade.getGraphics());
           break;
         case 3:
           PanelEast.textArea.setFont(font);
@@ -130,19 +129,14 @@ public class FramePrincipal extends JFrame {
           PanelEast.textASCII.update(PanelEast.textASCII.getGraphics());
           break;
         case 5:
-          PanelEast.textBitsBrutos.setFont(font);
-          PanelEast.textBitsBrutos.setText(mensagem);
-          PanelEast.textBitsBrutos.update(PanelEast.textBitsBrutos.getGraphics());
+          // PanelEast.textBitsBrutos.setFont(font);
+          // PanelEast.textBitsBrutos.setText(mensagem);
+          // PanelEast.textBitsBrutos.update(PanelEast.textBitsBrutos.getGraphics());
           break;
         case 6:
-          PanelEast.textBitsDecodificados.setFont(font);
-          PanelEast.textBitsDecodificados.setText(mensagem);
-          PanelEast.textBitsDecodificados.update(PanelEast.textBitsDecodificados.getGraphics());
-          break;
-        case 7:
-          PanelWest.textQuadrosEnquadrados.setFont(font);
-          PanelWest.textQuadrosEnquadrados.setText(mensagem);
-          PanelWest.textQuadrosEnquadrados.update(PanelWest.textQuadrosEnquadrados.getGraphics());
+          // PanelEast.textBitsDecodificados.setFont(font);
+          // PanelEast.textBitsDecodificados.setText(mensagem);
+          // PanelEast.textBitsDecodificados.update(PanelEast.textBitsDecodificados.getGraphics());
           break;
         case 8:
           PanelEast.textQuadrosEnquadrados.setFont(font);

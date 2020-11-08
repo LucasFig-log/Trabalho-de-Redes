@@ -23,18 +23,15 @@ public class PanelEast extends JPanel {
   private JScrollPane scrollTextArea;
   public static JTextArea textASCII;
   private JScrollPane scrollTextASCII;
-  public static JTextArea textBitsDecodificados;
-  private JScrollPane scrollBitsDecodificados;
-  public static JTextArea textBitsBrutos;
-  private JScrollPane scrollTextBitsBrutos;
+  public static JTextArea textBitsParidadeReceptora;
+  private JScrollPane scrollBitsParidadeReceptora;
   public static JTextArea textQuadrosEnquadrados;
   private JScrollPane scrollQuadrosEnquadrados;
   private JLabel labelText;
-  private JLabel labelBitsDecodificado;
+  private JLabel labelBitsParidadeReceptora;
   private JLabel labelASCII;
-  private JLabel labelBitsBrutos;
   private JLabel labelQuadrosEnquadrados;
-  private Font font;
+  public Font font;
 
     /* ***************************************************************
   Metodo: PanelEast*
@@ -88,6 +85,19 @@ public class PanelEast extends JPanel {
     scrollQuadrosEnquadrados = new JScrollPane(textQuadrosEnquadrados);
     scrollQuadrosEnquadrados.setPreferredSize(new Dimension(300, 50));
     scrollQuadrosEnquadrados.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+    
+    // configuracoes do JLabel com o texto especifico
+    labelBitsParidadeReceptora = new JLabel("Quadros em Paridade Par Recebidos");
+    labelBitsParidadeReceptora.setFont(new Font("OldStyle", Font.BOLD, 14));
+    labelBitsParidadeReceptora.setPreferredSize(new Dimension(300, 30));
+    
+    // configuracoes do campo de texto que exibe os quadros desenquadrados
+    textBitsParidadeReceptora = new JTextArea();
+    textBitsParidadeReceptora.setEditable(false);
+    textBitsParidadeReceptora.setLineWrap(true);
+    scrollBitsParidadeReceptora = new JScrollPane(textBitsParidadeReceptora);
+    scrollBitsParidadeReceptora.setPreferredSize(new Dimension(300, 50));
+    scrollBitsParidadeReceptora.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
 
     // adcionando todos os componentes ao JPanel
@@ -97,6 +107,8 @@ public class PanelEast extends JPanel {
     add(scrollTextASCII);
     add(labelQuadrosEnquadrados);
     add(scrollQuadrosEnquadrados);
+    add(labelBitsParidadeReceptora);
+    add(scrollBitsParidadeReceptora);
   
 
   }
