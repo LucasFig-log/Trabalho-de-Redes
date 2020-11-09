@@ -44,7 +44,7 @@ public class PanelCenter extends JPanel {
   private JSlider sliderErro;
   private Font font;
   private Font font2;
-  public static int probabilidade;
+  public static double probabilidade;
 
   /* ***************************************************************
   Metodo: PanelCenter*
@@ -52,6 +52,7 @@ public class PanelCenter extends JPanel {
   Parametros: nulo*
   Retorno: void*
   *************************************************************** */
+  @SuppressWarnings("unchecked")
   public PanelCenter() {
 
     Color cor = new Color(255, 250, 205);
@@ -79,19 +80,21 @@ public class PanelCenter extends JPanel {
     sliderErro.setPaintLabels(true);
     sliderErro.setMinorTickSpacing(50); //adicionar os ticks 
     sliderErro.setPaintTicks(true);
-    sliderErro.setSnapToTicks(true);
+    sliderErro.setSnapToTicks(false);
     
     //mapeando a posicao do JSlider
+    
+    
     Hashtable position = new Hashtable();
     position.put(0, new JLabel("0%"));
     position.put(50, new JLabel("50%"));
     position.put(100, new JLabel("100%"));
     sliderErro.setLabelTable(position);
-
+    
     sliderErro.addChangeListener(new ChangeListener(){
       public void stateChanged(ChangeEvent e){
-        probabilidade = ((JSlider)e.getSource()).getValue();
-        System.out.println(probabilidade);
+        probabilidade = (double)((JSlider)e.getSource()).getValue()/100;
+        
       }
 
     });

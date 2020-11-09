@@ -10,6 +10,8 @@ Funcao: Exemplificar o funcionamento de um envio de mensagem.
 
 public class CamadaEnlaceDadosReceptora{
 
+    public static int[] novoQuadro;
+
       /* ***************************************************************
   Metodo: camadaEnlaceDadosTransmissora*
   Funcao: executar funcoes da camada enlace de dados*
@@ -17,8 +19,8 @@ public class CamadaEnlaceDadosReceptora{
   Retorno: void
   *************************************************************** */
     public static void camadaEnlaceDadosReceptora(int quadro[]){
-        CamadaEnlaceDadosReceptoraEnquadramento.camadaEnlaceDadosReceptoraEnquadramento(quadro);
         CamadaEnlaceDadosReceptoraControleDeErro.camadaEnlaceDadosReceptoraControleDeErro(quadro);
+        CamadaEnlaceDadosReceptoraEnquadramento.camadaEnlaceDadosReceptoraEnquadramento(novoQuadro);
         CamadaEnlaceDadosReceptoraControleDeFluxo.camadaEnlaceDadosReceptoraControleDeFluxo(quadro);
 
         

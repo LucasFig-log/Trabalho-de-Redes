@@ -28,7 +28,7 @@ public class FramePrincipal extends JFrame {
   public static final int TEXT_AREA_DECODIFICADO = 3;
   public static final int TEXT_ASCII_DECODIFICADO = 4;
   public static final int TEXT_BITS_BRUTOS_DECODIFICADO = 5;
-  public static final int TEXT_BITS_RECEBIDOS = 6;
+  public static final int TEXT_QUADROS_SEM_PARIDADE_PAR = 6;
   public static final int TEXT_QUADROS_DESENQUADRADOS_RECEBIDOS = 8;
   private static Font font;
 
@@ -134,9 +134,9 @@ public class FramePrincipal extends JFrame {
           // PanelEast.textBitsBrutos.update(PanelEast.textBitsBrutos.getGraphics());
           break;
         case 6:
-          // PanelEast.textBitsDecodificados.setFont(font);
-          // PanelEast.textBitsDecodificados.setText(mensagem);
-          // PanelEast.textBitsDecodificados.update(PanelEast.textBitsDecodificados.getGraphics());
+          PanelEast.textBitsParidadeReceptora.setFont(font);
+          PanelEast.textBitsParidadeReceptora.setText(mensagem);
+          PanelEast.textBitsParidadeReceptora.update(PanelEast.textBitsParidadeReceptora.getGraphics());
           break;
         case 8:
           PanelEast.textQuadrosEnquadrados.setFont(font);

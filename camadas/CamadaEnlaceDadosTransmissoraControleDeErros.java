@@ -14,7 +14,7 @@ public class CamadaEnlaceDadosTransmissoraControleDeErros{
          
         FramePrincipal.imprimirNaTela(Conversao.bitsBrutosParaString(fluxoBrutoDeBits), FramePrincipal.TEXT_QUADROS_EM_PARIDADE_PAR);
 
-        //CamadaEnlaceDadosTransmissora.novoQuadro = fluxoBrutoDeBits;
+        CamadaEnlaceDadosTransmissora.novoQuadro = fluxoBrutoDeBits;
     }
 
     public static int [] camadaEnlaceDadosTransmissoraControleDeErrosBitDeParidadePar(int quadro[]){
@@ -36,10 +36,10 @@ public class CamadaEnlaceDadosTransmissoraControleDeErros{
 
         for (int i = 0; i < quadro.length; i++){
             quadroBitsParidadePar[i] = quadro[i];
-            System.out.println(quadro[i]);
+           
         }
 
-        System.out.println(quandidadeBitsUltimoInt);
+        
 
         if (quantidadeBitsUm % 2 == 0){
             if (quandidadeBitsUltimoInt >= 31){
@@ -59,9 +59,7 @@ public class CamadaEnlaceDadosTransmissoraControleDeErros{
 
         }
 
-        for (int i = 0; i< quadroBitsParidadePar.length; i++){
-            System.out.println(quadroBitsParidadePar[i] + "vetor paridade");
-        }
+       
 
         return quadroBitsParidadePar;
     }
