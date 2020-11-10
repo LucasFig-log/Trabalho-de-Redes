@@ -83,14 +83,13 @@ public class PanelCenter extends JPanel {
     sliderErro.setSnapToTicks(false);
     
     //mapeando a posicao do JSlider
-    
-    
     Hashtable position = new Hashtable();
     position.put(0, new JLabel("0%"));
     position.put(50, new JLabel("50%"));
     position.put(100, new JLabel("100%"));
     sliderErro.setLabelTable(position);
     
+    //Captura os numeros do slider
     sliderErro.addChangeListener(new ChangeListener(){
       public void stateChanged(ChangeEvent e){
         probabilidade = (double)((JSlider)e.getSource()).getValue()/100;
@@ -124,7 +123,7 @@ public class PanelCenter extends JPanel {
     add(labelPaint);
     
 
-
+    //radiobutton do bytesDeFlagRadioButton
     radioGroup2 = new ButtonGroup();
     radioGroup2.add(bytesDeFlagRadioButton);
     

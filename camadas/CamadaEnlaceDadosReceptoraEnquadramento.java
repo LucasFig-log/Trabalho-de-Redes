@@ -15,11 +15,11 @@ public class CamadaEnlaceDadosReceptoraEnquadramento{
     private static int[] fluxoBrutoDeBits;
 
     /* ***************************************************************
-  Metodo: camadaEnlaceDadosTransmissoraEnquadramentoContagemDeCaracteres*
-  Funcao: executar a contagens de caractes para enquadralos*
-  Parametros: quadro[]*
-  Retorno: int[]*
-  *************************************************************** */
+    Metodo: camadaEnlaceDadosTransmissoraReceptoraEnquadramento*
+    Funcao: executa o enquadramento dos bits*
+    Parametros: quadro[]*
+    Retorno: int[]*
+    *************************************************************** */
     public static void camadaEnlaceDadosReceptoraEnquadramento(int quadro[]){
         
     
@@ -40,11 +40,11 @@ public class CamadaEnlaceDadosReceptoraEnquadramento{
 
 
     /* ***************************************************************
-  Metodo: camadaEnlaceDadosTransmissoraEnquadramentoInsercaoDeBytes*
-  Funcao: desenquadrar os quadros recebidos*
-  Parametros: quadro[]*
-  Retorno: int[]*
-  *************************************************************** */
+    Metodo: camadaEnlaceDadosTransmissoraEnquadramentoInsercaoDeBytes*
+    Funcao: desenquadrar os quadros recebidos*
+    Parametros: quadro[]*
+    Retorno: int[]*
+    *************************************************************** */
     public static int[] camadaEnlaceDadosReceptoraEnquadramentoInsercaoDeBytes(int quadro[]){
         
         //converter bits em ascii

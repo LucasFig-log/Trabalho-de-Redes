@@ -43,7 +43,7 @@ public class MeioDeComunicacao {
       public void run(){
         PanelSouth.fluxoDeBits.clear();
 
-      if (Math.random() <= PanelCenter.probabilidade){
+      if (Math.random() <= PanelCenter.probabilidade){ //Caso de erro
           
           
           for (int i = 0; i < tamanho; i++) {
@@ -87,7 +87,7 @@ public class MeioDeComunicacao {
             cont = 1;
       
           }
-      } else{
+      } else{ //Caso sem erro
         for (int i = 0; i < tamanho; i++) {
           numero = fluxoBrutoDeBitsPontA[i];
           int checaBits = Integer.toBinaryString(numero).length();

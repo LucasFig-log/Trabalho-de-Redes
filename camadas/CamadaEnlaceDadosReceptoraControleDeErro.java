@@ -1,4 +1,12 @@
 package camadas;
+/* ***************************************************************
+Autor: Lucas Santos Figueiredo*
+Matricula: 201810803*
+Inicio: 23/01/2020*
+Ultima alteracao: 03/11/2020*
+Nome: Simulador de Redes*
+Funcao: Exemplificar o funcionamento de um envio de mensagem.
+*************************************************************** */
 
 import view.FramePrincipal;
 import util.Conversao;
@@ -8,14 +16,28 @@ public class CamadaEnlaceDadosReceptoraControleDeErro{
     
     public static int [] fluxoBrutoDeBits;
 
+    /* ***************************************************************
+    Metodo: camadaEnlaceDadosReceptoraControleDeErro*
+    Funcao: executa o controle de erros*
+    Parametros: quadro[]*
+    Retorno: int[]*
+    *************************************************************** */
     public static void camadaEnlaceDadosReceptoraControleDeErro(int quadro[]){
+        
+        //confere a paridade par
         fluxoBrutoDeBits = camadaEnlaceDadosReceptoraControleDeErrosBitsDeParidadePar(quadro);
-
+        //imprime os bits
         FramePrincipal.imprimirNaTela(Conversao.bitsBrutosParaString(quadro), FramePrincipal.TEXT_QUADROS_SEM_PARIDADE_PAR);
-
+        //passa os bits checados para a camada receptora
         CamadaEnlaceDadosReceptora.novoQuadro = fluxoBrutoDeBits;
     }
 
+    /* ***************************************************************
+    Metodo: camadaEnlaceDadosReceptoraControleDeErrosBitsDeParidadePar*
+    Funcao: confere se o bits recebidos estao em paridade par*
+    Parametros: quadro[]*
+    Retorno: int[]*
+    *************************************************************** */
     public static int[] camadaEnlaceDadosReceptoraControleDeErrosBitsDeParidadePar(int quadro[]){
         
         int[] quadroSemParidadePar;
@@ -65,15 +87,15 @@ public class CamadaEnlaceDadosReceptoraControleDeErro{
             
         }
 
-        System.out.println(quantidadeBitsUm);
+        
         if (quantidadeBitsUm % 2 == 0){
             
             return quadroSemParidadePar;
             
         } else{
-            System.out.println("ERRO");
+            
             FramePrincipal.imprimirNaTela(Conversao.bitsBrutosParaString(quadro), FramePrincipal.TEXT_QUADROS_SEM_PARIDADE_PAR);
-            JOptionPane.showConfirmDialog(null, "Erro no envio da mensagem, tente novamente. ", "Alerta! ", JOptionPane.OK_CANCEL_OPTION);
+            JOptionPane.showMessageDialog(null, "Erro no envio da mensagem, tente novamente. ", "Alerta! ", JOptionPane.ERROR_MESSAGE);
             
             return quadroSemParidadePar;
         }

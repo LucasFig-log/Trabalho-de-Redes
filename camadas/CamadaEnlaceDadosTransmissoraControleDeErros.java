@@ -1,5 +1,14 @@
 package camadas;
 
+/* ***************************************************************
+Autor: Lucas Santos Figueiredo*
+Matricula: 201810803*
+Inicio: 23/01/2020*
+Ultima alteracao: 03/11/2020*
+Nome: Simulador de Redes*
+Funcao: Exemplificar o funcionamento de um envio de mensagem.
+*************************************************************** */
+
 import view.FramePrincipal;
 import util.Conversao;
 
@@ -7,7 +16,12 @@ public class CamadaEnlaceDadosTransmissoraControleDeErros{
 
     public static int[] fluxoBrutoDeBits;
     
-
+    /* ***************************************************************
+    Metodo: camadaEnlaceDadosTransmissoraControleDeErros*
+    Funcao: executa o codigo de bit de paridade*
+    Parametros: quadro[]*
+    Retorno: int[]*
+    *************************************************************** */
     public static void camadaEnlaceDadosTransmissoraControleDeErros(int quadro[]){
         
         fluxoBrutoDeBits = camadaEnlaceDadosTransmissoraControleDeErrosBitDeParidadePar(quadro);
@@ -17,6 +31,12 @@ public class CamadaEnlaceDadosTransmissoraControleDeErros{
         CamadaEnlaceDadosTransmissora.novoQuadro = fluxoBrutoDeBits;
     }
 
+    /* ***************************************************************
+    Metodo: camadaEnlaceDadosTransmissoraControleDeErrosBitDeParidadePar*
+    Funcao: coloca a mensagem em bit de paridade par*
+    Parametros: quadro[]*
+    Retorno: int[]*
+    *************************************************************** */
     public static int [] camadaEnlaceDadosTransmissoraControleDeErrosBitDeParidadePar(int quadro[]){
 
         int[] quadroBitsParidadePar;
@@ -59,13 +79,16 @@ public class CamadaEnlaceDadosTransmissoraControleDeErros{
 
         }
 
-       
-
         return quadroBitsParidadePar;
     }
 
 
-    
+    /* ***************************************************************
+    Metodo: quantidadeDeBitsUm*
+    Funcao: conta a quantidade de bits um na mensagem*
+    Parametros: quadro[]*
+    Retorno: int[]*
+    *************************************************************** */
     public static int quantidadeDeBitsUm(int[] quadro){
         int quantidadeBitsUm = 0;
         int valor = 0;
@@ -90,10 +113,6 @@ public class CamadaEnlaceDadosTransmissoraControleDeErros{
                 valor <<= 1;
             }
             
-            
-
-            
-
         }
         return quantidadeBitsUm;
     }
