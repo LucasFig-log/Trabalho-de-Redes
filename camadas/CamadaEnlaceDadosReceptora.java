@@ -20,9 +20,9 @@ public class CamadaEnlaceDadosReceptora{
   *************************************************************** */
     public static void camadaEnlaceDadosReceptora(int quadro[]){
         CamadaEnlaceDadosReceptoraControleDeErro.camadaEnlaceDadosReceptoraControleDeErro(quadro);
-        CamadaEnlaceDadosReceptoraEnquadramento.camadaEnlaceDadosReceptoraEnquadramento(novoQuadro);
+        //CamadaEnlaceDadosReceptoraEnquadramento.camadaEnlaceDadosReceptoraEnquadramento(novoQuadro);
         CamadaEnlaceDadosReceptoraControleDeFluxo.camadaEnlaceDadosReceptoraControleDeFluxo(quadro);
 
-        
+        CamadaDeAplicacaoReceptora.camadaDeAplicacaoReceptora(novoQuadro);
     }
 }

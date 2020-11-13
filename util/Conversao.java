@@ -193,7 +193,10 @@ public class Conversao {
     StringBuilder stringAscii = new StringBuilder();
 
     for (int i = 0; i < value.length; i++) {
-      stringAscii.append(" " + (char) value[i] + "  ->  " + value[i] + "\n ");
+      if(value[i] != 0){
+        stringAscii.append(" " + (char) value[i] + "  ->  " + value[i] + "\n ");
+      }
+      
     }
     // imprime a mensagem no campo especifico
     FramePrincipal.imprimirNaTela(stringAscii.toString(), tipoDeImpressao);

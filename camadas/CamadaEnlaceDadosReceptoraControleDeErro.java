@@ -29,6 +29,9 @@ public class CamadaEnlaceDadosReceptoraControleDeErro{
         //imprime os bits
         FramePrincipal.imprimirNaTela(Conversao.bitsBrutosParaString(quadro), FramePrincipal.TEXT_QUADROS_SEM_PARIDADE_PAR);
         //passa os bits checados para a camada receptora
+        Conversao.showAscII(Conversao.bitsBrutosParaASCII(fluxoBrutoDeBits),
+          FramePrincipal.TEXT_ASCII_DECODIFICADO);
+
         CamadaEnlaceDadosReceptora.novoQuadro = fluxoBrutoDeBits;
     }
 

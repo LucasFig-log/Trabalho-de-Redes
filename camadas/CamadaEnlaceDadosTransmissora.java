@@ -25,8 +25,8 @@ public class CamadaEnlaceDadosTransmissora{
   Retorno: void
   *************************************************************** */
     public static void camadaEnlaceDadosTransmissora(int quadro[]){
-        CamadaEnlaceDadosTransmissoraEnquadramento.camadaEnlaceDadosTransmissoraEnquadramento(quadro);
-        CamadaEnlaceDadosTransmissoraControleDeErros.camadaEnlaceDadosTransmissoraControleDeErros(novoQuadro);
+        //CamadaEnlaceDadosTransmissoraEnquadramento.camadaEnlaceDadosTransmissoraEnquadramento(quadro);
+        CamadaEnlaceDadosTransmissoraControleDeErros.camadaEnlaceDadosTransmissoraControleDeErros(quadro);
         CamadaEnlaceDadosTransmissoraControleDeFluxo.camadaEnlaceDadosTransmissoraControleDeFluxo(quadro);
         
         
