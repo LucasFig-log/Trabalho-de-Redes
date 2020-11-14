@@ -24,10 +24,16 @@ public class CamadaEnlaceDadosReceptoraControleDeErro{
     *************************************************************** */
     public static void camadaEnlaceDadosReceptoraControleDeErro(int quadro[]){
         
+        
         //confere a paridade par
         fluxoBrutoDeBits = camadaEnlaceDadosReceptoraControleDeErrosBitsDeParidadePar(quadro);
+        
         //imprime os bits
         FramePrincipal.imprimirNaTela(Conversao.bitsBrutosParaString(quadro), FramePrincipal.TEXT_QUADROS_SEM_PARIDADE_PAR);
+        
+        //imprime na caixa de texto quadro sem pararidade par recebidos
+        FramePrincipal.imprimirNaTela(Conversao.bitsBrutosParaString(quadro), FramePrincipal.TEXT_QUADROS_DESENQUADRADOS_RECEBIDOS);
+
         //passa os bits checados para a camada receptora
         Conversao.showAscII(Conversao.bitsBrutosParaASCII(fluxoBrutoDeBits),
           FramePrincipal.TEXT_ASCII_DECODIFICADO);

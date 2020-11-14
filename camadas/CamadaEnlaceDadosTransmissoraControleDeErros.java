@@ -23,11 +23,17 @@ public class CamadaEnlaceDadosTransmissoraControleDeErros{
     Retorno: int[]*
     *************************************************************** */
     public static void camadaEnlaceDadosTransmissoraControleDeErros(int quadro[]){
-        
+       
+        //imprime na caixa de texto quadro antes da paridade par
+        FramePrincipal.imprimirNaTela(Conversao.bitsBrutosParaString(quadro), FramePrincipal.TEXT_QUADROS_ENQUADRADOS);
+       
+        //chama a funcao que coloca o bit de paridade par
         fluxoBrutoDeBits = camadaEnlaceDadosTransmissoraControleDeErrosBitDeParidadePar(quadro);
-         
+       
+        //imprime na caixa de texto quadro em paridade par 
         FramePrincipal.imprimirNaTela(Conversao.bitsBrutosParaString(fluxoBrutoDeBits), FramePrincipal.TEXT_QUADROS_EM_PARIDADE_PAR);
-
+       
+        //retorna o novo vetor para a camada enlace dados
         CamadaEnlaceDadosTransmissora.novoQuadro = fluxoBrutoDeBits;
     }
 

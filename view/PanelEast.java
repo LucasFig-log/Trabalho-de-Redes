@@ -74,7 +74,7 @@ public class PanelEast extends JPanel {
     scrollTextASCII.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
      // configuracoes do JLabel com o texto especifico
-    labelQuadrosEnquadrados = new JLabel("Quadros Desenquadrados Recebidos");
+    labelQuadrosEnquadrados = new JLabel("Quadro Sem o Bit De Paridade Par");
     labelQuadrosEnquadrados.setFont(new Font("OldStyle", Font.BOLD, 14));
     labelQuadrosEnquadrados.setPreferredSize(new Dimension(300, 30));
 
@@ -87,7 +87,7 @@ public class PanelEast extends JPanel {
     scrollQuadrosEnquadrados.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
     
     // configuracoes do JLabel com o texto especifico
-    labelBitsParidadeReceptora = new JLabel("Quadros em Paridade Par Recebidos");
+    labelBitsParidadeReceptora = new JLabel("Quadro em Paridade Par Recebidos");
     labelBitsParidadeReceptora.setFont(new Font("OldStyle", Font.BOLD, 14));
     labelBitsParidadeReceptora.setPreferredSize(new Dimension(300, 30));
     

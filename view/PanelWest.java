@@ -56,7 +56,7 @@ public class PanelWest extends JPanel {
     this.setBackground(cor);
     setPreferredSize(new Dimension(350, 200));
     font = new Font("OldStyle", Font.BOLD, 18);
-    font2 = new Font("Coolvetica", Font.HANGING_BASELINE, 13);
+    font2 = new Font("Coolvetica", Font.BOLD, 15);
     
     // configuracoes do JLabel com o texto especifico
     labelText = new JLabel("Mensagem Decodificada");
@@ -116,8 +116,8 @@ public class PanelWest extends JPanel {
     scrollTextASCII.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 
     // configuracoes do JLabel com o texto especifico
-    labelQuadrosEnquadrados = new JLabel("Quadros Enquadrados");
-    labelQuadrosEnquadrados.setFont(font);
+    labelQuadrosEnquadrados = new JLabel("Quadro Antes do Bit de Paridade Par");
+    labelQuadrosEnquadrados.setFont(font2);
     labelQuadrosEnquadrados.setPreferredSize(new Dimension(300, 30));
 
     // configuracoes do campo de texto que exibe os quadros enquadrados
@@ -129,7 +129,7 @@ public class PanelWest extends JPanel {
     scrollQuadrosEnquadrados.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
     // configuracoes do JLabel com o texto especifico
-    labelBitsParidade = new JLabel("Quadros em Paridades Par");
+    labelBitsParidade = new JLabel("Quadro em Paridades Par");
     labelBitsParidade.setFont(font);
     labelBitsParidade.setPreferredSize(new Dimension(300, 30));
 

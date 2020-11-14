@@ -41,7 +41,8 @@ public class MeioDeComunicacao {
 
       @Override
       public void run(){
-        PanelSouth.fluxoDeBits.clear();
+      PanelSouth.fluxoDeBits.clear();
+        
 
       if (Math.random() <= PanelCenter.probabilidade){ //Caso de erro
           
