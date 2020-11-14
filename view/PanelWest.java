@@ -25,9 +25,11 @@ import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import java.awt.Font;
 
+import view.FramePrincipal;
+
 public class PanelWest extends JPanel {
 
-  public JTextArea textArea;
+  public static JTextArea textArea;
   private JScrollPane scrollTextArea;
   public static JTextArea textASCII;
   private JScrollPane scrollTextASCII;
@@ -44,7 +46,7 @@ public class PanelWest extends JPanel {
   private Font font;
   private Font font2;
   private Color cor;
-
+  public static String mensagem;
   /*
    * *************************************************************** Metodo:
    * PanelWest* Funcao: Construtor da classe PanelWest* Parametros: nulo* Retorno:
@@ -169,7 +171,11 @@ public class PanelWest extends JPanel {
         JOptionPane.showMessageDialog(null, "Caixa de texto vazia! ", "Alerta! ", JOptionPane.ERROR_MESSAGE);
       } else {
         send.setEnabled(false);
-        CamadaDeAplicacaoTransmissora.camadaDeAplicacaoTransmissora(textArea.getText());
+        
+        mensagem = textArea.getText();
+        
+        CamadaDeAplicacaoTransmissora.camadaDeAplicacaoTransmissora(mensagem);
+        
         
       }
 

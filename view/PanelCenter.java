@@ -104,19 +104,19 @@ public class PanelCenter extends JPanel {
     panelInv.setBackground(cor);
 
     panelInvDivisor = new JPanel();
-    panelInvDivisor.setPreferredSize(new Dimension(500, 80));
+    panelInvDivisor.setPreferredSize(new Dimension(500, 200));
     panelInvDivisor.setBackground(cor);
 
-    labelPaint = new JLabel("Sinais dos Bits Codificados");
+    labelPaint = new JLabel("Sinais dos Bits");
     labelPaint.setFont(new Font("OldStyle", Font.BOLD, 18));
     labelPaint.setHorizontalAlignment(SwingConstants.CENTER);
     labelPaint.setPreferredSize(new Dimension(450, 150));
 
 
     // adcionando todos os componentes ao JPanel
-    add(labelTextTransmissao);
-    add(bytesDeFlagRadioButton);
-    add(panelInv);
+    //add(labelTextTransmissao);
+    //add(bytesDeFlagRadioButton);
+    //add(panelInv);
     add(labelProbabilidadeErro);
     add(sliderErro);
     add(panelInvDivisor);

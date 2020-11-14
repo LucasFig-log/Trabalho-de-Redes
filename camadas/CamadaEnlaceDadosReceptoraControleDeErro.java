@@ -32,7 +32,7 @@ public class CamadaEnlaceDadosReceptoraControleDeErro{
         FramePrincipal.imprimirNaTela(Conversao.bitsBrutosParaString(quadro), FramePrincipal.TEXT_QUADROS_SEM_PARIDADE_PAR);
         
         //imprime na caixa de texto quadro sem pararidade par recebidos
-        FramePrincipal.imprimirNaTela(Conversao.bitsBrutosParaString(quadro), FramePrincipal.TEXT_QUADROS_DESENQUADRADOS_RECEBIDOS);
+        FramePrincipal.imprimirNaTela(Conversao.bitsBrutosParaString(fluxoBrutoDeBits), FramePrincipal.TEXT_QUADROS_DESENQUADRADOS_RECEBIDOS);
 
         //passa os bits checados para a camada receptora
         Conversao.showAscII(Conversao.bitsBrutosParaASCII(fluxoBrutoDeBits),

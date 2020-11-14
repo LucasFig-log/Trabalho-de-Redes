@@ -99,7 +99,7 @@ public class FramePrincipal extends JFrame {
   Retorno: void*
   *************************************************************** */
   public static void imprimirNaTela(String mensagem, int tipoDeImpressao) {
-
+      
     
       switch (tipoDeImpressao) {
         case 0:
@@ -164,5 +164,17 @@ public class FramePrincipal extends JFrame {
     int componentHeigth = container.getHeight();
     container.setBounds((screenSize.width - componentWidth) / 2, (screenSize.height - componentHeigth) / 2,
         componentWidth, componentHeigth);
+  }
+
+  public static void limparCamposTexto(){
+
+    //PanelWest.textArea.setText("");
+    PanelWest.textASCII.setText("");
+    PanelWest.textQuadrosEnquadrados.setText("");
+    PanelWest.textBitsParidade.setText("");
+    PanelEast.textArea.setText("");
+    PanelEast.textASCII.setText("");
+    PanelEast.textQuadrosEnquadrados.setText("");
+    PanelEast.textBitsParidadeReceptora.setText("");
   }
 }

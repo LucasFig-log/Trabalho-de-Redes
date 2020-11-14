@@ -21,6 +21,7 @@ public class CamadaDeAplicacaoTransmissora {
   *************************************************************** */
   public static void camadaDeAplicacaoTransmissora(String mensagem) {
 
+    FramePrincipal.limparCamposTexto();
     int quadro[] = new int[mensagem.length()];
 
     for (int i = 0; i < mensagem.length(); i++) {
