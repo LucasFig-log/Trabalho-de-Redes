@@ -45,7 +45,7 @@ public class FramePrincipal extends JFrame {
   *************************************************************** */
   public FramePrincipal() {
 
-    super("Trabalho 04");
+    super("Trabalho 05");
 
     layout = new BorderLayout();
     font = new Font("Coolvetica", Font.HANGING_BASELINE, 13);
