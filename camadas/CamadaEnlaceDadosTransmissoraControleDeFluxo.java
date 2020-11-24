@@ -2,51 +2,63 @@ package camadas;
 
 import camadas.CamadaEnlaceDadosTransmissora;
 import util.Conversao;
+//import util.Eventos;
 
 public class CamadaEnlaceDadosTransmissoraControleDeFluxo{
 
-    public static int[] fluxoDeBits;
+    
 
     public static void camadaEnlaceDadosTransmissoraControleDeFluxo(int quadro[]){
         
-        fluxoDeBits = camadaEnlaceDadosTransmissoraControleDeFluxoGoBackN(quadro);
+        camadaEnlaceDadosTransmissoraControleDeFluxoGoBackN(quadro);
 
     }
 
-    public int[] camadaEnlaceDadosTransmissoraControleDeFluxoGoBackN(int quadro[]){
+    public static void camadaEnlaceDadosTransmissoraControleDeFluxoGoBackN(int quadro[]){
 
-        int [] quadroAsc = Conversao.bitsBrutosParaASCII(quadro);
-        int proximoQuadro = 0;
-        public static boolean quadroRecebido = false;
+        int[] quadroAsc = Conversao.bitsBrutosParaASCII(quadro);
+        int[] envio = new int[1];
+        int base = 0;
+        int proximoSeq = 0;
+        int nbuffer = 0;
+        int MAXSEQ = 3;
+        
 
-        if (quadroAsc >= 3){
-            janelaDeslizante = new int[3];
+
+        if (quadroAsc.length >= 4){
+           int buffer[] = new int[MAXSEQ + 1];
         } else{
-            janelaDeslizante = new int[quadroAsc.length];
-        }
-
-        for (int i = 0; i < janelaDeslizante.length; i++){
-            janelaDeslizante[i] = quadroAsc[i];
+            int buffer[] = new int[quadroAsc.length - 1];
         }
 
 
-        while (true){
+        while(true){
 
-            // mandar quadros na janela
-
-            
-            switch (quadroRecebido) {
-                case quadroRecebido == true:
+            Eventos tipo = Eventos.ENVIAR;
+            switch (tipo) {
+                case tipo = Eventos.ENVIAR:
                     
                     break;
-            
-                case quadroRecebido == false:
+                case tipo = Eventos.RECEBER_ACK:
+                    
+                    
+                    break;
+                case tipo = Eventos.TIMEOUT:
+
 
 
                     break;
+                default:
+                    break;
             }
+
         }
 
-        return null;
+
+
+        
+
+
+        
     }
 }
