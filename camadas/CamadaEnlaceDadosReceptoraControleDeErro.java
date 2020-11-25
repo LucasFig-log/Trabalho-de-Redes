@@ -11,6 +11,7 @@ Funcao: Exemplificar o funcionamento de um envio de mensagem.
 import view.FramePrincipal;
 import util.Conversao;
 import javax.swing.JOptionPane;
+import util.Quadro;
 
 public class CamadaEnlaceDadosReceptoraControleDeErro{
     
@@ -22,14 +23,14 @@ public class CamadaEnlaceDadosReceptoraControleDeErro{
     Parametros: quadro[]*
     Retorno: int[]*
     *************************************************************** */
-    public static void camadaEnlaceDadosReceptoraControleDeErro(int quadro[]){
+    public static void camadaEnlaceDadosReceptoraControleDeErro(Quadro... quadro){
         
         
         //confere a paridade par
-        fluxoBrutoDeBits = camadaEnlaceDadosReceptoraControleDeErrosBitsDeParidadePar(quadro);
+        fluxoBrutoDeBits = camadaEnlaceDadosReceptoraControleDeErrosBitsDeParidadePar(quadro[0].bits);
         
         //imprime os bits
-        FramePrincipal.imprimirNaTela(Conversao.bitsBrutosParaString(quadro), FramePrincipal.TEXT_QUADROS_SEM_PARIDADE_PAR);
+        FramePrincipal.imprimirNaTela(Conversao.bitsBrutosParaString(quadro[0].bits), FramePrincipal.TEXT_QUADROS_SEM_PARIDADE_PAR);
         
         //imprime na caixa de texto quadro sem pararidade par recebidos
         FramePrincipal.imprimirNaTela(Conversao.bitsBrutosParaString(fluxoBrutoDeBits), FramePrincipal.TEXT_QUADROS_DESENQUADRADOS_RECEBIDOS);
@@ -38,7 +39,7 @@ public class CamadaEnlaceDadosReceptoraControleDeErro{
         Conversao.showAscII(Conversao.bitsBrutosParaASCII(fluxoBrutoDeBits),
           FramePrincipal.TEXT_ASCII_DECODIFICADO);
 
-        CamadaEnlaceDadosReceptora.novoQuadro = fluxoBrutoDeBits;
+        CamadaEnlaceDadosReceptora.novoQuadro[0].bits = fluxoBrutoDeBits;
     }
 
     /* ***************************************************************

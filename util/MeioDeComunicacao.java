@@ -13,6 +13,8 @@ import view.PanelSouth;
 import view.PanelCenter;
 import java.util.*;
 import java.lang.Math;
+import util.Quadro;
+import util.Conversao;
 
 public class MeioDeComunicacao {
   public static int tamanho;
@@ -23,9 +25,12 @@ public class MeioDeComunicacao {
   Parametros: int[] fluxoBrutoDeBits*
   Retorno: void*
   *************************************************************** */
-  public static void meioDeComunicacao(int fluxoBrutoDeBits[]) {
-    tamanho = fluxoBrutoDeBits.length;
-    int[] fluxoBrutoDeBitsPontA = fluxoBrutoDeBits;
+  public static void meioDeComunicacao(Quadro... quadros) {
+    tamanho = quadros.length;
+   
+    int[] quadroConvertido = Conversao.asciiParaBits(quadros[0].bits);
+    
+    int[] fluxoBrutoDeBitsPontA = quadroConvertido;
     int[] fluxoBrutoDeBitsPontB = new int[tamanho];
     int numero = 0;
     int cont = 1;
@@ -135,7 +140,8 @@ public class MeioDeComunicacao {
    
     
     //envia os quadros para a camada enlace de dados receptora
-    CamadaEnlaceDadosReceptora.camadaEnlaceDadosReceptora(fluxoBrutoDeBitsPontB);
+    quadros[0].bits = fluxoBrutoDeBitsPontB;
+    CamadaEnlaceDadosReceptora.camadaEnlaceDadosReceptora(quadros);
       }
 
     }).start(); 

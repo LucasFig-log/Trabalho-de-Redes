@@ -34,13 +34,18 @@ public class Conversao {
       valor <<= 8;
       valor = valor | quadro[i];
       if (i % 4 >= 0 && i == quadro.length - 1) {
+        
         fluxoBrutoDeBits[j] = valor;
+
       } else if (i % 4 == 3) {
         fluxoBrutoDeBits[j] = valor;
+
         valor = 0;
         j++;
       }
     }
+
+
 
     return fluxoBrutoDeBits;
   }

@@ -32,6 +32,6 @@ public class CamadaEnlaceDadosTransmissora{
         
         
         
-        MeioDeComunicacao.meioDeComunicacao(novoQuadro);
+        //MeioDeComunicacao.meioDeComunicacao(novoQuadro);
     }
 }

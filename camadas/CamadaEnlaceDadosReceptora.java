@@ -7,10 +7,11 @@ Ultima alteracao: 03/11/2020*
 Nome: Simulador de Redes*
 Funcao: Exemplificar o funcionamento de um envio de mensagem.
 *************************************************************** */
-
+import util.Quadro;
 public class CamadaEnlaceDadosReceptora{
 
-    public static int[] novoQuadro;
+    public static Quadro[] novoQuadro;
+    public static int[] bitsQuadro;
 
       /* ***************************************************************
   Metodo: camadaEnlaceDadosTransmissora*
@@ -18,10 +19,10 @@ public class CamadaEnlaceDadosReceptora{
   Parametros: quadro[]*
   Retorno: void
   *************************************************************** */
-    public static void camadaEnlaceDadosReceptora(int quadro[]){
+    public static void camadaEnlaceDadosReceptora(Quadro... quadro){
         CamadaEnlaceDadosReceptoraControleDeErro.camadaEnlaceDadosReceptoraControleDeErro(quadro);
-        CamadaEnlaceDadosReceptoraControleDeFluxo.camadaEnlaceDadosReceptoraControleDeFluxo(quadro);
+        CamadaEnlaceDadosReceptoraControleDeFluxo.camadaEnlaceDadosReceptoraControleDeFluxo(novoQuadro);
 
-        CamadaDeAplicacaoReceptora.camadaDeAplicacaoReceptora(novoQuadro);
+        CamadaDeAplicacaoReceptora.camadaDeAplicacaoReceptora(bitsQuadro);
     }
 }
