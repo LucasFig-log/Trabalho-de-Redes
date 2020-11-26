@@ -35,12 +35,12 @@ public class PanelCenter extends JPanel {
   private JRadioButton violacaoCamadaFisicaRadioButton;
   private ButtonGroup radioGroup;
   private ButtonGroup radioGroup2;
-  private JLabel labelText;
+  public static JLabel labelTimer;
   private JLabel labelPaint;
   private JLabel labelTextTransmissao;
   private JLabel labelProbabilidadeErro;
   private JPanel panelInv;
-  private JPanel panelInvDivisor;
+  public static JPanel panelInvDivisor;
   private JSlider sliderErro;
   private Font font;
   private Font font2;
@@ -103,6 +103,10 @@ public class PanelCenter extends JPanel {
     panelInv.setPreferredSize(new Dimension(500, 30));
     panelInv.setBackground(cor);
 
+    labelTimer = new JLabel();
+    labelProbabilidadeErro.setPreferredSize(new Dimension(175,40));
+
+
     panelInvDivisor = new JPanel();
     panelInvDivisor.setPreferredSize(new Dimension(500, 200));
     panelInvDivisor.setBackground(cor);
@@ -119,7 +123,7 @@ public class PanelCenter extends JPanel {
     //add(panelInv);
     add(labelProbabilidadeErro);
     add(sliderErro);
-    add(panelInvDivisor);
+    add(labelTimer);
     add(labelPaint);
     
 

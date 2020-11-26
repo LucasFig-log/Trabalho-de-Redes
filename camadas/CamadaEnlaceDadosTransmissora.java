@@ -12,6 +12,7 @@ import util.MeioDeComunicacao;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import util.Quadro;
 
 public class CamadaEnlaceDadosTransmissora{
   
@@ -24,7 +25,7 @@ public class CamadaEnlaceDadosTransmissora{
   Parametros: quadro[]*
   Retorno: void
   *************************************************************** */
-    public static void camadaEnlaceDadosTransmissora(int quadro[]){
+    public static void camadaEnlaceDadosTransmissora(Quadro... quadro){
         
         CamadaEnlaceDadosTransmissoraControleDeErros.camadaEnlaceDadosTransmissoraControleDeErros(quadro);
         CamadaEnlaceDadosTransmissoraControleDeFluxo.camadaEnlaceDadosTransmissoraControleDeFluxo(novoQuadro);

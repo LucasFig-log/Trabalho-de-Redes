@@ -11,6 +11,7 @@ Funcao: Exemplificar o funcionamento de um envio de mensagem.
 
 import view.FramePrincipal;
 import util.Conversao;
+import util.Quadro;
 
 public class CamadaEnlaceDadosTransmissoraControleDeErros{
 
@@ -22,10 +23,10 @@ public class CamadaEnlaceDadosTransmissoraControleDeErros{
     Parametros: quadro[]*
     Retorno: int[]*
     *************************************************************** */
-    public static void camadaEnlaceDadosTransmissoraControleDeErros(int quadro[]){
+    public static void camadaEnlaceDadosTransmissoraControleDeErros(Quadro... quadro){
        
         //imprime na caixa de texto quadro antes da paridade par
-        FramePrincipal.imprimirNaTela(Conversao.bitsBrutosParaString(quadro), FramePrincipal.TEXT_QUADROS_ENQUADRADOS);
+        FramePrincipal.imprimirNaTela(Conversao.bitsBrutosParaString(quadro[0].bits), FramePrincipal.TEXT_QUADROS_ENQUADRADOS);
        
         //chama a funcao que coloca o bit de paridade par
         fluxoBrutoDeBits = camadaEnlaceDadosTransmissoraControleDeErrosBitDeParidadePar(quadro);
@@ -43,47 +44,37 @@ public class CamadaEnlaceDadosTransmissoraControleDeErros{
     Parametros: quadro[]*
     Retorno: int[]*
     *************************************************************** */
-    public static int [] camadaEnlaceDadosTransmissoraControleDeErrosBitDeParidadePar(int quadro[]){
+    public static int [] camadaEnlaceDadosTransmissoraControleDeErrosBitDeParidadePar(Quadro... quadro){
 
         int[] quadroBitsParidadePar;
+        int[] quadrosConvertidos = Conversao.bitsBrutosParaASCII(quadro[0].bits);
         int quantidadeBitsUm = 0;
         
         
 
-        int quandidadeBitsUltimoInt = Integer.toBinaryString(quadro[quadro.length - 1]).length();
-        
-        if (quandidadeBitsUltimoInt >= 31){
-            quadroBitsParidadePar = new int[quadro.length + 1];
-        } else{
-            quadroBitsParidadePar = new int[quadro.length];
-        }
-
-        quantidadeBitsUm  = quantidadeDeBitsUm(quadro);
-
-        for (int i = 0; i < quadro.length; i++){
-            quadroBitsParidadePar[i] = quadro[i];
-           
-        }
-
         
 
-        if (quantidadeBitsUm % 2 == 0){
-            if (quandidadeBitsUltimoInt >= 31){
-                quadroBitsParidadePar[quadroBitsParidadePar.length -1] = 0;
+        for (int i = 0; i < quadrosConvertidos.length; i++ ){
+            quantidadeBitsUm = quantidadeDeBitsUm(quadrosConvertidos[i]);
+
+            if(quantidadeBitsUm % 2 == 0){
+                quadrosConvertidos[i] <<= 1;
             } else{
-                quadroBitsParidadePar[quadroBitsParidadePar.length-1] <<= 1;
+                quadrosConvertidos[i] <<= 1;
+                quadrosConvertidos[i] = quadrosConvertidos[i] | 1;
             }
-            
-        } else{
-            if (quandidadeBitsUltimoInt >= 31){
-                quadroBitsParidadePar[quadroBitsParidadePar.length -1] = 1;
-            } else{
-                quadroBitsParidadePar[quadroBitsParidadePar.length-1] <<= 1;
-            quadroBitsParidadePar[quadroBitsParidadePar.length-1] = quadroBitsParidadePar[quadroBitsParidadePar.length-1] | 1;
-            }
-            
 
         }
+
+        quadroBitsParidadePar = Conversao.asciiParaBits(quadrosConvertidos);
+
+        for(int i = 0; i<quadroBitsParidadePar.length; i++){
+            System.out.println(quadroBitsParidadePar[i]);
+        }
+
+        
+
+        
 
         return quadroBitsParidadePar;
     }
@@ -95,15 +86,15 @@ public class CamadaEnlaceDadosTransmissoraControleDeErros{
     Parametros: quadro[]*
     Retorno: int[]*
     *************************************************************** */
-    public static int quantidadeDeBitsUm(int[] quadro){
+    public static int quantidadeDeBitsUm(int quadro){
         int quantidadeBitsUm = 0;
         int valor = 0;
         int quantidadeBitsValor = 0;
         int displayMask = 1 << 31;
 
-        for (int i = 0; i < quadro.length; i++){
+        
 
-            valor = quadro[i];
+            valor = quadro;
             quantidadeBitsValor = Integer.toBinaryString(valor).length();
             valor <<= (32 - (quantidadeBitsValor+1));
             
@@ -119,7 +110,7 @@ public class CamadaEnlaceDadosTransmissoraControleDeErros{
                 valor <<= 1;
             }
             
-        }
+        
         return quantidadeBitsUm;
     }
 }

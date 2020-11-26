@@ -10,6 +10,7 @@ Funcao: Exemplificar o funcionamento de um envio de mensagem.
 import camadas.CamadaEnlaceDadosTransmissora;
 import util.Conversao;
 import view.FramePrincipal;
+import util.Quadro;
 
 public class CamadaDeAplicacaoTransmissora {
 
@@ -35,7 +36,9 @@ public class CamadaDeAplicacaoTransmissora {
     //converte a mensagem para bits
     quadro = Conversao.asciiParaBits(quadro);
     
+    Quadro quadroEnquadrado = new Quadro();
+    quadroEnquadrado.bits = quadro;
     
-    CamadaEnlaceDadosTransmissora.camadaEnlaceDadosTransmissora(quadro);
+    CamadaEnlaceDadosTransmissora.camadaEnlaceDadosTransmissora(quadroEnquadrado);
   }
 }

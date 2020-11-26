@@ -132,11 +132,12 @@ public class Conversao {
     int mask = 1 << 31;
     int cont = 1;
 
-    string.append("Quantidade de bits 1: " + CamadaEnlaceDadosTransmissoraControleDeErros.quantidadeDeBitsUm(bitsBrutos)+"\n" );
+    
 
     for (int i = 0; i < bitsBrutos.length; i++) {
       int numero = bitsBrutos[i];
-
+      string.append("Quantidade de bits 1: " + CamadaEnlaceDadosTransmissoraControleDeErros.quantidadeDeBitsUm(numero)+"\n" );
+      
       int checaBits = Integer.toBinaryString(numero).length();
       if (checaBits <= 8) {
         checaBits = 8;
@@ -153,7 +154,7 @@ public class Conversao {
       while (cont <= checaBits) {
         if ((mask & numero) == 0) {
           string.append('0');
-          if ((cont % 8) == 0) {
+          if ((cont % 9) == 0) {
             string.append(' ');
           }
           if ((cont % 32) == 0) {
@@ -161,7 +162,7 @@ public class Conversao {
           }
         } else {
           string.append('1');
-          if ((cont % 8) == 0) {
+          if ((cont % 9) == 0) {
             string.append(' ');
           }
           if ((cont % 32) == 0) {

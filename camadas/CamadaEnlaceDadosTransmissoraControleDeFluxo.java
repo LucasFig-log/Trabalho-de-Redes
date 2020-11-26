@@ -49,23 +49,32 @@ public class CamadaEnlaceDadosTransmissoraControleDeFluxo{
                     quadroEnviado.ack = ((proximoSeq + MAXSEQ) % (MAXSEQ + 1));
                     nbuffer += 1;
                     proximoSeq += 1;
+                    quadroEnviado.temporizador(5);
                     MeioDeComunicacao.meioDeComunicacao(quadroEnviado);
 
                     
                     System.out.println("Enviar quadro");
-                    //CamadaEnlaceDadosReceptoraControleDeFluxo.tipo = Eventos.TIMEOUT;
+                    CamadaEnlaceDadosReceptoraControleDeFluxo.tipo = Eventos.RECEBER_ACK;
+                    
                     break;
                 case  RECEBER_ACK:
                     
                     
                     break;
                 case  TIMEOUT:
+                    
 
 
                     break;
                 default:
                     break;
             }
+
+            // if (nbuffer < MAXSEQ){
+            //     CamadaEnlaceDadosReceptoraControleDeFluxo.tipo = Eventos.ENVIAR;
+            // } else{
+            //     CamadaEnlaceDadosReceptoraControleDeFluxo.tipo = Eventos.RECEBER_ACK;
+            // }
 
             
 
