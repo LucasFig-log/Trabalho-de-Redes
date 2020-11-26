@@ -19,6 +19,8 @@ public class CamadaDeAplicacaoReceptora {
   Retorno: void*
   *************************************************************** */
   public static void camadaDeAplicacaoReceptora(int fluxoBrutoDeBits[]) {
+    
+    
     aplicacaoReceptora(Conversao.bitsBrutosParaMensagem(fluxoBrutoDeBits));
   }
 

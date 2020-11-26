@@ -12,12 +12,15 @@ import view.FramePrincipal;
 import view.PanelSouth;
 import view.PanelCenter;
 import java.util.*;
+import java.util.concurrent.Semaphore;
 import java.lang.Math;
 import util.Quadro;
 import util.Conversao;
 
 public class MeioDeComunicacao {
   public static int tamanho;
+
+  public static Semaphore mutexMeio = new Semaphore(1);
   
   /* ***************************************************************
   Metodo: meioDeComunicacao*
@@ -32,10 +35,7 @@ public class MeioDeComunicacao {
     
     int[] fluxoBrutoDeBitsPontA = quadroConvertido;
     int[] fluxoBrutoDeBitsPontB = new int[tamanho];
-    int numero = 0;
-    int cont = 1;
-    int valorTransmitido = 0;
-    int mask = 1 << 31;
+    
 
     new Thread(new Runnable(){
       int numero = 0;

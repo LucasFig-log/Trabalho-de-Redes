@@ -104,7 +104,7 @@ public class PanelCenter extends JPanel {
     panelInv.setBackground(cor);
 
     labelTimer = new JLabel();
-    labelProbabilidadeErro.setPreferredSize(new Dimension(175,40));
+    labelTimer.setPreferredSize(new Dimension(175,200));
 
 
     panelInvDivisor = new JPanel();

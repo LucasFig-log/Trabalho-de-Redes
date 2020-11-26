@@ -9,10 +9,10 @@ import java.awt.event.ActionListener;
 
 
 public class Quadro {
-    public int[] buffer;
+    public int[] buffer = new int[1];
     public int sequencia;
     public int ack;
-    public int[] bits;
+    public int[] bits = new int[1];
     public Timer timer;
     public javax.swing.Timer timerTela;
 

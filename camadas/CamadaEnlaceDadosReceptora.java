@@ -10,8 +10,9 @@ Funcao: Exemplificar o funcionamento de um envio de mensagem.
 import util.Quadro;
 public class CamadaEnlaceDadosReceptora{
 
-    public static Quadro[] novoQuadro;
-    public static int[] bitsQuadro;
+   
+
+    
 
       /* ***************************************************************
   Metodo: camadaEnlaceDadosTransmissora*
@@ -20,9 +21,13 @@ public class CamadaEnlaceDadosReceptora{
   Retorno: void
   *************************************************************** */
     public static void camadaEnlaceDadosReceptora(Quadro... quadro){
-        CamadaEnlaceDadosReceptoraControleDeErro.camadaEnlaceDadosReceptoraControleDeErro(quadro);
-        CamadaEnlaceDadosReceptoraControleDeFluxo.camadaEnlaceDadosReceptoraControleDeFluxo(novoQuadro);
-
-        CamadaDeAplicacaoReceptora.camadaDeAplicacaoReceptora(bitsQuadro);
+        
+        
+        quadro[0].bits = CamadaEnlaceDadosReceptoraControleDeErro.camadaEnlaceDadosReceptoraControleDeErro(quadro[0].bits);
+        
+        CamadaEnlaceDadosReceptoraControleDeFluxo.camadaEnlaceDadosReceptoraControleDeFluxo(quadro);
+        
+        
+        CamadaDeAplicacaoReceptora.camadaDeAplicacaoReceptora(quadro[0].bits);
     }
 }

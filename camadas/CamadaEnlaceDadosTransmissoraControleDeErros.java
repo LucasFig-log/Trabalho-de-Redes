@@ -11,6 +11,7 @@ Funcao: Exemplificar o funcionamento de um envio de mensagem.
 
 import view.FramePrincipal;
 import util.Conversao;
+import util.MeioDeComunicacao;
 import util.Quadro;
 
 public class CamadaEnlaceDadosTransmissoraControleDeErros{
@@ -23,7 +24,7 @@ public class CamadaEnlaceDadosTransmissoraControleDeErros{
     Parametros: quadro[]*
     Retorno: int[]*
     *************************************************************** */
-    public static void camadaEnlaceDadosTransmissoraControleDeErros(Quadro... quadro){
+    public static int[] camadaEnlaceDadosTransmissoraControleDeErros(Quadro... quadro){
        
         //imprime na caixa de texto quadro antes da paridade par
         FramePrincipal.imprimirNaTela(Conversao.bitsBrutosParaString(quadro[0].bits), FramePrincipal.TEXT_QUADROS_ENQUADRADOS);
@@ -32,10 +33,10 @@ public class CamadaEnlaceDadosTransmissoraControleDeErros{
         fluxoBrutoDeBits = camadaEnlaceDadosTransmissoraControleDeErrosBitDeParidadePar(quadro);
        
         //imprime na caixa de texto quadro em paridade par 
-        FramePrincipal.imprimirNaTela(Conversao.bitsBrutosParaString(fluxoBrutoDeBits), FramePrincipal.TEXT_QUADROS_EM_PARIDADE_PAR);
+        FramePrincipal.imprimirNaTela(Conversao.bitsBrutosParaStringEmParidade(fluxoBrutoDeBits), FramePrincipal.TEXT_QUADROS_EM_PARIDADE_PAR);
        
         //retorna o novo vetor para a camada enlace dados
-        CamadaEnlaceDadosTransmissora.novoQuadro = fluxoBrutoDeBits;
+         return fluxoBrutoDeBits;
     }
 
     /* ***************************************************************
@@ -68,9 +69,7 @@ public class CamadaEnlaceDadosTransmissoraControleDeErros{
 
         quadroBitsParidadePar = Conversao.asciiParaBits(quadrosConvertidos);
 
-        for(int i = 0; i<quadroBitsParidadePar.length; i++){
-            System.out.println(quadroBitsParidadePar[i]);
-        }
+        
 
         
 
@@ -112,5 +111,12 @@ public class CamadaEnlaceDadosTransmissoraControleDeErros{
             
         
         return quantidadeBitsUm;
+    }
+    public static void mandarACK(Quadro... quadro){
+
+        quadro[0].bits =  camadaEnlaceDadosTransmissoraControleDeErrosBitDeParidadePar(quadro);
+        MeioDeComunicacao.meioDeComunicacao(quadro);
+
+        
     }
 }

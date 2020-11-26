@@ -16,7 +16,7 @@ import util.Quadro;
 
 public class CamadaEnlaceDadosTransmissora{
   
-  public static int[] novoQuadro;
+  
 
 
     /* ***************************************************************
@@ -27,8 +27,9 @@ public class CamadaEnlaceDadosTransmissora{
   *************************************************************** */
     public static void camadaEnlaceDadosTransmissora(Quadro... quadro){
         
-        CamadaEnlaceDadosTransmissoraControleDeErros.camadaEnlaceDadosTransmissoraControleDeErros(quadro);
-        CamadaEnlaceDadosTransmissoraControleDeFluxo.camadaEnlaceDadosTransmissoraControleDeFluxo(novoQuadro);
+        quadro[0].bits =  CamadaEnlaceDadosTransmissoraControleDeErros.camadaEnlaceDadosTransmissoraControleDeErros(quadro);
+        
+        CamadaEnlaceDadosTransmissoraControleDeFluxo.camadaEnlaceDadosTransmissoraControleDeFluxo(quadro);
         
         
         

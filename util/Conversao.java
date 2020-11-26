@@ -133,10 +133,11 @@ public class Conversao {
     int cont = 1;
 
     
+    int[] bitsAscii = bitsBrutosParaASCII(bitsBrutos);
 
-    for (int i = 0; i < bitsBrutos.length; i++) {
-      int numero = bitsBrutos[i];
-      string.append("Quantidade de bits 1: " + CamadaEnlaceDadosTransmissoraControleDeErros.quantidadeDeBitsUm(numero)+"\n" );
+    for (int i = 0; i < bitsAscii.length; i++) {
+      int numero = bitsAscii[i];
+      string.append("Quantidade de bits 1: " + CamadaEnlaceDadosTransmissoraControleDeErros.quantidadeDeBitsUm(numero)+"\n " );
       
       int checaBits = Integer.toBinaryString(numero).length();
       if (checaBits <= 8) {
@@ -173,6 +174,63 @@ public class Conversao {
         cont++;
       }
       cont = 1;
+      string.append("\n");
+    }
+
+    
+    return string.toString();
+
+  }
+
+  /* ***************************************************************
+  Metodo: bitsBrutosParaStringEmParidade*
+  Funcao: converte os bits em String + o bit de paridade*
+  Parametros: int[] bitsBrutos*
+  Retorno: String*
+  *************************************************************** */
+  public static String bitsBrutosParaStringEmParidade(int[] bitsBrutos) {
+    StringBuilder string = new StringBuilder();
+    int mask = 1 << 31;
+    int cont = 1;
+    int quantidadeDeBitsUm = 0;
+    
+    
+
+    for (int i = 0; i < bitsBrutos.length; i++) {
+      int numero = bitsBrutos[i];
+      
+      
+      int checaBits = Integer.toBinaryString(numero).length();
+      if (checaBits <= 8) {
+        checaBits = 8;
+
+      } else if (checaBits <= 16) {
+        checaBits = 16;
+      } else if (checaBits <= 24) {
+        checaBits = 24;
+      } else {
+        checaBits = 32;
+      }
+      numero = numero << (32 - (checaBits));
+
+      while (cont <= checaBits) {
+        for(int j = 0; j < 8; j++){
+          if ((mask & numero) == 0) {
+            string.append('0');
+           
+          } else {
+            string.append('1');
+            quantidadeDeBitsUm += 1;
+           
+          }
+          numero = numero << 1;
+          cont++;
+        }
+        string.append(" Quantidade de bits 1: "+quantidadeDeBitsUm+"\n");
+        quantidadeDeBitsUm = 0;
+      }
+      cont = 1;
+      
     }
 
     
