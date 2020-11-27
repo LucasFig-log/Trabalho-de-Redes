@@ -1,6 +1,7 @@
 package camadas;
 
 import camadas.CamadaEnlaceDadosTransmissora;
+
 import util.Conversao;
 import util.Eventos;
 
@@ -16,6 +17,7 @@ public class CamadaEnlaceDadosTransmissoraControleDeFluxo{
     public static Semaphore mutex = new Semaphore(0);
     public static int proximoSeq = 0;
     public static int quadroEsperado = 0;
+    public static int base = 0;
     public static boolean flag = false;
     public static int [] quadroAscCorrigido;
     
@@ -55,7 +57,7 @@ public class CamadaEnlaceDadosTransmissoraControleDeFluxo{
                     }
                 }
                 
-                System.out.println(quadroAscCorrigido.length);
+                
                 
                 int MAXSEQ = 3;
                 int[] buffer;
@@ -71,19 +73,21 @@ public class CamadaEnlaceDadosTransmissoraControleDeFluxo{
                 
                 while(true){
                     
-                    
+                    //System.out.println(quadroAscCorrigido.length + " " + proximoSeq);
                     if(quadroAscCorrigido.length == proximoSeq){
                         
                         if(flag){
+                            System.out.println("Limpando variaveis");
                             proximoSeq = 0;
                             base = 0;
                             nbuffer = 0;
                             CamadaEnlaceDadosReceptoraControleDeFluxo.todosQuadros.clear();
+                            
                             break;
                         }           
                         
                     } else{
-                        System.out.println(mutex.availablePermits()  + " P");
+                        
                         try {
                             MeioDeComunicacao.mutexMeio.acquire();
                         } catch (Exception e) {

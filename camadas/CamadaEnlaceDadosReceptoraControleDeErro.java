@@ -9,6 +9,7 @@ Funcao: Exemplificar o funcionamento de um envio de mensagem.
 *************************************************************** */
 
 import view.FramePrincipal;
+import view.PanelCenter;
 import util.Conversao;
 import javax.swing.JOptionPane;
 import util.Quadro;
@@ -16,6 +17,7 @@ import util.Quadro;
 public class CamadaEnlaceDadosReceptoraControleDeErro{
     
     public static int [] fluxoBrutoDeBits;
+    static int contAck;
 
     /* ***************************************************************
     Metodo: camadaEnlaceDadosReceptoraControleDeErro*
@@ -28,16 +30,23 @@ public class CamadaEnlaceDadosReceptoraControleDeErro{
         
         //confere a paridade par
         fluxoBrutoDeBits = camadaEnlaceDadosReceptoraControleDeErrosBitsDeParidadePar(quadro);
+        if(fluxoBrutoDeBits[0] != 184){
+            //imprime os bits
+             FramePrincipal.imprimirNaTela(Conversao.bitsBrutosParaStringEmParidade(quadro), FramePrincipal.TEXT_QUADROS_SEM_PARIDADE_PAR);
         
-        //imprime os bits
-        FramePrincipal.imprimirNaTela(Conversao.bitsBrutosParaStringEmParidade(quadro), FramePrincipal.TEXT_QUADROS_SEM_PARIDADE_PAR);
-        
-        //imprime na caixa de texto quadro sem pararidade par recebidos
-        FramePrincipal.imprimirNaTela(Conversao.bitsBrutosParaString(fluxoBrutoDeBits), FramePrincipal.TEXT_QUADROS_DESENQUADRADOS_RECEBIDOS);
+            //imprime na caixa de texto quadro sem pararidade par recebidos
+             FramePrincipal.imprimirNaTela(Conversao.bitsBrutosParaString(fluxoBrutoDeBits), FramePrincipal.TEXT_QUADROS_DESENQUADRADOS_RECEBIDOS);
 
-        //passa os bits checados para a camada receptora
-        Conversao.showAscII(Conversao.bitsBrutosParaASCII(fluxoBrutoDeBits),
-          FramePrincipal.TEXT_ASCII_DECODIFICADO);
+            //passa os bits checados para a camada receptora
+            Conversao.showAscII(Conversao.bitsBrutosParaASCII(fluxoBrutoDeBits),
+            FramePrincipal.TEXT_ASCII_DECODIFICADO);
+        } else{
+            contAck++;
+            PanelCenter.labelACK.setText("Ack Recebido "+contAck);
+
+            
+        }
+        
 
           
         

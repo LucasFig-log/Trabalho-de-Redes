@@ -141,6 +141,7 @@ public class MeioDeComunicacao {
     
     //envia os quadros para a camada enlace de dados receptora
     quadros[0].bits = fluxoBrutoDeBitsPontB;
+    
     CamadaEnlaceDadosReceptora.camadaEnlaceDadosReceptora(quadros);
       }
 

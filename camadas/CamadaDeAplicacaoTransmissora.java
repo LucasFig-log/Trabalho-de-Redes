@@ -1,4 +1,6 @@
 package camadas;
+import java.util.concurrent.Semaphore;
+
 /* ***************************************************************
 Autor: Lucas Santos Figueiredo*
 Matricula: 201810803*
@@ -9,7 +11,9 @@ Funcao: Exemplificar o funcionamento de um envio de mensagem.
 *************************************************************** */
 import camadas.CamadaEnlaceDadosTransmissora;
 import util.Conversao;
+import util.MeioDeComunicacao;
 import view.FramePrincipal;
+import view.PanelCenter;
 import util.Quadro;
 
 public class CamadaDeAplicacaoTransmissora {
@@ -21,6 +25,18 @@ public class CamadaDeAplicacaoTransmissora {
   Retorno: void*
   *************************************************************** */
   public static void camadaDeAplicacaoTransmissora(String mensagem) {
+
+    
+      System.out.println("limpando");
+      CamadaEnlaceDadosTransmissoraControleDeFluxo.quadroEsperado = 0;
+      CamadaEnlaceDadosTransmissoraControleDeFluxo.proximoSeq = 0;
+      CamadaEnlaceDadosTransmissoraControleDeFluxo.base = 0;
+      CamadaEnlaceDadosTransmissoraControleDeFluxo.nbuffer = 0;
+      CamadaEnlaceDadosReceptoraControleDeErro.contAck = 0;
+      CamadaEnlaceDadosReceptoraControleDeFluxo.todosQuadros.clear();
+      CamadaEnlaceDadosTransmissoraControleDeFluxo.mutex = new Semaphore(0);
+      MeioDeComunicacao.mutexMeio = new Semaphore(1);
+      PanelCenter.labelACK.setText("Recebimendo de Ack");
 
     FramePrincipal.limparCamposTexto();
     int quadro[] = new int[mensagem.length()];

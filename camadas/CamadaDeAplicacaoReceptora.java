@@ -22,8 +22,17 @@ public class CamadaDeAplicacaoReceptora {
   public static void camadaDeAplicacaoReceptora(int fluxoBrutoDeBits[]) {
     
     aplicacaoReceptora(Conversao.bitsBrutosParaMensagem(fluxoBrutoDeBits));
-    if(CamadaEnlaceDadosTransmissoraControleDeFluxo.quadroAscCorrigido.length == CamadaEnlaceDadosTransmissoraControleDeFluxo.proximoSeq)
-      CamadaEnlaceDadosTransmissoraControleDeFluxo.flag = true;
+    // if(CamadaEnlaceDadosTransmissoraControleDeFluxo.quadroAscCorrigido.length == CamadaEnlaceDadosTransmissoraControleDeFluxo.proximoSeq){
+    //   System.out.println("fim da mensagem");
+    //   // CamadaEnlaceDadosTransmissoraControleDeFluxo.proximoSeq = 0;
+    //   // CamadaEnlaceDadosTransmissoraControleDeFluxo.base = 0;
+    //   // CamadaEnlaceDadosTransmissoraControleDeFluxo.nbuffer = 0;
+    //   // CamadaEnlaceDadosReceptoraControleDeFluxo.todosQuadros.clear();
+    //   CamadaEnlaceDadosTransmissoraControleDeFluxo.flag = true;
+
+    // }
+      
+      
 
   }
 

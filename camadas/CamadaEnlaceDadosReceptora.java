@@ -8,6 +8,7 @@ Nome: Simulador de Redes*
 Funcao: Exemplificar o funcionamento de um envio de mensagem.
 *************************************************************** */
 import util.Quadro;
+import view.PanelCenter;
 public class CamadaEnlaceDadosReceptora{
 
    
@@ -28,6 +29,14 @@ public class CamadaEnlaceDadosReceptora{
         quadro[0].bits =  CamadaEnlaceDadosReceptoraControleDeFluxo.camadaEnlaceDadosReceptoraControleDeFluxo(quadro);
         
         
-        CamadaDeAplicacaoReceptora.camadaDeAplicacaoReceptora(quadro[0].bits);
+        
+        if(quadro[0].ACK != true){
+            
+            CamadaDeAplicacaoReceptora.camadaDeAplicacaoReceptora(quadro[0].bits);
+        } else{
+            
+        }
+
+        
     }
 }

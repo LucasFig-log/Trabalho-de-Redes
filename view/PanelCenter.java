@@ -36,6 +36,7 @@ public class PanelCenter extends JPanel {
   private ButtonGroup radioGroup;
   private ButtonGroup radioGroup2;
   public static JLabel labelTimer;
+  public static JLabel labelACK;
   private JLabel labelPaint;
   private JLabel labelTextTransmissao;
   private JLabel labelProbabilidadeErro;
@@ -104,7 +105,10 @@ public class PanelCenter extends JPanel {
     panelInv.setBackground(cor);
 
     labelTimer = new JLabel();
-    labelTimer.setPreferredSize(new Dimension(175,200));
+    labelTimer.setPreferredSize(new Dimension(175,100));
+
+    labelACK = new JLabel();
+    labelACK.setPreferredSize(new Dimension(116, 100));
 
 
     panelInvDivisor = new JPanel();
@@ -124,6 +128,7 @@ public class PanelCenter extends JPanel {
     add(labelProbabilidadeErro);
     add(sliderErro);
     add(labelTimer);
+    add(labelACK);
     add(labelPaint);
     
 

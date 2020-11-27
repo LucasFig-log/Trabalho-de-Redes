@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class CamadaEnlaceDadosReceptoraControleDeFluxo{
     
     static int[] fluxoBrutoDeBits;
+    static int[] buffer;
     public static Eventos tipo = Eventos.ENVIAR;
     static ArrayList<Integer> todosQuadros = new ArrayList<>();
 
@@ -24,7 +25,7 @@ public class CamadaEnlaceDadosReceptoraControleDeFluxo{
     public static int[] camadaEnlaceDadosReceptoraControleDeFluxoGoBackN(Quadro... quadro){
         
     
-        int[] buffer;
+        
 
         
         //System.out.println(quadro[0].sequencia +" "+ CamadaEnlaceDadosTransmissoraControleDeFluxo.quadroEsperado);
@@ -59,13 +60,13 @@ public class CamadaEnlaceDadosReceptoraControleDeFluxo{
             MeioDeComunicacao.mutexMeio.release();
             
             CamadaEnlaceDadosTransmissoraControleDeFluxo.mutex.release();
-            
+
             
             
         }
 
         buffer = new int[todosQuadros.size()];
-        
+       
         for(int i = 0; i < todosQuadros.size(); i++){
             buffer[i] = todosQuadros.get(i);
             //System.out.println(buffer[i]+" armazenado no buffer pra imprimir");
