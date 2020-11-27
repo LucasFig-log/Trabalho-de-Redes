@@ -3,7 +3,7 @@ package util;
 Autor: Lucas Santos Figueiredo*
 Matricula: 201810803*
 Inicio: 23/01/2020*
-Ultima alteracao: 03/11/2020*
+Ultima alteracao: 27/11/2020*
 Nome: Simulador de Redes*
 Funcao: Exemplificar o funcionamento de um envio de mensagem.
 *************************************************************** */
@@ -11,11 +11,8 @@ import camadas.CamadaEnlaceDadosReceptora;
 import view.FramePrincipal;
 import view.PanelSouth;
 import view.PanelCenter;
-import java.util.*;
 import java.util.concurrent.Semaphore;
 import java.lang.Math;
-import util.Quadro;
-import util.Conversao;
 
 public class MeioDeComunicacao {
   public static int tamanho;

@@ -1,13 +1,8 @@
 package camadas;
 
-import camadas.CamadaEnlaceDadosTransmissora;
-
 import util.Conversao;
 import util.Eventos;
-
 import java.util.concurrent.Semaphore;
-
-import camadas.CamadaEnlaceDadosReceptoraControleDeFluxo;
 import util.MeioDeComunicacao;
 import util.Quadro;
 
@@ -21,22 +16,32 @@ public class CamadaEnlaceDadosTransmissoraControleDeFluxo{
     public static boolean flag = false;
     public static int [] quadroAscCorrigido;
     
+    /* ***************************************************************
+    Metodo: camadaEnlaceDadosTransmissoraControleDeFluxo*
+    Funcao: executa o codigo de controle de fluxo go back n*
+    Parametros: Quadros[]*
+    Retorno: void[]*
+    *************************************************************** */
     public static void camadaEnlaceDadosTransmissoraControleDeFluxo(Quadro... quadro){
         
         camadaEnlaceDadosTransmissoraControleDeFluxoGoBackN(quadro[0]);
 
     }
 
+    /* ***************************************************************
+    Metodo: camadaEnlaceDadosTransmissoraControleDeFluxoGoBackN*
+    Funcao: executa o codigo de controle de fluxo go back n*
+    Parametros: Quadros[]*
+    Retorno: void[]*
+    *************************************************************** */
     public static void camadaEnlaceDadosTransmissoraControleDeFluxoGoBackN(Quadro quadro){
-
-        
 
         
         new Thread(new Runnable(){
             @Override
             public void run(){
                 
-                int[] quadroAsc = Conversao.bitsBrutosParaASCII(quadro.bits);
+                int[] quadroAsc = Conversao.bitsBrutosParaASCII(quadro.bits); 
                 int[] envio = new int[1];
                 int base = 0;
                 int cont = 0;
@@ -57,8 +62,6 @@ public class CamadaEnlaceDadosTransmissoraControleDeFluxo{
                     }
                 }
                 
-                
-                
                 int MAXSEQ = 3;
                 int[] buffer;
 
@@ -73,18 +76,11 @@ public class CamadaEnlaceDadosTransmissoraControleDeFluxo{
                 
                 while(true){
                     
-                    //System.out.println(quadroAscCorrigido.length + " " + proximoSeq);
+                    
                     if(quadroAscCorrigido.length == proximoSeq){
                         
-                        if(flag){
-                            System.out.println("Limpando variaveis");
-                            proximoSeq = 0;
-                            base = 0;
-                            nbuffer = 0;
-                            CamadaEnlaceDadosReceptoraControleDeFluxo.todosQuadros.clear();
-                            
-                            break;
-                        }           
+                        break;
+                                   
                         
                     } else{
                         

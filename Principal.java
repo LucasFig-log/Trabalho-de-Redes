@@ -7,7 +7,7 @@ Ultima alteracao: 03/11/2020*
 Nome: Simulador de Redes*
 Funcao: Exemplificar o funcionamento de um envio de mensagem.
 *************************************************************** */
-import javax.swing.JFrame;
+
 import view.FramePrincipal;
 import javax.swing.SwingUtilities;
 

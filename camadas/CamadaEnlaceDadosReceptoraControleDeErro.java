@@ -12,7 +12,7 @@ import view.FramePrincipal;
 import view.PanelCenter;
 import util.Conversao;
 import javax.swing.JOptionPane;
-import util.Quadro;
+
 
 public class CamadaEnlaceDadosReceptoraControleDeErro{
     
@@ -41,15 +41,13 @@ public class CamadaEnlaceDadosReceptoraControleDeErro{
             Conversao.showAscII(Conversao.bitsBrutosParaASCII(fluxoBrutoDeBits),
             FramePrincipal.TEXT_ASCII_DECODIFICADO);
         } else{
+            
+            //imprime a mensagem de ack recebido na tela
             contAck++;
             PanelCenter.labelACK.setText("Ack Recebido "+contAck);
 
             
         }
-        
-
-          
-        
 
         return fluxoBrutoDeBits;
     }

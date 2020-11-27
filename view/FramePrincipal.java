@@ -7,16 +7,11 @@ Ultima alteracao: 03/11/2020*
 Nome: Simulador de Redes*
 Funcao: Exemplificar o funcionamento de um envio de mensagem.
 *************************************************************** */
-import view.PanelCenter;
-import view.PanelEast;
-import view.PanelSouth;
-import view.PanelWest;
+
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.*;
-import javax.swing.Timer;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;

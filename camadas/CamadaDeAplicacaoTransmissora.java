@@ -9,7 +9,7 @@ Ultima alteracao: 03/11/2020*
 Nome: Simulador de Redes*
 Funcao: Exemplificar o funcionamento de um envio de mensagem.
 *************************************************************** */
-import camadas.CamadaEnlaceDadosTransmissora;
+
 import util.Conversao;
 import util.MeioDeComunicacao;
 import view.FramePrincipal;
@@ -26,7 +26,7 @@ public class CamadaDeAplicacaoTransmissora {
   *************************************************************** */
   public static void camadaDeAplicacaoTransmissora(String mensagem) {
 
-    
+      //Redefinindo as variaveis para enviar a mensagem
       System.out.println("limpando");
       CamadaEnlaceDadosTransmissoraControleDeFluxo.quadroEsperado = 0;
       CamadaEnlaceDadosTransmissoraControleDeFluxo.proximoSeq = 0;
@@ -44,7 +44,7 @@ public class CamadaDeAplicacaoTransmissora {
     for (int i = 0; i < mensagem.length(); i++) {
       quadro[i] = mensagem.charAt(i);
     }
-    // passando o vetor com os numeros de cada caractere para a CamadaFisicaTransmissora
+    
     
     //imprime na caixa de texto os caracteres e seus valores ascII
     Conversao.showAscII(quadro, FramePrincipal.TEXT_ASCII);  

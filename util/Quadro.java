@@ -2,8 +2,6 @@ package util;
 
 import java.util.Timer;
 import java.util.TimerTask;
-
-import camadas.CamadaDeAplicacaoReceptora;
 import camadas.CamadaEnlaceDadosReceptoraControleDeFluxo;
 import view.PanelCenter;
 import java.awt.event.ActionEvent;
@@ -23,6 +21,12 @@ public class Quadro {
 
     public int cont;
 
+    /* ***************************************************************
+    Metodo: temporizador*
+    Funcao: da inicio ao cronometro do quadro*
+    Parametros: int segundos*
+    Retorno: void*
+    *************************************************************** */
     public void temporizador(int segundos){
         this.timer = new Timer();
         this.timer.schedule(new RemindTask(), segundos*1000);
@@ -40,6 +44,12 @@ public class Quadro {
 
     }
 
+    /* ***************************************************************
+    Metodo: stopTemporizador*
+    Funcao: para o cronometro do quadro*
+    Parametros: *
+    Retorno: void*
+    *************************************************************** */
     public void stopTemporizador(){
         
         this.timer.cancel();

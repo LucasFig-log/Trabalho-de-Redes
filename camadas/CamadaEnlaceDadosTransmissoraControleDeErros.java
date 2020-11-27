@@ -21,7 +21,7 @@ public class CamadaEnlaceDadosTransmissoraControleDeErros{
     /* ***************************************************************
     Metodo: camadaEnlaceDadosTransmissoraControleDeErros*
     Funcao: executa o codigo de bit de paridade*
-    Parametros: quadro[]*
+    Parametros: Quadro[]*
     Retorno: int[]*
     *************************************************************** */
     public static int[] camadaEnlaceDadosTransmissoraControleDeErros(Quadro... quadro){
@@ -50,10 +50,7 @@ public class CamadaEnlaceDadosTransmissoraControleDeErros{
         int[] quadroBitsParidadePar;
         int[] quadrosConvertidos = Conversao.bitsBrutosParaASCII(quadro[0].bits);
         int quantidadeBitsUm = 0;
-        
-        
-
-        
+    
 
         for (int i = 0; i < quadrosConvertidos.length; i++ ){
             quantidadeBitsUm = quantidadeDeBitsUm(quadrosConvertidos[i]);

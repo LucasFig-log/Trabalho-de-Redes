@@ -5,6 +5,8 @@ import util.MeioDeComunicacao;
 import camadas.CamadaEnlaceDadosTransmissoraControleDeFluxo;
 import camadas.CamadaEnlaceDadosTransmissora;
 import util.Quadro;
+import view.PanelWest;
+
 import java.util.ArrayList;
 
 public class CamadaEnlaceDadosReceptoraControleDeFluxo{
@@ -16,26 +18,20 @@ public class CamadaEnlaceDadosReceptoraControleDeFluxo{
 
     public static int[] camadaEnlaceDadosReceptoraControleDeFluxo(Quadro... quadro){
         fluxoBrutoDeBits = camadaEnlaceDadosReceptoraControleDeFluxoGoBackN(quadro);
-        //MeioDeComunicacao.mutexMeio.release();
         
         return fluxoBrutoDeBits;
 
     }
 
     public static int[] camadaEnlaceDadosReceptoraControleDeFluxoGoBackN(Quadro... quadro){
-        
     
-        
-
-        
-        //System.out.println(quadro[0].sequencia +" "+ CamadaEnlaceDadosTransmissoraControleDeFluxo.quadroEsperado);
 
         if(CamadaEnlaceDadosTransmissoraControleDeFluxo.quadroEsperado == quadro[0].sequencia){
             
             
             CamadaEnlaceDadosTransmissoraControleDeFluxo.quadroEsperado += 1;
             MeioDeComunicacao.mutexMeio.release();
-            //System.out.println("é quadro");
+            
             todosQuadros.add(quadro[0].bits[0]);
             quadro[0].stopTemporizador();
 
@@ -57,23 +53,16 @@ public class CamadaEnlaceDadosReceptoraControleDeFluxo{
             
             System.out.println("ack");
             CamadaEnlaceDadosTransmissoraControleDeFluxo.nbuffer -= 1;
-            MeioDeComunicacao.mutexMeio.release();
-            
-            CamadaEnlaceDadosTransmissoraControleDeFluxo.mutex.release();
-
-            
-            
+            MeioDeComunicacao.mutexMeio.release();            
+            CamadaEnlaceDadosTransmissoraControleDeFluxo.mutex.release();     
         }
 
         buffer = new int[todosQuadros.size()];
        
         for(int i = 0; i < todosQuadros.size(); i++){
             buffer[i] = todosQuadros.get(i);
-            //System.out.println(buffer[i]+" armazenado no buffer pra imprimir");
             
         }
-
-
 
         return buffer;
     }

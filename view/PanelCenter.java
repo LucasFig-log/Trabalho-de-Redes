@@ -20,8 +20,7 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import java.awt.event.ItemListener;
-import java.awt.event.ItemEvent;
+
 import java.util.Hashtable;
 
 public class PanelCenter extends JPanel {
@@ -121,10 +120,6 @@ public class PanelCenter extends JPanel {
     labelPaint.setPreferredSize(new Dimension(450, 150));
 
 
-    // adcionando todos os componentes ao JPanel
-    //add(labelTextTransmissao);
-    //add(bytesDeFlagRadioButton);
-    //add(panelInv);
     add(labelProbabilidadeErro);
     add(sliderErro);
     add(labelTimer);
@@ -132,7 +127,7 @@ public class PanelCenter extends JPanel {
     add(labelPaint);
     
 
-    //radiobutton do bytesDeFlagRadioButton
+    
     radioGroup2 = new ButtonGroup();
     radioGroup2.add(bytesDeFlagRadioButton);
     

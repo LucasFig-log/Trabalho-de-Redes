@@ -8,10 +8,7 @@ Ultima alteracao: 03/11/2020*
 Nome: Simulador de Redes*
 Funcao: Exemplificar o funcionamento de um envio de mensagem.
 *************************************************************** */
-import util.MeioDeComunicacao;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
+
 import util.Quadro;
 
 public class CamadaEnlaceDadosTransmissora{
@@ -34,6 +31,6 @@ public class CamadaEnlaceDadosTransmissora{
         
         
         
-        //MeioDeComunicacao.meioDeComunicacao(novoQuadro);
+        
     }
 }

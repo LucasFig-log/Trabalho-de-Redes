@@ -8,7 +8,6 @@ Nome: Simulador de Redes*
 Funcao: Exemplificar o funcionamento de um envio de mensagem.
 *************************************************************** */
 import util.Conversao;
-import util.MeioDeComunicacao;
 import view.FramePrincipal;
 import view.PanelWest;
 public class CamadaDeAplicacaoReceptora {
@@ -22,15 +21,7 @@ public class CamadaDeAplicacaoReceptora {
   public static void camadaDeAplicacaoReceptora(int fluxoBrutoDeBits[]) {
     
     aplicacaoReceptora(Conversao.bitsBrutosParaMensagem(fluxoBrutoDeBits));
-    // if(CamadaEnlaceDadosTransmissoraControleDeFluxo.quadroAscCorrigido.length == CamadaEnlaceDadosTransmissoraControleDeFluxo.proximoSeq){
-    //   System.out.println("fim da mensagem");
-    //   // CamadaEnlaceDadosTransmissoraControleDeFluxo.proximoSeq = 0;
-    //   // CamadaEnlaceDadosTransmissoraControleDeFluxo.base = 0;
-    //   // CamadaEnlaceDadosTransmissoraControleDeFluxo.nbuffer = 0;
-    //   // CamadaEnlaceDadosReceptoraControleDeFluxo.todosQuadros.clear();
-    //   CamadaEnlaceDadosTransmissoraControleDeFluxo.flag = true;
-
-    // }
+    
       
       
 
@@ -44,6 +35,8 @@ public class CamadaDeAplicacaoReceptora {
   *************************************************************** */
   public static void aplicacaoReceptora(String mensagem) {
     FramePrincipal.imprimirNaTela(mensagem, FramePrincipal.TEXT_AREA_DECODIFICADO);
-    PanelWest.send.setEnabled(true);
+    if (CamadaEnlaceDadosTransmissoraControleDeFluxo.proximoSeq == CamadaEnlaceDadosTransmissoraControleDeFluxo.quadroAscCorrigido.length){
+      PanelWest.send.setEnabled(true); // desbloqueio o botão
+  }
   }
 }
