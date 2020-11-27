@@ -2,6 +2,9 @@ package util;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
+import camadas.CamadaDeAplicacaoReceptora;
+import camadas.CamadaEnlaceDadosReceptoraControleDeFluxo;
 import view.PanelCenter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,7 +31,7 @@ public class Quadro {
             public void actionPerformed(ActionEvent e){
                 PanelCenter.labelTimer.setText(String.valueOf(cont));
                 cont++;
-                if(cont == segundos*1000){
+                if(cont == segundos){
                     timerTela.stop();
                 }
             }
@@ -38,12 +41,14 @@ public class Quadro {
     }
 
     public void stopTemporizador(){
+        
         this.timer.cancel();
     }
 
     class RemindTask extends TimerTask{
         public void run(){
             System.out.println("Acabou o tempo");
+            CamadaEnlaceDadosReceptoraControleDeFluxo.tipo = Eventos.TIMEOUT;
             timer.cancel();
         }
     }

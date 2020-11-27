@@ -25,7 +25,7 @@ public class CamadaEnlaceDadosReceptora{
         
         quadro[0].bits = CamadaEnlaceDadosReceptoraControleDeErro.camadaEnlaceDadosReceptoraControleDeErro(quadro[0].bits);
         
-        CamadaEnlaceDadosReceptoraControleDeFluxo.camadaEnlaceDadosReceptoraControleDeFluxo(quadro);
+        quadro[0].bits =  CamadaEnlaceDadosReceptoraControleDeFluxo.camadaEnlaceDadosReceptoraControleDeFluxo(quadro);
         
         
         CamadaDeAplicacaoReceptora.camadaDeAplicacaoReceptora(quadro[0].bits);

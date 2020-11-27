@@ -8,6 +8,7 @@ Nome: Simulador de Redes*
 Funcao: Exemplificar o funcionamento de um envio de mensagem.
 *************************************************************** */
 import util.Conversao;
+import util.MeioDeComunicacao;
 import view.FramePrincipal;
 import view.PanelWest;
 public class CamadaDeAplicacaoReceptora {
@@ -20,8 +21,10 @@ public class CamadaDeAplicacaoReceptora {
   *************************************************************** */
   public static void camadaDeAplicacaoReceptora(int fluxoBrutoDeBits[]) {
     
-    
     aplicacaoReceptora(Conversao.bitsBrutosParaMensagem(fluxoBrutoDeBits));
+    if(CamadaEnlaceDadosTransmissoraControleDeFluxo.quadroAscCorrigido.length == CamadaEnlaceDadosTransmissoraControleDeFluxo.proximoSeq)
+      CamadaEnlaceDadosTransmissoraControleDeFluxo.flag = true;
+
   }
 
 /* ***************************************************************

@@ -115,6 +115,7 @@ public class CamadaEnlaceDadosTransmissoraControleDeErros{
     public static void mandarACK(Quadro... quadro){
 
         quadro[0].bits =  camadaEnlaceDadosTransmissoraControleDeErrosBitDeParidadePar(quadro);
+        
         MeioDeComunicacao.meioDeComunicacao(quadro);
 
         

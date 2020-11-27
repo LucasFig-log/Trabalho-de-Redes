@@ -16,6 +16,8 @@ public class CamadaEnlaceDadosTransmissoraControleDeFluxo{
     public static Semaphore mutex = new Semaphore(0);
     public static int proximoSeq = 0;
     public static int quadroEsperado = 0;
+    public static boolean flag = false;
+    public static int [] quadroAscCorrigido;
     
     public static void camadaEnlaceDadosTransmissoraControleDeFluxo(Quadro... quadro){
         
@@ -35,7 +37,25 @@ public class CamadaEnlaceDadosTransmissoraControleDeFluxo{
                 int[] quadroAsc = Conversao.bitsBrutosParaASCII(quadro.bits);
                 int[] envio = new int[1];
                 int base = 0;
-        
+                int cont = 0;
+
+                for(int i = 0; i < quadroAsc.length; i++){
+                    if(quadroAsc[i] == 0){
+                        cont++;
+                    }
+                }
+                
+                quadroAscCorrigido = new int[quadroAsc.length - cont];
+                cont = 0;
+                for(int i = 0; i <quadroAsc.length; i++){
+                    if(quadroAsc[i] != 0){
+                        quadroAscCorrigido[i-cont] = quadroAsc[i];
+                    } else{
+                        cont++;
+                    }
+                }
+                
+                System.out.println(quadroAscCorrigido.length);
                 
                 int MAXSEQ = 3;
                 int[] buffer;
@@ -44,63 +64,75 @@ public class CamadaEnlaceDadosTransmissoraControleDeFluxo{
                 if (quadroAsc.length >= 4){
                     buffer = new int[MAXSEQ + 1];
                 } else{
-                    buffer = new int[quadroAsc.length - 1];
+                    buffer = new int[quadroAscCorrigido.length - 1];
                 }
                 
                 
                 
                 while(true){
-
-                    try {
-
-                        MeioDeComunicacao.mutexMeio.acquire();
+                    
+                    
+                    if(quadroAscCorrigido.length == proximoSeq){
+                        
+                        if(flag){
+                            proximoSeq = 0;
+                            base = 0;
+                            nbuffer = 0;
+                            CamadaEnlaceDadosReceptoraControleDeFluxo.todosQuadros.clear();
+                            break;
+                        }           
+                        
+                    } else{
+                        System.out.println(mutex.availablePermits()  + " P");
+                        try {
+                            MeioDeComunicacao.mutexMeio.acquire();
+                        } catch (Exception e) {
+                            System.out.println("mutex do meio");
+                        }
                         switch (CamadaEnlaceDadosReceptoraControleDeFluxo.tipo) {
                             case ENVIAR:
                                 Quadro quadroEnviado = new Quadro();
-                                envio[0] = quadroAsc[proximoSeq];
+                                envio[0] = quadroAscCorrigido[proximoSeq];
                                 quadroEnviado.bits = envio;
                                 quadroEnviado.buffer = envio;
                                 quadroEnviado.sequencia = proximoSeq;
-                                buffer[proximoSeq] = quadroAsc[proximoSeq];
+                                buffer[base] = quadroAscCorrigido[proximoSeq];
                                 quadroEnviado.ack = ((proximoSeq + MAXSEQ) % (MAXSEQ + 1));
                                 nbuffer += 1;
+                                base += 1;
                                 proximoSeq += 1;
                                 quadroEnviado.temporizador(10);
-                                System.out.println("Enviar quadro");
+                                System.out.println(quadroEnviado.bits[0]);
+                                System.out.println("Enviar quadro, buffer antes de enviar " + nbuffer);
                                 MeioDeComunicacao.meioDeComunicacao(quadroEnviado);
-            
                                 
-                                
-                                
-                                
-                                break;
-                            case  RECEBER_ACK:
-                                
-                                
-                                break;
+                                break; 
                             case  TIMEOUT:
-                                
-            
-            
+                                System.out.println("Entrou no timeout");
                                 break;
                             default:
                                 break;
                         }
-            
+                        
+
                         if (nbuffer < MAXSEQ){
                             CamadaEnlaceDadosReceptoraControleDeFluxo.tipo = Eventos.ENVIAR;
                         } else{
+                            System.out.println("else nbuffer ");
                             
+                            try {
                             mutex.acquire();
-                
+                                
+                            } catch (Exception e) {
+                                System.out.println("mutex do else");
+                            }
                         }
-            
+
+                        if(base == 4){
+                            base = 0;
+                        }
                     }
-                     catch (Exception e) {
-                        System.out.println("Erro no mutex, transição");
-                }
-            }   
-        
+                } 
             }
         }).start();
         
