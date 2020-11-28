@@ -2,15 +2,13 @@ package camadas;
 
 import util.Eventos;
 import util.MeioDeComunicacao;
-import camadas.CamadaEnlaceDadosTransmissoraControleDeFluxo;
-import camadas.CamadaEnlaceDadosTransmissora;
 import util.Quadro;
-import view.PanelWest;
+import view.PanelCenter;
 
 import java.util.ArrayList;
 
 public class CamadaEnlaceDadosReceptoraControleDeFluxo{
-    
+    static boolean erro = false;
     static int[] fluxoBrutoDeBits;
     static int[] buffer;
     public static Eventos tipo = Eventos.ENVIAR;
@@ -25,28 +23,33 @@ public class CamadaEnlaceDadosReceptoraControleDeFluxo{
 
     public static int[] camadaEnlaceDadosReceptoraControleDeFluxoGoBackN(Quadro... quadro){
     
-
-        if(CamadaEnlaceDadosTransmissoraControleDeFluxo.quadroEsperado == quadro[0].sequencia){
-            
-            
+        if(erro){
             CamadaEnlaceDadosTransmissoraControleDeFluxo.quadroEsperado += 1;
             MeioDeComunicacao.mutexMeio.release();
-            
-            todosQuadros.add(quadro[0].bits[0]);
-            quadro[0].stopTemporizador();
-
-            Quadro ack = new Quadro();
-            ack.sequencia = 9999;
-            ack.bits[0] = 184;
-            ack.ACK = true;
-            
-            try {
-                MeioDeComunicacao.mutexMeio.acquire();
-            } catch (Exception e) {
-               System.out.println("erro mutex na receptora");
+        } else{
+            if(CamadaEnlaceDadosTransmissoraControleDeFluxo.quadroEsperado == quadro[0].sequencia){
+                
+                System.out.println("recebe quadro");
+                CamadaEnlaceDadosTransmissoraControleDeFluxo.quadroEsperado += 1;
+                MeioDeComunicacao.mutexMeio.release();
+                
+                todosQuadros.add(quadro[0].bits[0]);
+                quadro[0].stopTemporizador();
+    
+                Quadro ack = new Quadro();
+                ack.sequencia = 9999;
+                ack.bits[0] = 184;
+                ack.ACK = true;
+                
+                try {
+                    MeioDeComunicacao.mutexMeio.acquire();
+                } catch (Exception e) {
+                   System.out.println("erro mutex na receptora");
+                }
+                CamadaEnlaceDadosTransmissoraControleDeErros.mandarACK(ack);
             }
-            CamadaEnlaceDadosTransmissoraControleDeErros.mandarACK(ack);
-        } 
+        }
+        
         
         if(quadro[0].ACK == true){
             

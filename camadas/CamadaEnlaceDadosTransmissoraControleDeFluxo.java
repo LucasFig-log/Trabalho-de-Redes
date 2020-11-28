@@ -5,6 +5,7 @@ import util.Eventos;
 import java.util.concurrent.Semaphore;
 import util.MeioDeComunicacao;
 import util.Quadro;
+import view.PanelCenter;
 
 public class CamadaEnlaceDadosTransmissoraControleDeFluxo{
 
@@ -63,26 +64,19 @@ public class CamadaEnlaceDadosTransmissoraControleDeFluxo{
                 }
                 
                 int MAXSEQ = 3;
-                int[] buffer;
+                Quadro[] buffer;
 
 
                 if (quadroAsc.length >= 4){
-                    buffer = new int[MAXSEQ + 1];
+                    buffer = new Quadro[MAXSEQ + 1];
                 } else{
-                    buffer = new int[quadroAscCorrigido.length - 1];
+                    buffer = new Quadro[quadroAscCorrigido.length - 1];
                 }
                 
                 
                 
                 while(true){
                     
-                    
-                    if(quadroAscCorrigido.length == proximoSeq){
-                        
-                        break;
-                                   
-                        
-                    } else{
                         
                         try {
                             MeioDeComunicacao.mutexMeio.acquire();
@@ -96,19 +90,30 @@ public class CamadaEnlaceDadosTransmissoraControleDeFluxo{
                                 quadroEnviado.bits = envio;
                                 quadroEnviado.buffer = envio;
                                 quadroEnviado.sequencia = proximoSeq;
-                                buffer[base] = quadroAscCorrigido[proximoSeq];
                                 quadroEnviado.ack = ((proximoSeq + MAXSEQ) % (MAXSEQ + 1));
+                                buffer[base] = quadroEnviado;
                                 nbuffer += 1;
                                 base += 1;
                                 proximoSeq += 1;
-                                quadroEnviado.temporizador(10);
+                                quadroEnviado.temporizador(3);
                                 System.out.println(quadroEnviado.bits[0]);
                                 System.out.println("Enviar quadro, buffer antes de enviar " + nbuffer);
+                                PanelCenter.sliderErro.enable(true);
                                 MeioDeComunicacao.meioDeComunicacao(quadroEnviado);
                                 
                                 break; 
                             case  TIMEOUT:
-                                System.out.println("Entrou no timeout");
+                                System.out.println("timeout");
+                                for(int i = 0; i< nbuffer; i++){
+                                    System.out.println("dentro do for");
+                                    quadroEsperado = buffer[i].sequencia;
+                                    buffer[i].temporizador(3);
+                                    MeioDeComunicacao.meioDeComunicacao(buffer[i]);
+                                    CamadaEnlaceDadosReceptoraControleDeFluxo.tipo = Eventos.ENVIAR;
+                                }
+                                break;
+                            case  FIM_MENSAGEM:
+                                System.out.println("fim da mensagem");
                                 break;
                             default:
                                 break;
@@ -131,7 +136,7 @@ public class CamadaEnlaceDadosTransmissoraControleDeFluxo{
                         if(base == 4){
                             base = 0;
                         }
-                    }
+                    
                 } 
             }
         }).start();

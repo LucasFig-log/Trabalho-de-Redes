@@ -27,6 +27,7 @@ public class CamadaDeAplicacaoTransmissora {
   public static void camadaDeAplicacaoTransmissora(String mensagem) {
 
       //Redefinindo as variaveis para enviar a mensagem
+      PanelCenter.sliderErro.enable(false);
       System.out.println("limpando");
       CamadaEnlaceDadosTransmissoraControleDeFluxo.quadroEsperado = 0;
       CamadaEnlaceDadosTransmissoraControleDeFluxo.proximoSeq = 0;

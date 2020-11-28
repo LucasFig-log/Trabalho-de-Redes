@@ -8,6 +8,7 @@ Nome: Simulador de Redes*
 Funcao: Exemplificar o funcionamento de um envio de mensagem.
 *************************************************************** */
 import util.Conversao;
+import util.Eventos;
 import view.FramePrincipal;
 import view.PanelWest;
 public class CamadaDeAplicacaoReceptora {
@@ -21,7 +22,10 @@ public class CamadaDeAplicacaoReceptora {
   public static void camadaDeAplicacaoReceptora(int fluxoBrutoDeBits[]) {
     
     aplicacaoReceptora(Conversao.bitsBrutosParaMensagem(fluxoBrutoDeBits));
-    
+    if(CamadaEnlaceDadosTransmissoraControleDeFluxo.quadroAscCorrigido.length == CamadaEnlaceDadosTransmissoraControleDeFluxo.proximoSeq){
+      CamadaEnlaceDadosReceptoraControleDeFluxo.tipo = Eventos.FIM_MENSAGEM;
+      PanelWest.send.setEnabled(true); // desbloqueio o botão
+    }
       
       
 
@@ -35,8 +39,6 @@ public class CamadaDeAplicacaoReceptora {
   *************************************************************** */
   public static void aplicacaoReceptora(String mensagem) {
     FramePrincipal.imprimirNaTela(mensagem, FramePrincipal.TEXT_AREA_DECODIFICADO);
-    if (CamadaEnlaceDadosTransmissoraControleDeFluxo.proximoSeq == CamadaEnlaceDadosTransmissoraControleDeFluxo.quadroAscCorrigido.length){
-      PanelWest.send.setEnabled(true); // desbloqueio o botão
-  }
+    
   }
 }

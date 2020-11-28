@@ -33,7 +33,7 @@ public class Quadro {
         timerTela = new javax.swing.Timer(segundos*1000, new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                PanelCenter.labelTimer.setText(String.valueOf(cont));
+                PanelCenter.labelTimer.setText("Cronometro: "+String.valueOf(cont));
                 cont++;
                 if(cont == segundos){
                     timerTela.stop();

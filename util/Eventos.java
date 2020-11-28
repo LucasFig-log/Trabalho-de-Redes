@@ -14,6 +14,7 @@ public enum Eventos{
 
     ENVIAR,
     RECEBER_ACK,
+    FIM_MENSAGEM,
     TIMEOUT;
 
 

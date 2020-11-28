@@ -109,14 +109,14 @@ public class CamadaEnlaceDadosReceptoraControleDeErro{
 
         
         if (quantidadeBitsUm % 2 == 0){
-            
+            CamadaEnlaceDadosReceptoraControleDeFluxo.erro = false;
             return quadroSemParidadePar;
             
         } else{
-            
+            CamadaEnlaceDadosReceptoraControleDeFluxo.erro = true;
             FramePrincipal.imprimirNaTela(Conversao.bitsBrutosParaString(quadro), FramePrincipal.TEXT_QUADROS_SEM_PARIDADE_PAR);
-            JOptionPane.showMessageDialog(null, "Erro no envio da mensagem, tente novamente. ", "Alerta! ", JOptionPane.ERROR_MESSAGE);
-            
+            JOptionPane.showMessageDialog(null, "Erro no envio do quadro. ", "Alerta! ", JOptionPane.ERROR_MESSAGE);
+            PanelCenter.sliderErro.setValue(0);
             return quadroSemParidadePar;
         }
 

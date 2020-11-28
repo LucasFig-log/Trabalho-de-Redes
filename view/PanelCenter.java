@@ -41,7 +41,7 @@ public class PanelCenter extends JPanel {
   private JLabel labelProbabilidadeErro;
   private JPanel panelInv;
   public static JPanel panelInvDivisor;
-  private JSlider sliderErro;
+  public static JSlider sliderErro;
   private Font font;
   private Font font2;
   public static double probabilidade;
