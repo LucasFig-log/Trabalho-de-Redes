@@ -27,17 +27,18 @@ public class CamadaDeAplicacaoTransmissora {
   public static void camadaDeAplicacaoTransmissora(String mensagem) {
 
       //Redefinindo as variaveis para enviar a mensagem
-      PanelCenter.sliderErro.enable(false);
-      System.out.println("limpando");
-      CamadaEnlaceDadosTransmissoraControleDeFluxo.quadroEsperado = 0;
-      CamadaEnlaceDadosTransmissoraControleDeFluxo.proximoSeq = 0;
-      CamadaEnlaceDadosTransmissoraControleDeFluxo.base = 0;
-      CamadaEnlaceDadosTransmissoraControleDeFluxo.nbuffer = 0;
-      CamadaEnlaceDadosReceptoraControleDeErro.contAck = 0;
-      CamadaEnlaceDadosReceptoraControleDeFluxo.todosQuadros.clear();
+      
+      CamadaDeAplicacaoReceptora.mensagemConcatenada = "";
+      CamadaEnlaceDadosReceptoraControleDeFluxo.ackEsperado = 0;
+      CamadaEnlaceDadosReceptoraControleDeFluxo.proximoQuadroEnviar = 0;
+      CamadaEnlaceDadosReceptoraControleDeFluxo.quadroEsperado = 0;
+      CamadaEnlaceDadosReceptoraControleDeFluxo.nbuffer = 0;
+      CamadaEnlaceDadosTransmissoraControleDeFluxo.buffer = new Quadro[CamadaEnlaceDadosReceptoraControleDeFluxo.MAX_SEQ + 1];
+      CamadaEnlaceDadosTransmissoraControleDeFluxo.indexBuffer = 0;
+      
       CamadaEnlaceDadosTransmissoraControleDeFluxo.mutex = new Semaphore(0);
       MeioDeComunicacao.mutexMeio = new Semaphore(1);
-      PanelCenter.labelACK.setText("Recebimendo de Ack");
+      
 
     FramePrincipal.limparCamposTexto();
     int quadro[] = new int[mensagem.length()];
@@ -58,4 +59,6 @@ public class CamadaDeAplicacaoTransmissora {
     
     CamadaEnlaceDadosTransmissora.camadaEnlaceDadosTransmissora(quadroEnquadrado);
   }
+  
 }
+

@@ -2,7 +2,10 @@ package util;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
+import camadas.CamadaEnlaceDadosReceptoraControleDeErro;
 import camadas.CamadaEnlaceDadosReceptoraControleDeFluxo;
+import camadas.CamadaEnlaceDadosTransmissoraControleDeFluxo;
 import view.PanelCenter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,8 +13,9 @@ import java.awt.event.ActionListener;
 
 
 public class Quadro {
-    public int[] buffer = new int[1];
+    public Quadro buffer;
     public int sequencia;
+    public int quadroEsperado;
     public int ack;
     public int[] bits = new int[1];
     public Timer timer;
@@ -53,13 +57,30 @@ public class Quadro {
     public void stopTemporizador(){
         
         this.timer.cancel();
+        this.timer.purge();
     }
 
     class RemindTask extends TimerTask{
         public void run(){
-            System.out.println("Acabou o tempo");
-            CamadaEnlaceDadosReceptoraControleDeFluxo.tipo = Eventos.TIMEOUT;
+            
             timer.cancel();
+            timer.purge();
+            try {
+                System.out.println(MeioDeComunicacao.mutexMeio.availablePermits());
+                
+                
+                
+                CamadaEnlaceDadosReceptoraControleDeFluxo.proximoQuadroEnviar = CamadaEnlaceDadosReceptoraControleDeFluxo.ackEsperado;
+            //reenvia os quadros na janela        
+            for(CamadaEnlaceDadosReceptoraControleDeFluxo.i = 1; CamadaEnlaceDadosReceptoraControleDeFluxo.i < CamadaEnlaceDadosReceptoraControleDeFluxo.nbuffer; CamadaEnlaceDadosReceptoraControleDeFluxo.i++){
+                MeioDeComunicacao.mutexMeio.acquire();
+                CamadaEnlaceDadosTransmissoraControleDeFluxo.enviarQuadro(CamadaEnlaceDadosReceptoraControleDeFluxo.proximoQuadroEnviar, CamadaEnlaceDadosReceptoraControleDeFluxo.quadroEsperado, CamadaEnlaceDadosTransmissoraControleDeFluxo.buffer, CamadaEnlaceDadosTransmissoraControleDeFluxo.send);
+                CamadaEnlaceDadosReceptoraControleDeFluxo.proximoQuadroEnviar++;
+            }
+            } catch (Exception e) {
+                System.out.println("erro aquire timeout");
+            }
+            
         }
     }
 }

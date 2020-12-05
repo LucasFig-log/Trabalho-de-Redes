@@ -12,10 +12,10 @@ Funcao: Exemplificar o funcionamento de um envio de mensagem.
 
 public enum Eventos{
 
-    ENVIAR,
-    RECEBER_ACK,
-    FIM_MENSAGEM,
-    TIMEOUT;
+   
+    RECEBER_QUADRO,
+    ERRO;
+    
 
 
 }

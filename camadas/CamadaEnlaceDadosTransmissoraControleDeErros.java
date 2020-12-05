@@ -54,7 +54,7 @@ public class CamadaEnlaceDadosTransmissoraControleDeErros{
 
         for (int i = 0; i < quadrosConvertidos.length; i++ ){
             quantidadeBitsUm = quantidadeDeBitsUm(quadrosConvertidos[i]);
-
+            
             if(quantidadeBitsUm % 2 == 0){
                 quadrosConvertidos[i] <<= 1;
             } else{
@@ -64,13 +64,8 @@ public class CamadaEnlaceDadosTransmissoraControleDeErros{
 
         }
 
-        quadroBitsParidadePar = Conversao.asciiParaBits(quadrosConvertidos);
-
-        
-
-        
-
-        
+        quadroBitsParidadePar = quadrosConvertidos;
+   
 
         return quadroBitsParidadePar;
     }
@@ -109,12 +104,5 @@ public class CamadaEnlaceDadosTransmissoraControleDeErros{
         
         return quantidadeBitsUm;
     }
-    public static void mandarACK(Quadro... quadro){
-
-        quadro[0].bits =  camadaEnlaceDadosTransmissoraControleDeErrosBitDeParidadePar(quadro);
-        
-        MeioDeComunicacao.meioDeComunicacao(quadro);
-
-        
-    }
+    
 }

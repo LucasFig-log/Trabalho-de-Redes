@@ -10,9 +10,11 @@ Funcao: Exemplificar o funcionamento de um envio de mensagem.
 import util.Conversao;
 import util.Eventos;
 import view.FramePrincipal;
+import view.PanelCenter;
 import view.PanelWest;
 public class CamadaDeAplicacaoReceptora {
 
+  public static String mensagemConcatenada = "";
  /* ***************************************************************
   Metodo: camadaDeAplicacaoReceptora*
   Funcao: converte os bits decodificados em mensagem*
@@ -20,12 +22,12 @@ public class CamadaDeAplicacaoReceptora {
   Retorno: void*
   *************************************************************** */
   public static void camadaDeAplicacaoReceptora(int fluxoBrutoDeBits[]) {
+     
     
     aplicacaoReceptora(Conversao.bitsBrutosParaMensagem(fluxoBrutoDeBits));
-    if(CamadaEnlaceDadosTransmissoraControleDeFluxo.quadroAscCorrigido.length == CamadaEnlaceDadosTransmissoraControleDeFluxo.proximoSeq){
-      CamadaEnlaceDadosReceptoraControleDeFluxo.tipo = Eventos.FIM_MENSAGEM;
-      PanelWest.send.setEnabled(true); // desbloqueio o botão
-    }
+    PanelWest.send.setEnabled(true); // desbloqueio o botão
+    
+    
       
       
 
@@ -38,7 +40,9 @@ public class CamadaDeAplicacaoReceptora {
   Retorno: void*
   *************************************************************** */
   public static void aplicacaoReceptora(String mensagem) {
-    FramePrincipal.imprimirNaTela(mensagem, FramePrincipal.TEXT_AREA_DECODIFICADO);
+    mensagemConcatenada += mensagem;
+    
+    FramePrincipal.imprimirNaTela(mensagemConcatenada, FramePrincipal.TEXT_AREA_DECODIFICADO);
     
   }
 }

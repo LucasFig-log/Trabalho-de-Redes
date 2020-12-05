@@ -72,7 +72,7 @@ public class PanelSouth extends JPanel {
           repaint();
           Thread.sleep(1000);
         }catch (InterruptedException e){
-          
+          System.out.println("panel sul");
           PanelSouth.mutex.release();
 
         }

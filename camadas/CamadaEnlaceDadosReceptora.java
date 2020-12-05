@@ -26,16 +26,11 @@ public class CamadaEnlaceDadosReceptora{
         
         quadro[0].bits = CamadaEnlaceDadosReceptoraControleDeErro.camadaEnlaceDadosReceptoraControleDeErro(quadro[0].bits);
         
-        quadro[0].bits =  CamadaEnlaceDadosReceptoraControleDeFluxo.camadaEnlaceDadosReceptoraControleDeFluxo(quadro);
+        CamadaEnlaceDadosReceptoraControleDeFluxo.camadaEnlaceDadosReceptoraControleDeFluxo(quadro);
         
         
         
-        if(quadro[0].ACK != true){
-            
-            CamadaDeAplicacaoReceptora.camadaDeAplicacaoReceptora(quadro[0].bits);
-        } else{
-            
-        }
+       
 
         
     }

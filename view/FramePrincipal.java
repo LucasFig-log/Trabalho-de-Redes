@@ -74,12 +74,12 @@ public class FramePrincipal extends JFrame {
   Retorno: void*
   *************************************************************** */
   public static void rePintar() {
-    
-    
+        
     try {
       panelSouth.setPreferredSize(new Dimension(panelSouth.LARGURA * PanelSouth.fluxoDeBits.size(), 200));
       panelSouth.revalidate();
       panelSouth.repintar();
+      
       Thread.sleep(1000);
     } catch (Exception e) {
       System.out.println("Erro ao repintar");

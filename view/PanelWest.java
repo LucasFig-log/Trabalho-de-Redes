@@ -167,9 +167,10 @@ public class PanelWest extends JPanel {
       if (textArea.getText().equals("")) {
         JOptionPane.showMessageDialog(null, "Caixa de texto vazia! ", "Alerta! ", JOptionPane.ERROR_MESSAGE);
       } else {
-        send.setEnabled(false);
+        //send.setEnabled(false);
         
         mensagem = textArea.getText();
+        
         
         CamadaDeAplicacaoTransmissora.camadaDeAplicacaoTransmissora(mensagem);
         

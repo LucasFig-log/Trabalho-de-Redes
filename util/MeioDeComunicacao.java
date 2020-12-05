@@ -27,14 +27,16 @@ public class MeioDeComunicacao {
   *************************************************************** */
   public static void meioDeComunicacao(Quadro... quadros) {
     tamanho = quadros.length;
-   
-    int[] quadroConvertido = Conversao.asciiParaBits(quadros[0].bits);
     
+    
+    int[] quadroConvertido = Conversao.asciiParaBits(quadros[0].bits);
     int[] fluxoBrutoDeBitsPontA = quadroConvertido;
     int[] fluxoBrutoDeBitsPontB = new int[tamanho];
     
 
     new Thread(new Runnable(){
+
+      
       int numero = 0;
       int cont = 1;
       int valorTransmitido = 0;
@@ -44,7 +46,7 @@ public class MeioDeComunicacao {
       @Override
       public void run(){
       PanelSouth.fluxoDeBits.clear();
-        
+      
 
       if (Math.random() <= PanelCenter.probabilidade){ //Caso de erro
           
@@ -127,13 +129,16 @@ public class MeioDeComunicacao {
         }
       }
 
-      try{
+      
         PanelSouth.bandeira = true;
         FramePrincipal.rePintar();
-        PanelSouth.mutex.acquire();
-      }catch (InterruptedException e){
-        System.out.println("Erro ao travar o painel sul");
-      } 
+        
+        try {
+          PanelSouth.mutex.acquire();
+        } catch (Exception e) {
+          System.out.println("mutex da imagem");
+        }
+      
    
     
     //envia os quadros para a camada enlace de dados receptora

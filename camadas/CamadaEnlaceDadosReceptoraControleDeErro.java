@@ -11,6 +11,8 @@ Funcao: Exemplificar o funcionamento de um envio de mensagem.
 import view.FramePrincipal;
 import view.PanelCenter;
 import util.Conversao;
+import util.Eventos;
+
 import javax.swing.JOptionPane;
 
 
@@ -30,24 +32,17 @@ public class CamadaEnlaceDadosReceptoraControleDeErro{
         
         //confere a paridade par
         fluxoBrutoDeBits = camadaEnlaceDadosReceptoraControleDeErrosBitsDeParidadePar(quadro);
-        if(fluxoBrutoDeBits[0] != 184){
-            //imprime os bits
-             FramePrincipal.imprimirNaTela(Conversao.bitsBrutosParaStringEmParidade(quadro), FramePrincipal.TEXT_QUADROS_SEM_PARIDADE_PAR);
         
-            //imprime na caixa de texto quadro sem pararidade par recebidos
-             FramePrincipal.imprimirNaTela(Conversao.bitsBrutosParaString(fluxoBrutoDeBits), FramePrincipal.TEXT_QUADROS_DESENQUADRADOS_RECEBIDOS);
+        //imprime os bits
+        FramePrincipal.imprimirNaTela(Conversao.bitsBrutosParaStringEmParidade(quadro), FramePrincipal.TEXT_QUADROS_SEM_PARIDADE_PAR);
 
-            //passa os bits checados para a camada receptora
-            Conversao.showAscII(Conversao.bitsBrutosParaASCII(fluxoBrutoDeBits),
+        //imprime na caixa de texto quadro sem pararidade par recebidos
+        FramePrincipal.imprimirNaTela(Conversao.bitsBrutosParaString(fluxoBrutoDeBits), FramePrincipal.TEXT_QUADROS_DESENQUADRADOS_RECEBIDOS);
+
+        //passa os bits checados para a camada receptora
+        Conversao.showAscII(Conversao.bitsBrutosParaASCII(fluxoBrutoDeBits),
             FramePrincipal.TEXT_ASCII_DECODIFICADO);
-        } else{
-            
-            //imprime a mensagem de ack recebido na tela
-            contAck++;
-            PanelCenter.labelACK.setText("Ack Recebido "+contAck);
-
-            
-        }
+        
 
         return fluxoBrutoDeBits;
     }
@@ -106,16 +101,16 @@ public class CamadaEnlaceDadosReceptoraControleDeErro{
             }
             
         }
-
         
         if (quantidadeBitsUm % 2 == 0){
-            CamadaEnlaceDadosReceptoraControleDeFluxo.erro = false;
+            CamadaEnlaceDadosReceptoraControleDeFluxo.tipo = Eventos.RECEBER_QUADRO;
             return quadroSemParidadePar;
             
         } else{
-            CamadaEnlaceDadosReceptoraControleDeFluxo.erro = true;
+            CamadaEnlaceDadosReceptoraControleDeFluxo.tipo = Eventos.ERRO;
             FramePrincipal.imprimirNaTela(Conversao.bitsBrutosParaString(quadro), FramePrincipal.TEXT_QUADROS_SEM_PARIDADE_PAR);
-            JOptionPane.showMessageDialog(null, "Erro no envio do quadro. ", "Alerta! ", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Erro no envio do quadro. ", "Alerta! ", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Erro");
             PanelCenter.sliderErro.setValue(0);
             return quadroSemParidadePar;
         }

@@ -1,5 +1,12 @@
 package camadas;
-
+/* ***************************************************************
+Autor: Lucas Santos Figueiredo*
+Matricula: 201810803*
+Inicio: 23/01/2020*
+Ultima alteracao: 03/11/2020*
+Nome: Simulador de Redes*
+Funcao: Exemplificar o funcionamento de um envio de mensagem.
+*************************************************************** */
 import util.Eventos;
 import util.MeioDeComunicacao;
 import util.Quadro;
@@ -8,66 +15,85 @@ import view.PanelCenter;
 import java.util.ArrayList;
 
 public class CamadaEnlaceDadosReceptoraControleDeFluxo{
-    static boolean erro = false;
+    
     static int[] fluxoBrutoDeBits;
-    static int[] buffer;
-    public static Eventos tipo = Eventos.ENVIAR;
-    static ArrayList<Integer> todosQuadros = new ArrayList<>();
-
-    public static int[] camadaEnlaceDadosReceptoraControleDeFluxo(Quadro... quadro){
-        fluxoBrutoDeBits = camadaEnlaceDadosReceptoraControleDeFluxoGoBackN(quadro);
+    
+    public static int MAX_SEQ = 3;
+    public static Eventos tipo;
+    public static int proximoQuadroEnviar = 0;
+    public static int ackEsperado = 0;
+    public static int quadroEsperado = 0;
+    public static int nbuffer = 0;
+    
+    
+    public static int i;
+    
+    
+    /* ***************************************************************
+    Metodo: camadaEnlaceDadosReceptoraControleDeFluxo*
+    Funcao: executa o codigo de controle de fluxo go back n*
+    Parametros: Quadros[]*
+    Retorno: void[]*
+    *************************************************************** */
+    public static void camadaEnlaceDadosReceptoraControleDeFluxo(Quadro... quadro){
+        camadaEnlaceDadosReceptoraControleDeFluxoGoBackN(quadro);
         
-        return fluxoBrutoDeBits;
 
     }
 
-    public static int[] camadaEnlaceDadosReceptoraControleDeFluxoGoBackN(Quadro... quadro){
-    
-        if(erro){
-            CamadaEnlaceDadosTransmissoraControleDeFluxo.quadroEsperado += 1;
-            MeioDeComunicacao.mutexMeio.release();
-        } else{
-            if(CamadaEnlaceDadosTransmissoraControleDeFluxo.quadroEsperado == quadro[0].sequencia){
-                
-                System.out.println("recebe quadro");
-                CamadaEnlaceDadosTransmissoraControleDeFluxo.quadroEsperado += 1;
-                MeioDeComunicacao.mutexMeio.release();
-                
-                todosQuadros.add(quadro[0].bits[0]);
-                quadro[0].stopTemporizador();
-    
-                Quadro ack = new Quadro();
-                ack.sequencia = 9999;
-                ack.bits[0] = 184;
-                ack.ACK = true;
-                
-                try {
-                    MeioDeComunicacao.mutexMeio.acquire();
-                } catch (Exception e) {
-                   System.out.println("erro mutex na receptora");
-                }
-                CamadaEnlaceDadosTransmissoraControleDeErros.mandarACK(ack);
+    /* ***************************************************************
+    Metodo: camadaEnlaceDadosReceptoraControleDeFluxoGoBackN*
+    Funcao: executa o codigo de controle de fluxo go back n de recepcao*
+    Parametros: Quadros[]*
+    Retorno: void[]*
+    *************************************************************** */
+    public static void camadaEnlaceDadosReceptoraControleDeFluxoGoBackN(Quadro... quadro){
+        
+            switch (tipo) {
+            
+                case RECEBER_QUADRO:
+                    
+                    if(quadro[0].sequencia == quadroEsperado){
+                        
+                        quadroEsperado++;
+                        
+                        CamadaDeAplicacaoReceptora.camadaDeAplicacaoReceptora(quadro[0].bits);
+                        MeioDeComunicacao.mutexMeio.release();
+                        
+                    }
+
+                    while(entre(ackEsperado, quadro[0].ack, proximoQuadroEnviar)){
+                        
+                        nbuffer--;
+                        quadro[0].stopTemporizador();
+                        ackEsperado++;
+                        PanelCenter.labelACK.setText("Recebimendo de Ack");
+                        PanelCenter.labelACK.update(PanelCenter.labelACK.getGraphics());
+                        if(!entre(ackEsperado, quadro[0].ack, proximoQuadroEnviar)){
+                            
+                            PanelCenter.labelACK.setText("Ack recebido");
+                            PanelCenter.labelACK.update(PanelCenter.labelACK.getGraphics());
+                        }
+
+                    }
+                    
+                break;
+
+                case ERRO:
+                    MeioDeComunicacao.mutexMeio.release();
+                    break;
             }
-        }
-        
-        
-        if(quadro[0].ACK == true){
-            
-            
-            System.out.println("ack");
-            CamadaEnlaceDadosTransmissoraControleDeFluxo.nbuffer -= 1;
-            MeioDeComunicacao.mutexMeio.release();            
-            CamadaEnlaceDadosTransmissoraControleDeFluxo.mutex.release();     
-        }
 
-        buffer = new int[todosQuadros.size()];
-       
-        for(int i = 0; i < todosQuadros.size(); i++){
-            buffer[i] = todosQuadros.get(i);
-            
-        }
+    
+    }
 
-        return buffer;
+    public static boolean entre(int a, int b, int c){
+        
+        if (((a <= b) && (b < c)) || ((c < a) && (a <= b)) || ((b < c) && (c < a)))
+            return(true);
+        else
+            return(false);
+        
     }
 
     
