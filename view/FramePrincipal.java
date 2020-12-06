@@ -7,34 +7,37 @@ Ultima alteracao: 03/11/2020*
 Nome: Simulador de Redes*
 Funcao: Exemplificar o funcionamento de um envio de mensagem.
 *************************************************************** */
-import view.PanelCenter;
-import view.PanelEast;
-import view.PanelSouth;
-import view.PanelWest;
+
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.*;
-import javax.swing.Timer;
+
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
+import util.Computador;
+
 public class FramePrincipal extends JFrame {
-  public static final int TEXT_ASCII = 0;
-  public static final int TEXT_QUADROS_ENQUADRADOS = 1;
-  public static final int TEXT_QUADROS_EM_PARIDADE_PAR = 2;
-  public static final int TEXT_AREA_DECODIFICADO = 3;
-  public static final int TEXT_ASCII_DECODIFICADO = 4;
-  public static final int TEXT_BITS_BRUTOS_DECODIFICADO = 5;
-  public static final int TEXT_QUADROS_SEM_PARIDADE_PAR = 6;
-  public static final int TEXT_QUADROS_DESENQUADRADOS_RECEBIDOS = 8;
+  public static final int TEXT_AREAPC1 = 0;
+  public static final int TEXT_ASCIIPC1 = 1;
+  public static final int TEXT_BITSPC1 = 2;
+  public static final int TEXT_AREAPC2 = 3;
+  public static final int TEXT_ASCIIPC2 = 4;
+  public static final int TEXT_BITSPC2 = 5;
+  public static final int TEXT_AREAPC3 = 6;
+  public static final int TEXT_ASCIIPC3 = 7;
+  public static final int TEXT_BITSPC3 = 8; 
+  
   private static Font font;
 
   public BorderLayout layout;
   public static PanelSouth panelSouth;
-  public static PanelWest panelWest;
+  public static PanelVisualComputador visualPC1;
+  public static PanelVisualComputador visualPC2;
+  public static PanelVisualComputador visualPC3;
+
   private JScrollPane scrollBits;
 
   /* ***************************************************************
@@ -49,23 +52,27 @@ public class FramePrincipal extends JFrame {
 
     layout = new BorderLayout();
     font = new Font("Coolvetica", Font.HANGING_BASELINE, 13);
-    panelWest = new PanelWest();
+    
+        
+    visualPC1 = new PanelVisualComputador(1);
+    visualPC2 =  new PanelVisualComputador(2);
+    visualPC3 =  new PanelVisualComputador(3);
+    
     panelSouth = new PanelSouth();
     scrollBits = new JScrollPane(panelSouth);
-    scrollBits.setPreferredSize(new Dimension(1000, 200));
+    scrollBits.setPreferredSize(new Dimension(1000, 250));
     scrollBits.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
     
-    this.getRootPane().setDefaultButton(panelWest.send);
+    //this.getRootPane().setDefaultButton(visualPC1.send);
     
     // adicionando os JPanel's individuais ao frame principal
-    add(panelWest, BorderLayout.WEST);
-    
-    add(new PanelCenter(), BorderLayout.CENTER);
-    add(new PanelEast(), BorderLayout.EAST);
+    add(visualPC1,BorderLayout.WEST);
+    add(visualPC2, BorderLayout.CENTER);
+    add(visualPC3, BorderLayout.EAST);
     add(scrollBits, BorderLayout.SOUTH);
 
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    this.setSize(1000, 630);
+    this.setSize(1000, 730);
     this.setResizable(false);
     this.centerContainer(this);
     this.setVisible(true);
@@ -102,46 +109,51 @@ public class FramePrincipal extends JFrame {
       
     
       switch (tipoDeImpressao) {
+        
         case 0:
-          PanelWest.textASCII.setFont(font);
-          PanelWest.textASCII.setText(mensagem);
-          PanelWest.textASCII.update(PanelWest.textASCII.getGraphics());
+          visualPC1.textArea.setFont(font);
+          visualPC1.textArea.setText(mensagem);
+          visualPC1.textArea.update(visualPC1.textArea.getGraphics());
+
+        
+        case 1:
+          visualPC1.textASCII.setFont(font);
+          visualPC1.textASCII.setText(mensagem);
+          visualPC1.textASCII.update(visualPC1.textASCII.getGraphics());
           
           break;
-        case 1:
-          PanelWest.textQuadrosEnquadrados.setFont(font);
-          PanelWest.textQuadrosEnquadrados.setText(mensagem);
-          PanelWest.textQuadrosEnquadrados.update(PanelWest.textQuadrosEnquadrados.getGraphics());
-          break;
         case 2:
-           PanelWest.textBitsParidade.setFont(font);
-           PanelWest.textBitsParidade.setText(mensagem);
-           PanelWest.textBitsParidade.update(PanelWest.textBitsParidade.getGraphics());
+          visualPC1.textQuadrosEnquadrados.setFont(font);
+          visualPC1.textQuadrosEnquadrados.setText(mensagem);
+          visualPC1.textQuadrosEnquadrados.update(visualPC1.textQuadrosEnquadrados.getGraphics());
           break;
         case 3:
-          PanelEast.textArea.setFont(font);
-          PanelEast.textArea.setText(mensagem);
-          PanelEast.textArea.update(PanelEast.textArea.getGraphics());
+          visualPC2.textArea.setFont(font);
+          visualPC2.textArea.setText(mensagem);
+          visualPC2.textArea.update(visualPC2.textArea.getGraphics());
           break;
         case 4:
-          PanelEast.textASCII.setFont(font);
-          PanelEast.textASCII.setText(mensagem);
-          PanelEast.textASCII.update(PanelEast.textASCII.getGraphics());
+          visualPC2.textASCII.setFont(font);
+          visualPC2.textASCII.setText(mensagem);
+          visualPC2.textASCII.update(visualPC2.textASCII.getGraphics());
           break;
         case 5:
-          // PanelEast.textBitsBrutos.setFont(font);
-          // PanelEast.textBitsBrutos.setText(mensagem);
-          // PanelEast.textBitsBrutos.update(PanelEast.textBitsBrutos.getGraphics());
+          
           break;
         case 6:
-          PanelEast.textBitsParidadeReceptora.setFont(font);
-          PanelEast.textBitsParidadeReceptora.setText(mensagem);
-          PanelEast.textBitsParidadeReceptora.update(PanelEast.textBitsParidadeReceptora.getGraphics());
+          visualPC3.textArea.setFont(font);
+          visualPC3.textArea.setText(mensagem);
+          visualPC3.textArea.update(visualPC2.textArea.getGraphics());
+          break;
+        case 7:
+          visualPC3.textASCII.setFont(font);
+          visualPC3.textASCII.setText(mensagem);
+          visualPC3.textASCII.update(visualPC3.textASCII.getGraphics());
           break;
         case 8:
-          PanelEast.textQuadrosEnquadrados.setFont(font);
-          PanelEast.textQuadrosEnquadrados.setText(mensagem);
-          PanelEast.textQuadrosEnquadrados.update(PanelEast.textQuadrosEnquadrados.getGraphics());
+          visualPC3.textQuadrosEnquadrados.setFont(font);
+          visualPC3.textQuadrosEnquadrados.setText(mensagem);
+          visualPC3.textQuadrosEnquadrados.update(visualPC2.textQuadrosEnquadrados.getGraphics());
           break;    
         }
         try{
@@ -166,15 +178,5 @@ public class FramePrincipal extends JFrame {
         componentWidth, componentHeigth);
   }
 
-  public static void limparCamposTexto(){
-
-    //PanelWest.textArea.setText("");
-    PanelWest.textASCII.setText("");
-    PanelWest.textQuadrosEnquadrados.setText("");
-    PanelWest.textBitsParidade.setText("");
-    PanelEast.textArea.setText("");
-    PanelEast.textASCII.setText("");
-    PanelEast.textQuadrosEnquadrados.setText("");
-    PanelEast.textBitsParidadeReceptora.setText("");
-  }
+  
 }

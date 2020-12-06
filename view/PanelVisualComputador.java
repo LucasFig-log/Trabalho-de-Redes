@@ -8,52 +8,66 @@ Nome: Simulador de Redes*
 Funcao: Exemplificar o funcionamento de um envio de mensagem.
 *************************************************************** */
 import camadas.CamadaDeAplicacaoTransmissora;
+import util.Computador;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.Component;
 
+
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import java.awt.Font;
 
-import view.FramePrincipal;
 
-public class PanelWest extends JPanel {
 
-  public static JTextArea textArea;
+public class PanelVisualComputador extends JPanel {
+  private int id;
+  public Computador computador;
+
+  public  JTextArea textArea;
   private JScrollPane scrollTextArea;
-  public static JTextArea textASCII;
+  public  JTextArea textASCII;
   private JScrollPane scrollTextASCII;
-  public static JTextArea textBitsParidade;
+  public  JTextArea textBitsParidade;
   private JScrollPane scrollTextBitsParidade;
+  public  JRadioButton comunicacaoPC1;
+  public  JRadioButton comunicacaoPC2;
+  public JRadioButton comunicacaoPC3;
+  private ButtonGroup radioGroup;
  
-  public static JTextArea textQuadrosEnquadrados;
+  public  JTextArea textQuadrosEnquadrados;
   private JScrollPane scrollQuadrosEnquadrados;
-  public static JButton send;
+  public  JButton send;
   private JLabel labelText;
   private JLabel labelBitsParidade;
   private JLabel labelASCII;
   private JLabel labelQuadrosEnquadrados;
+  private JLabel labelComunicao;
   private Font font;
   private Font font2;
   private Color cor;
-  public static String mensagem;
+  public  String mensagem;
   /*
    * *************************************************************** Metodo:
    * PanelWest* Funcao: Construtor da classe PanelWest* Parametros: nulo* Retorno:
    * void*
    */
-  public PanelWest() {
-
+  public PanelVisualComputador(int id) {
+    this.id = id;
+    computador = new Computador(id);
+    
+    //parte visual
     cor = new Color(255, 250, 205);
     this.setBackground(cor);
     setPreferredSize(new Dimension(350, 200));
@@ -61,9 +75,9 @@ public class PanelWest extends JPanel {
     font2 = new Font("Coolvetica", Font.BOLD, 15);
     
     // configuracoes do JLabel com o texto especifico
-    labelText = new JLabel("Mensagem Decodificada");
+    labelText = new JLabel("Computador "+id);
     labelText.setFont(font);
-    labelText.setPreferredSize(new Dimension(250, 30));
+    labelText.setPreferredSize(new Dimension(200, 30));
 
     // configuracoes do campo de texto onde a mensagem sera digitada
     textArea = new JTextArea();
@@ -103,6 +117,12 @@ public class PanelWest extends JPanel {
         } 
       }
     });
+    
+    labelComunicao = new JLabel("Comunicação");
+    labelComunicao.setFont(font);
+    labelComunicao.setPreferredSize(new Dimension(300,30));
+
+    
     
     // configuracoes do JLabel com o texto especifico
     labelASCII = new JLabel("Transcrição pra tabela ASCII");
@@ -144,17 +164,68 @@ public class PanelWest extends JPanel {
     scrollTextBitsParidade.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
     
     // adcionando todos os componentes ao JPanel
+    
     add(labelText);
     add(scrollTextArea);
     add(send);
+    add(labelComunicao);
+    criarRadioButton(this.id); //cria radioButton para cara computador
     add(labelASCII);
     add(scrollTextASCII);
     add(labelQuadrosEnquadrados);
     add(scrollQuadrosEnquadrados);
     add(labelBitsParidade);
     add(scrollTextBitsParidade);
+
    
 
+  }
+
+  public void criarRadioButton(int id){
+   
+
+    if(id == 1){
+      comunicacaoPC2 = new JRadioButton("Computador 2");
+      comunicacaoPC2.setBackground(cor);
+      comunicacaoPC3 = new JRadioButton("Computador 3");
+      comunicacaoPC3.setBackground(cor);
+
+      add(comunicacaoPC2);
+      add(comunicacaoPC3);
+
+      radioGroup = new ButtonGroup();
+      radioGroup.add(comunicacaoPC2);
+      radioGroup.add(comunicacaoPC3);
+    } else if(id == 2){
+      
+      comunicacaoPC1 = new JRadioButton("Computador 1");
+      comunicacaoPC1.setBackground(cor);
+      comunicacaoPC3 = new JRadioButton("Computador 3");
+      comunicacaoPC3.setBackground(cor);
+
+      add(comunicacaoPC1);
+      add(comunicacaoPC3);
+
+      radioGroup = new ButtonGroup();
+      radioGroup.add(comunicacaoPC1);
+      radioGroup.add(comunicacaoPC3);
+    } else{
+      comunicacaoPC1 = new JRadioButton("Computador 1");
+      comunicacaoPC1.setBackground(cor);
+      comunicacaoPC2 = new JRadioButton("Computador 2");
+      comunicacaoPC2.setBackground(cor);
+
+      add(comunicacaoPC1);
+      add(comunicacaoPC2);
+
+      radioGroup = new ButtonGroup();
+      radioGroup.add(comunicacaoPC1);
+      radioGroup.add(comunicacaoPC2);
+      
+    }
+
+   
+    
   }
 
   // classe privada para tratar o evento do botao que envia a mensagem
