@@ -8,7 +8,6 @@ Nome: Simulador de Redes*
 Funcao: Exemplificar o funcionamento de um envio de mensagem.
 *************************************************************** */
 import view.FramePrincipal;
-import camadas.CamadaEnlaceDadosTransmissoraControleDeErros;
 
 public class Conversao {
 
@@ -127,7 +126,7 @@ public class Conversao {
     int mask = 1 << 31;
     int cont = 1;
 
-    string.append("Quantidade de bits 1: " + CamadaEnlaceDadosTransmissoraControleDeErros.quantidadeDeBitsUm(bitsBrutos)+"\n" );
+    //string.append("Quantidade de bits 1: " + CamadaEnlaceDadosTransmissoraControleDeErros.quantidadeDeBitsUm(bitsBrutos)+"\n" );
 
     for (int i = 0; i < bitsBrutos.length; i++) {
       int numero = bitsBrutos[i];

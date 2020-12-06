@@ -19,8 +19,7 @@ public class CamadaEnlaceDadosReceptora{
   Retorno: void
   *************************************************************** */
     public static void camadaEnlaceDadosReceptora(int quadro[]){
-        CamadaEnlaceDadosReceptoraControleDeErro.camadaEnlaceDadosReceptoraControleDeErro(quadro);
-        CamadaEnlaceDadosReceptoraControleDeFluxo.camadaEnlaceDadosReceptoraControleDeFluxo(quadro);
+       
 
         CamadaDeAplicacaoReceptora.camadaDeAplicacaoReceptora(novoQuadro);
     }
