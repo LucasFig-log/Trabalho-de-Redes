@@ -6,15 +6,15 @@ public class SubCamadaDeAcessoAoMeioTransmissora {
     
     public static int[] fluxoBrutoDeBits;
 
-    public void subCamadaDeAcessoAoMeioTransmissora(int quadros[]){
+    public static void subCamadaDeAcessoAoMeioTransmissora(int quadros[], int pcTransmissor, int pcReceptor){
         
         fluxoBrutoDeBits = subCamadaDeAcessoAoMeioTransmissoraCSMANaoPersistente(quadros);
 
-        MeioDeComunicacao.meioDeComunicacao(fluxoBrutoDeBits);
+        MeioDeComunicacao.meioDeComunicacao(fluxoBrutoDeBits, pcTransmissor, pcReceptor);
     }
 
-    public int[] subCamadaDeAcessoAoMeioTransmissoraCSMANaoPersistente(int quadros[]){
+    public static int[] subCamadaDeAcessoAoMeioTransmissoraCSMANaoPersistente(int quadros[]){
 
-        return null;
+        return quadros;
     }
 }

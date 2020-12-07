@@ -1,5 +1,6 @@
 package util;
 
+import camadas.CamadaDeAplicacaoTransmissora;
 import view.FramePrincipal;
 
 public class Computador {
@@ -20,7 +21,8 @@ public class Computador {
         return this.id;
     }
 
-    public void mandarMensagem(){
+    public void mandarMensagem(String mensagem, int pcTransmissor, int pcReceptor){
         
+        CamadaDeAplicacaoTransmissora.camadaDeAplicacaoTransmissora(mensagem, pcTransmissor, pcReceptor);
     }
 }

@@ -1,4 +1,6 @@
 package camadas;
+
+
 /* ***************************************************************
 Autor: Lucas Santos Figueiredo*
 Matricula: 201810803*
@@ -9,7 +11,7 @@ Funcao: Exemplificar o funcionamento de um envio de mensagem.
 *************************************************************** */
 import util.Conversao;
 import view.FramePrincipal;
-import view.PanelVisualComputador;
+
 public class CamadaDeAplicacaoReceptora {
 
  /* ***************************************************************
@@ -18,18 +20,15 @@ public class CamadaDeAplicacaoReceptora {
   Parametros: int fluxoBrutoDeBits[]*
   Retorno: void*
   *************************************************************** */
-  public static void camadaDeAplicacaoReceptora(int fluxoBrutoDeBits[]) {
-    aplicacaoReceptora(Conversao.bitsBrutosParaMensagem(fluxoBrutoDeBits));
+  public static void camadaDeAplicacaoReceptora(int fluxoBrutoDeBits[], int pcTransmissor, int pcReceptor) {
+    if(pcReceptor == 1){
+      FramePrincipal.visualPC1.textArea.setText(Conversao.bitsBrutosParaMensagem(fluxoBrutoDeBits));
+    } else if(pcReceptor == 2){
+      FramePrincipal.visualPC2.textArea.setText(Conversao.bitsBrutosParaMensagem(fluxoBrutoDeBits));
+    } else{
+      FramePrincipal.visualPC3.textArea.setText(Conversao.bitsBrutosParaMensagem(fluxoBrutoDeBits));
+    }
   }
 
-/* ***************************************************************
-  Metodo: aplicacaoReceptora*
-  Funcao: imprime a mensagem decodificada*
-  Parametros: String mensagem*
-  Retorno: void*
-  *************************************************************** */
-  public static void aplicacaoReceptora(String mensagem) {
-    //FramePrincipal.imprimirNaTela(mensagem, FramePrincipal.TEXT_AREA_DECODIFICADO);
-    //PanelWest.send.setEnabled(true);
-  }
+
 }

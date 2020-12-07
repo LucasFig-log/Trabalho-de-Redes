@@ -12,6 +12,10 @@ import view.FramePrincipal;
 import view.PanelSouth;
 
 import java.util.*;
+
+import camadas.CamadaDeAplicacaoReceptora;
+import camadas.SubCamadaDeAcessoAoMeioReceptora;
+
 import java.lang.Math;
 
 public class MeioDeComunicacao {
@@ -23,21 +27,18 @@ public class MeioDeComunicacao {
   Parametros: int[] fluxoBrutoDeBits*
   Retorno: void*
   *************************************************************** */
-  public static void meioDeComunicacao(int fluxoBrutoDeBits[]) {
+  public static void meioDeComunicacao(int fluxoBrutoDeBits[], int pcTransmissor, int pcReceptor) {
     tamanho = fluxoBrutoDeBits.length;
     int[] fluxoBrutoDeBitsPontA = fluxoBrutoDeBits;
     int[] fluxoBrutoDeBitsPontB = new int[tamanho];
-    int numero = 0;
-    int cont = 1;
-    int valorTransmitido = 0;
-    int mask = 1 << 31;
+   
 
     new Thread(new Runnable(){
       int numero = 0;
       int cont = 1;
       int valorTransmitido = 0;
       int mask = 1 << 31;
-      int contRuido = 0;
+      
 
       @Override
       public void run(){
@@ -90,9 +91,12 @@ public class MeioDeComunicacao {
       } 
    
     
-    //envia os quadros para a camada enlace de dados receptora
-    //CamadaEnlaceDadosReceptora.camadaEnlaceDadosReceptora(fluxoBrutoDeBitsPontB);
-      }
+      //envia os quadros para a camada enlace de dados receptora
+
+      int[] mensagem = Conversao.bitsBrutosParaASCII(fluxoBrutoDeBitsPontB);
+      //CamadaDeAplicacaoReceptora.camadaDeAplicacaoReceptora(mensagem, pcTransmissor, pcReceptor);
+      SubCamadaDeAcessoAoMeioReceptora.subCamadaDeAcessoAoMeioReceptora(fluxoBrutoDeBitsPontB, pcTransmissor, pcReceptor);  
+    }
 
     }).start(); 
 

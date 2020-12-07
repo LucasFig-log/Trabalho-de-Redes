@@ -9,7 +9,9 @@ Funcao: Exemplificar o funcionamento de um envio de mensagem.
 *************************************************************** */
 
 import util.Conversao;
+import util.MeioDeComunicacao;
 import view.FramePrincipal;
+import view.PanelVisualComputador;
 
 public class CamadaDeAplicacaoTransmissora {
 
@@ -19,7 +21,7 @@ public class CamadaDeAplicacaoTransmissora {
   Parametros: String mensagem*
   Retorno: void*
   *************************************************************** */
-  public static void camadaDeAplicacaoTransmissora(String mensagem) {
+  public static void camadaDeAplicacaoTransmissora(String mensagem, int pcTransmissor, int pcReceptor) {
 
     //FramePrincipal.limparCamposTexto();
     int quadro[] = new int[mensagem.length()];
@@ -27,13 +29,18 @@ public class CamadaDeAplicacaoTransmissora {
     for (int i = 0; i < mensagem.length(); i++) {
       quadro[i] = mensagem.charAt(i);
     }
-    // passando o vetor com os numeros de cada caractere para a CamadaFisicaTransmissora
-    
+   
     //imprime na caixa de texto os caracteres e seus valores ascII
-    Conversao.showAscII(quadro, 7);  
+    String mensagemAscii =  Conversao.showAscII(quadro);  
+    String mensagemBits = Conversao.bitsBrutosParaString(quadro);
+
+    FramePrincipal.imprimirNaTela(mensagemAscii, mensagemBits, pcTransmissor);
+    
     
     //converte a mensagem para bits
     quadro = Conversao.asciiParaBits(quadro);
+
+    SubCamadaDeAcessoAoMeioTransmissora.subCamadaDeAcessoAoMeioTransmissora(quadro, pcTransmissor, pcReceptor);
     
     
     

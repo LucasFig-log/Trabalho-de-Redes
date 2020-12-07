@@ -188,7 +188,7 @@ public class Conversao {
     return string.toString();
   }
 
-  public static void showAscII(int[] value, int tipoDeImpressao) {
+  public static String showAscII(int[] value) {
     StringBuilder stringAscii = new StringBuilder();
 
     for (int i = 0; i < value.length; i++) {
@@ -197,9 +197,8 @@ public class Conversao {
       }
       
     }
-    // imprime a mensagem no campo especifico
-    FramePrincipal.imprimirNaTela(stringAscii.toString(), tipoDeImpressao);
-
+    
+    return stringAscii.toString();
   }
 
 }

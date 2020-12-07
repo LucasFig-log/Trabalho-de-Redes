@@ -72,7 +72,7 @@ public class FramePrincipal extends JFrame {
     add(scrollBits, BorderLayout.SOUTH);
 
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    this.setSize(1000, 730);
+    this.setSize(1000, 700);
     this.setResizable(false);
     this.centerContainer(this);
     this.setVisible(true);
@@ -105,62 +105,60 @@ public class FramePrincipal extends JFrame {
   Parametros: String mensagem, int tipoDeImpressao*
   Retorno: void*
   *************************************************************** */
-  public static void imprimirNaTela(String mensagem, int tipoDeImpressao) {
+  public static void imprimirNaTela(String mensagemAscii, String mensagemBits, int tipoDeImpressao) {
       
     
       switch (tipoDeImpressao) {
         
-        case 0:
-          visualPC1.textArea.setFont(font);
-          visualPC1.textArea.setText(mensagem);
-          visualPC1.textArea.update(visualPC1.textArea.getGraphics());
-
         
         case 1:
           visualPC1.textASCII.setFont(font);
-          visualPC1.textASCII.setText(mensagem);
+          visualPC1.textASCII.setText(mensagemAscii);
           visualPC1.textASCII.update(visualPC1.textASCII.getGraphics());
+
+          try{
+            Thread.sleep(600);
+          } catch (Exception e){
+            e.printStackTrace();
+          }
+
+          visualPC1.textBitsMensagem.setFont(font);
+          visualPC1.textBitsMensagem.setText(mensagemBits);
+          visualPC1.textBitsMensagem.update(visualPC1.textBitsMensagem.getGraphics());
           
           break;
         case 2:
-          visualPC1.textQuadrosEnquadrados.setFont(font);
-          visualPC1.textQuadrosEnquadrados.setText(mensagem);
-          visualPC1.textQuadrosEnquadrados.update(visualPC1.textQuadrosEnquadrados.getGraphics());
+          visualPC2.textASCII.setFont(font);
+          visualPC2.textASCII.setText(mensagemAscii);
+          visualPC2.textASCII.update(visualPC2.textASCII.getGraphics());
+
+          try{
+            Thread.sleep(600);
+          } catch (Exception e){
+            e.printStackTrace();
+          }
+
+          visualPC2.textBitsMensagem.setFont(font);
+          visualPC2.textBitsMensagem.setText(mensagemBits);
+          visualPC2.textBitsMensagem.update(visualPC2.textBitsMensagem.getGraphics());
           break;
         case 3:
-          visualPC2.textArea.setFont(font);
-          visualPC2.textArea.setText(mensagem);
-          visualPC2.textArea.update(visualPC2.textArea.getGraphics());
-          break;
-        case 4:
-          visualPC2.textASCII.setFont(font);
-          visualPC2.textASCII.setText(mensagem);
-          visualPC2.textASCII.update(visualPC2.textASCII.getGraphics());
-          break;
-        case 5:
-          
-          break;
-        case 6:
-          visualPC3.textArea.setFont(font);
-          visualPC3.textArea.setText(mensagem);
-          visualPC3.textArea.update(visualPC2.textArea.getGraphics());
-          break;
-        case 7:
           visualPC3.textASCII.setFont(font);
-          visualPC3.textASCII.setText(mensagem);
+          visualPC3.textASCII.setText(mensagemAscii);
           visualPC3.textASCII.update(visualPC3.textASCII.getGraphics());
+
+          try{
+            Thread.sleep(600);
+          } catch (Exception e){
+            e.printStackTrace();
+          }
+
+          visualPC3.textBitsMensagem.setFont(font);
+          visualPC3.textBitsMensagem.setText(mensagemBits);
+          visualPC3.textBitsMensagem.update(visualPC3.textBitsMensagem.getGraphics());
           break;
-        case 8:
-          visualPC3.textQuadrosEnquadrados.setFont(font);
-          visualPC3.textQuadrosEnquadrados.setText(mensagem);
-          visualPC3.textQuadrosEnquadrados.update(visualPC2.textQuadrosEnquadrados.getGraphics());
-          break;    
-        }
-        try{
-          Thread.sleep(600);
-        } catch (Exception e){
-          e.printStackTrace();
-        }
+      }
+        
   
   }
 

@@ -16,6 +16,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 
 import javax.swing.ButtonGroup;
@@ -34,6 +36,7 @@ import java.awt.Font;
 public class PanelVisualComputador extends JPanel {
   private int id;
   public Computador computador;
+  public int indexSelecionado = 2;
 
   public  JTextArea textArea;
   private JScrollPane scrollTextArea;
@@ -46,13 +49,13 @@ public class PanelVisualComputador extends JPanel {
   public JRadioButton comunicacaoPC3;
   private ButtonGroup radioGroup;
  
-  public  JTextArea textQuadrosEnquadrados;
-  private JScrollPane scrollQuadrosEnquadrados;
+  public  JTextArea textBitsMensagem;
+  private JScrollPane scrollBitsMensagem;
   public  JButton send;
   private JLabel labelText;
   private JLabel labelBitsParidade;
   private JLabel labelASCII;
-  private JLabel labelQuadrosEnquadrados;
+  private JLabel labelBitsMensagem;
   private JLabel labelComunicao;
   private Font font;
   private Font font2;
@@ -112,7 +115,7 @@ public class PanelVisualComputador extends JPanel {
             JOptionPane.showMessageDialog(null, "Caixa de texto vazia! ", "Alerta! ", JOptionPane.ERROR_MESSAGE);
           } else{
             send.setEnabled(false);
-            CamadaDeAplicacaoTransmissora.camadaDeAplicacaoTransmissora(textArea.getText());
+            //CamadaDeAplicacaoTransmissora.camadaDeAplicacaoTransmissora(textArea.getText());
           }
         } 
       }
@@ -120,7 +123,7 @@ public class PanelVisualComputador extends JPanel {
     
     labelComunicao = new JLabel("Comunicação");
     labelComunicao.setFont(font);
-    labelComunicao.setPreferredSize(new Dimension(300,30));
+    labelComunicao.setPreferredSize(new Dimension(300,40));
 
     
     
@@ -134,21 +137,21 @@ public class PanelVisualComputador extends JPanel {
     textASCII.setEditable(false);
     textASCII.setLineWrap(true);
     scrollTextASCII = new JScrollPane(textASCII);
-    scrollTextASCII.setPreferredSize(new Dimension(300, 50));
+    scrollTextASCII.setPreferredSize(new Dimension(300, 70));
     scrollTextASCII.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 
     // configuracoes do JLabel com o texto especifico
-    labelQuadrosEnquadrados = new JLabel("Quadro Antes do Bit de Paridade Par");
-    labelQuadrosEnquadrados.setFont(font2);
-    labelQuadrosEnquadrados.setPreferredSize(new Dimension(300, 30));
+    labelBitsMensagem = new JLabel("Bits referente a mensagem");
+    labelBitsMensagem.setFont(font2);
+    labelBitsMensagem.setPreferredSize(new Dimension(300, 30));
 
     // configuracoes do campo de texto que exibe os quadros enquadrados
-    textQuadrosEnquadrados = new JTextArea();
-    textQuadrosEnquadrados.setEditable(false);
-    textQuadrosEnquadrados.setLineWrap(true);
-    scrollQuadrosEnquadrados = new JScrollPane(textQuadrosEnquadrados);
-    scrollQuadrosEnquadrados.setPreferredSize(new Dimension(300, 50));
-    scrollQuadrosEnquadrados.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+    textBitsMensagem = new JTextArea();
+    textBitsMensagem.setEditable(false);
+    textBitsMensagem.setLineWrap(true);
+    scrollBitsMensagem = new JScrollPane(textBitsMensagem);
+    scrollBitsMensagem.setPreferredSize(new Dimension(300, 70));
+    scrollBitsMensagem.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
     // configuracoes do JLabel com o texto especifico
     labelBitsParidade = new JLabel("Quadro em Paridades Par");
@@ -172,10 +175,9 @@ public class PanelVisualComputador extends JPanel {
     criarRadioButton(this.id); //cria radioButton para cara computador
     add(labelASCII);
     add(scrollTextASCII);
-    add(labelQuadrosEnquadrados);
-    add(scrollQuadrosEnquadrados);
-    add(labelBitsParidade);
-    add(scrollTextBitsParidade);
+    add(labelBitsMensagem);
+    add(scrollBitsMensagem);
+    
 
    
 
@@ -185,7 +187,7 @@ public class PanelVisualComputador extends JPanel {
    
 
     if(id == 1){
-      comunicacaoPC2 = new JRadioButton("Computador 2");
+      comunicacaoPC2 = new JRadioButton("Computador 2",true);
       comunicacaoPC2.setBackground(cor);
       comunicacaoPC3 = new JRadioButton("Computador 3");
       comunicacaoPC3.setBackground(cor);
@@ -196,9 +198,12 @@ public class PanelVisualComputador extends JPanel {
       radioGroup = new ButtonGroup();
       radioGroup.add(comunicacaoPC2);
       radioGroup.add(comunicacaoPC3);
+
+      comunicacaoPC2.addItemListener(new RadioButtonHandler());
+      comunicacaoPC3.addItemListener(new RadioButtonHandler());
     } else if(id == 2){
       
-      comunicacaoPC1 = new JRadioButton("Computador 1");
+      comunicacaoPC1 = new JRadioButton("Computador 1", true);
       comunicacaoPC1.setBackground(cor);
       comunicacaoPC3 = new JRadioButton("Computador 3");
       comunicacaoPC3.setBackground(cor);
@@ -209,8 +214,12 @@ public class PanelVisualComputador extends JPanel {
       radioGroup = new ButtonGroup();
       radioGroup.add(comunicacaoPC1);
       radioGroup.add(comunicacaoPC3);
+
+      comunicacaoPC1.addItemListener(new RadioButtonHandler());
+      comunicacaoPC3.addItemListener(new RadioButtonHandler());
+
     } else{
-      comunicacaoPC1 = new JRadioButton("Computador 1");
+      comunicacaoPC1 = new JRadioButton("Computador 1", true);
       comunicacaoPC1.setBackground(cor);
       comunicacaoPC2 = new JRadioButton("Computador 2");
       comunicacaoPC2.setBackground(cor);
@@ -221,6 +230,9 @@ public class PanelVisualComputador extends JPanel {
       radioGroup = new ButtonGroup();
       radioGroup.add(comunicacaoPC1);
       radioGroup.add(comunicacaoPC2);
+
+      comunicacaoPC1.addItemListener(new RadioButtonHandler());
+      comunicacaoPC2.addItemListener(new RadioButtonHandler());
       
     }
 
@@ -228,24 +240,49 @@ public class PanelVisualComputador extends JPanel {
     
   }
 
+  private class RadioButtonHandler implements ItemListener {
+
+    /* ***************************************************************
+    Metodo: itemStateChanged*
+    Funcao: manopular evento de selecao*
+    Parametros: ItemEvent event*
+    Retorno: void*
+    *************************************************************** */
+    public void itemStateChanged(ItemEvent event) {
+            
+
+      if(comunicacaoPC1.isSelected()){
+        indexSelecionado = 1;
+      } else if(comunicacaoPC2.isSelected()){
+        indexSelecionado = 2;
+      } else if(comunicacaoPC3.isSelected()){
+        indexSelecionado = 3;
+      }
+      
+      
+    }
+
+  }
   // classe privada para tratar o evento do botao que envia a mensagem
   public class ButtonHandler implements ActionListener{
 
-    /*
-     * *************************************************************** Metodo:
-     * actionPerformed* Funcao: tratar o evendo de botao* Parametros: ActionEvent
-     * event* Retorno: void*
+    /*****************************************************************     
+     * Metodo:actionPerformed* 
+     * Funcao: tratar o evendo de botao* 
+     * Parametros: ActionEvent event* 
+     * Retorno: void*
      */
     public void actionPerformed(ActionEvent event) {
 
-      if (textArea.getText().equals("")) {
-        JOptionPane.showMessageDialog(null, "Caixa de texto vazia! ", "Alerta! ", JOptionPane.ERROR_MESSAGE);
+      if (textArea.getText().equals("") && indexSelecionado == 0) {
+        JOptionPane.showMessageDialog(null, "Caixa de texto vazia ou tipo de comunicação não! ", "Alerta! ", JOptionPane.ERROR_MESSAGE);
       } else {
-        send.setEnabled(false);
+        //send.setEnabled(false);
         
         mensagem = textArea.getText();
-        
-        CamadaDeAplicacaoTransmissora.camadaDeAplicacaoTransmissora(mensagem);
+        System.out.println(indexSelecionado);
+        computador.mandarMensagem(mensagem, computador.getId() ,indexSelecionado);
+        //CamadaDeAplicacaoTransmissora.camadaDeAplicacaoTransmissora(mensagem);
         
         
       }
@@ -255,7 +292,7 @@ public class PanelVisualComputador extends JPanel {
   }
 
   
+  
 
-  
-  
+   
 }
