@@ -20,8 +20,8 @@ import java.util.ArrayList;
 public class MeioDeComunicacao {
   public static int tamanho;
   
-  public static ArrayList<Integer> fluxoBrutoDeBitsPontA = new ArrayList<Integer>();
-  public static ArrayList<Integer> fluxoBrutoDeBitsPontB = new ArrayList<Integer>();
+  public static ArrayList<Integer> fluxoBrutoDeBitsPontA = new ArrayList<Integer>(); //buffer para o envio de mensagem
+  public static ArrayList<Integer> fluxoBrutoDeBitsPontB = new ArrayList<Integer>(); //buffer para o envio de mensagem
 
   /* ***************************************************************
   Metodo: meioDeComunicacao*
@@ -31,17 +31,14 @@ public class MeioDeComunicacao {
   *************************************************************** */
   public static void meioDeComunicacao(int fluxoBrutoDeBits[], int pcTransmissor, int pcReceptor) {
     
-    
+    //passa os bits recebidos para o buffer
     for(int i = 0; i < fluxoBrutoDeBits.length; i++){
       fluxoBrutoDeBitsPontA.add(fluxoBrutoDeBits[i]);
       
     }
     
-    
-   
-    
     try {
-      Thread.sleep(5000);
+      Thread.sleep(2000);
     } catch (Exception e) {
       System.out.println("erro sleep do meio");
     }
@@ -56,7 +53,7 @@ public class MeioDeComunicacao {
     PanelSouth.fluxoDeBits.clear();
       
 
-      
+    //executa a transferencia
     for (int i = 0; i < fluxoBrutoDeBits.length; i++) {
       numero = fluxoBrutoDeBitsPontA.get(i);
       int checaBits = Integer.toBinaryString(numero).length();

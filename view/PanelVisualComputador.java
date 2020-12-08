@@ -289,12 +289,10 @@ public class PanelVisualComputador extends JPanel {
           if (textArea.getText().equals("") || indexSelecionado == 0) {
             JOptionPane.showMessageDialog(null, "Caixa de texto vazia ou tipo de comunicação não selecionado! ", "Alerta! ", JOptionPane.ERROR_MESSAGE);
           } else {
-            //send.setEnabled(false);
             
             mensagem = textArea.getText();
            
             computador.mandarMensagem(mensagem, computador.getId() ,indexSelecionado);
-            //CamadaDeAplicacaoTransmissora.camadaDeAplicacaoTransmissora(mensagem);
             revalidate();
             
           }
