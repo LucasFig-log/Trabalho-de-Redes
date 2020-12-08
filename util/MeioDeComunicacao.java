@@ -10,17 +10,19 @@ Funcao: Exemplificar o funcionamento de um envio de mensagem.
 
 import view.FramePrincipal;
 import view.PanelSouth;
-
-import java.util.*;
-
-import camadas.CamadaDeAplicacaoReceptora;
 import camadas.SubCamadaDeAcessoAoMeioReceptora;
 
-import java.lang.Math;
+import java.util.ArrayList;
+
+
+
 
 public class MeioDeComunicacao {
   public static int tamanho;
   
+  public static ArrayList<Integer> fluxoBrutoDeBitsPontA = new ArrayList<Integer>();
+  public static ArrayList<Integer> fluxoBrutoDeBitsPontB = new ArrayList<Integer>();
+
   /* ***************************************************************
   Metodo: meioDeComunicacao*
   Funcao: transmitir a mensagem enviada*
@@ -28,77 +30,95 @@ public class MeioDeComunicacao {
   Retorno: void*
   *************************************************************** */
   public static void meioDeComunicacao(int fluxoBrutoDeBits[], int pcTransmissor, int pcReceptor) {
-    tamanho = fluxoBrutoDeBits.length;
-    int[] fluxoBrutoDeBitsPontA = fluxoBrutoDeBits;
-    int[] fluxoBrutoDeBitsPontB = new int[tamanho];
-   
-
-    new Thread(new Runnable(){
-      int numero = 0;
-      int cont = 1;
-      int valorTransmitido = 0;
-      int mask = 1 << 31;
+    
+    
+    for(int i = 0; i < fluxoBrutoDeBits.length; i++){
+      fluxoBrutoDeBitsPontA.add(fluxoBrutoDeBits[i]);
       
-
-      @Override
-      public void run(){
-      PanelSouth.fluxoDeBits.clear();
-        
-
-       
-      for (int i = 0; i < tamanho; i++) {
-        numero = fluxoBrutoDeBitsPontA[i];
-        int checaBits = Integer.toBinaryString(numero).length();
-        if (checaBits <= 8) {
-          checaBits = 8;
-
-        } else if (checaBits <= 16) {
-          checaBits = 16;
-        } else if (checaBits <= 24) {
-          checaBits = 24;
-        } else {
-          checaBits = 32;
-        }
-        numero = numero << (32 - checaBits);
-
-        while (cont <= checaBits) {
-          if ((mask & numero) == 0) {
-            valorTransmitido = valorTransmitido << 1;
-            valorTransmitido = valorTransmitido | 0;
-            PanelSouth.fluxoDeBits.add(0);
-
-          } else {
-            valorTransmitido = valorTransmitido << 1;
-            valorTransmitido = valorTransmitido | 1;
-            PanelSouth.fluxoDeBits.add(1);
-          }
-          numero = numero << 1;
-          cont++;
-        }
-        fluxoBrutoDeBitsPontB[i] = valorTransmitido;
-        valorTransmitido = 0;
-        cont = 1;
-
-      }
-      
-
-      try{
-        PanelSouth.bandeira = true;
-        FramePrincipal.rePintar();
-        PanelSouth.mutex.acquire();
-      }catch (InterruptedException e){
-        System.out.println("Erro ao travar o painel sul");
-      } 
+    }
+    
+    
    
     
-      //envia os quadros para a camada enlace de dados receptora
-
-      int[] mensagem = Conversao.bitsBrutosParaASCII(fluxoBrutoDeBitsPontB);
-      //CamadaDeAplicacaoReceptora.camadaDeAplicacaoReceptora(mensagem, pcTransmissor, pcReceptor);
-      SubCamadaDeAcessoAoMeioReceptora.subCamadaDeAcessoAoMeioReceptora(fluxoBrutoDeBitsPontB, pcTransmissor, pcReceptor);  
+    try {
+      Thread.sleep(5000);
+    } catch (Exception e) {
+      System.out.println("erro sleep do meio");
     }
 
-    }).start(); 
+    int numero = 0;
+    int cont = 1;
+    int valorTransmitido = 0;
+    int mask = 1 << 31;
+    
+
+    
+    PanelSouth.fluxoDeBits.clear();
+      
+
+      
+    for (int i = 0; i < fluxoBrutoDeBits.length; i++) {
+      numero = fluxoBrutoDeBitsPontA.get(i);
+      int checaBits = Integer.toBinaryString(numero).length();
+      if (checaBits <= 8) {
+        checaBits = 8;
+
+      } else if (checaBits <= 16) {
+        checaBits = 16;
+      } else if (checaBits <= 24) {
+        checaBits = 24;
+      } else {
+        checaBits = 32;
+      }
+      numero = numero << (32 - checaBits);
+
+      while (cont <= checaBits) {
+        
+        if ((mask & numero) == 0) {
+          valorTransmitido = valorTransmitido << 1;
+          valorTransmitido = valorTransmitido | 0;
+          PanelSouth.fluxoDeBits.add(0);
+
+        } else {
+          valorTransmitido = valorTransmitido << 1;
+          valorTransmitido = valorTransmitido | 1;
+          PanelSouth.fluxoDeBits.add(1);
+        }
+        numero = numero << 1;
+        cont++;
+      }
+      
+      fluxoBrutoDeBitsPontB.add(valorTransmitido);
+      valorTransmitido = 0;
+      cont = 1;
+
+    }
+    
+    int[] transmissao = new int[fluxoBrutoDeBitsPontB.size()];
+
+    //passando para o vetor de transmissao
+    for(int i = 0; i < fluxoBrutoDeBitsPontB.size(); i++){
+      transmissao[i] = fluxoBrutoDeBitsPontB.get(i);
+    }
+
+    //limpando os buffers para liberar o meio
+    fluxoBrutoDeBitsPontA.clear();
+    fluxoBrutoDeBitsPontB.clear();
+   
+    
+    try{
+      PanelSouth.bandeira = true;
+      FramePrincipal.rePintar();
+      PanelSouth.mutex.acquire();
+    }catch (InterruptedException e){
+      System.out.println("Erro ao travar o painel sul");
+    } 
+    
+    
+  
+    //envia os quadros para a camada enlace de dados receptora
+    SubCamadaDeAcessoAoMeioReceptora.subCamadaDeAcessoAoMeioReceptora(transmissao, pcTransmissor, pcReceptor);  
+
 
     
 

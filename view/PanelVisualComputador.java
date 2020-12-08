@@ -36,7 +36,7 @@ import java.awt.Font;
 public class PanelVisualComputador extends JPanel {
   private int id;
   public Computador computador;
-  public int indexSelecionado = 2;
+  public int indexSelecionado = 0;
 
   public  JTextArea textArea;
   private JScrollPane scrollTextArea;
@@ -187,7 +187,7 @@ public class PanelVisualComputador extends JPanel {
    
 
     if(id == 1){
-      comunicacaoPC2 = new JRadioButton("Computador 2",true);
+      comunicacaoPC2 = new JRadioButton("Computador 2");
       comunicacaoPC2.setBackground(cor);
       comunicacaoPC3 = new JRadioButton("Computador 3");
       comunicacaoPC3.setBackground(cor);
@@ -203,7 +203,7 @@ public class PanelVisualComputador extends JPanel {
       comunicacaoPC3.addItemListener(new RadioButtonHandler());
     } else if(id == 2){
       
-      comunicacaoPC1 = new JRadioButton("Computador 1", true);
+      comunicacaoPC1 = new JRadioButton("Computador 1");
       comunicacaoPC1.setBackground(cor);
       comunicacaoPC3 = new JRadioButton("Computador 3");
       comunicacaoPC3.setBackground(cor);
@@ -219,7 +219,7 @@ public class PanelVisualComputador extends JPanel {
       comunicacaoPC3.addItemListener(new RadioButtonHandler());
 
     } else{
-      comunicacaoPC1 = new JRadioButton("Computador 1", true);
+      comunicacaoPC1 = new JRadioButton("Computador 1" );
       comunicacaoPC1.setBackground(cor);
       comunicacaoPC2 = new JRadioButton("Computador 2");
       comunicacaoPC2.setBackground(cor);
@@ -249,19 +249,27 @@ public class PanelVisualComputador extends JPanel {
     Retorno: void*
     *************************************************************** */
     public void itemStateChanged(ItemEvent event) {
-            
 
-      if(comunicacaoPC1.isSelected()){
-        indexSelecionado = 1;
-      } else if(comunicacaoPC2.isSelected()){
-        indexSelecionado = 2;
-      } else if(comunicacaoPC3.isSelected()){
-        indexSelecionado = 3;
+      if(id == 1){
+        if(comunicacaoPC2.isSelected()){
+          indexSelecionado = 2;
+        } else if(comunicacaoPC3.isSelected()){
+          indexSelecionado = 3;
+        }
+      } else if(id == 2){
+        if(comunicacaoPC1.isSelected()){
+          indexSelecionado = 1;
+        } else if(comunicacaoPC3.isSelected()){
+          indexSelecionado = 3;
+        }
+      } else{
+        if(comunicacaoPC1.isSelected()){
+          indexSelecionado = 1;
+        } else if(comunicacaoPC2.isSelected()){
+          indexSelecionado = 2;
+        }   
       }
-      
-      
-    }
-
+   }
   }
   // classe privada para tratar o evento do botao que envia a mensagem
   public class ButtonHandler implements ActionListener{
@@ -272,21 +280,28 @@ public class PanelVisualComputador extends JPanel {
      * Parametros: ActionEvent event* 
      * Retorno: void*
      */
-    public void actionPerformed(ActionEvent event) {
+    
+     public void actionPerformed(ActionEvent event) {
 
-      if (textArea.getText().equals("") && indexSelecionado == 0) {
-        JOptionPane.showMessageDialog(null, "Caixa de texto vazia ou tipo de comunicação não! ", "Alerta! ", JOptionPane.ERROR_MESSAGE);
-      } else {
-        //send.setEnabled(false);
-        
-        mensagem = textArea.getText();
-        System.out.println(indexSelecionado);
-        computador.mandarMensagem(mensagem, computador.getId() ,indexSelecionado);
-        //CamadaDeAplicacaoTransmissora.camadaDeAplicacaoTransmissora(mensagem);
-        
-        
-      }
+      new Thread(new Runnable(){
+        @Override
+        public void run() {
+          if (textArea.getText().equals("") || indexSelecionado == 0) {
+            JOptionPane.showMessageDialog(null, "Caixa de texto vazia ou tipo de comunicação não selecionado! ", "Alerta! ", JOptionPane.ERROR_MESSAGE);
+          } else {
+            //send.setEnabled(false);
+            
+            mensagem = textArea.getText();
+           
+            computador.mandarMensagem(mensagem, computador.getId() ,indexSelecionado);
+            //CamadaDeAplicacaoTransmissora.camadaDeAplicacaoTransmissora(mensagem);
+            revalidate();
+            
+          }
+        }
+      }).start();
 
+      
     }
     
   }

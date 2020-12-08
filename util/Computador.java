@@ -1,7 +1,7 @@
 package util;
 
 import camadas.CamadaDeAplicacaoTransmissora;
-import view.FramePrincipal;
+
 
 public class Computador {
     
